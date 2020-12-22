@@ -1,22 +1,8 @@
-"use strict";
-
-const can = document.getElementById('can');
-const con = can.getContext("2d");
-
-can.width = 800;
-can.height = 640;
-
-let center = { x: can.width/2, y: can.height/2 };
-
-let px;
-let py;
-let ox;
-let oy;
-
 
 /****************************************************
  * イベントリスナー
 ****************************************************/
+
 // マウスイベント。イベント情報はグローバル変数に代入。
 function mouseMove(e)
 {
@@ -27,12 +13,6 @@ function mouseMove(e)
 	oy = e.offsetY;
 }
 window.addEventListener('mousemove', mouseMove, false);
-
-
-function rand(min, max)
-{
-	return Math.floor( Math.random() * (max + 1 - min) ) + min ;
-}
 
 function drawDebug()
 {
@@ -48,132 +28,469 @@ function drawDebug()
 
 }
 
+
+/******************************************************
+ * 更新
+******************************************************/
 function update()
 {
 }
+
+
+/******************************************************
+ * 描画
+******************************************************/
 function draw()
 {
 	con.clearRect(0, 0, can.width, can.height);
-	drawOutline(true);
-	drawOutline(false);
-	//drawDebug();
+	drawNeckShadow();
+	drawRearHair1();
+	drawNeck();
+	drawEar();
+	drawOutline();
+	drawWhiteEyes();
 	drawNose();
-	drawMouth(true);
-	drawMouth(false);
-	drawEyes();
-	drawSign();
+	drawMouth();
+	drawEyes2();
 	drawCenter();
+	drawEyeblow();
+	drawEyelid();
+	drawEyeline2();
+	drawEyelashes()
+	drawLowerEyelid();
+	drawSkinHead();
+	drawFrontHair1();
+	drawSideHair1();
 }
 
+/******************************************************
+ * ループ関数
+******************************************************/
 function mainLoop()
 {
 	requestAnimationFrame(mainLoop);
 	update();
 	draw();
 }
+
+
+/******************************************************
+ * 全体の処理
+******************************************************/
 window.onload = ()=>{
 	//mainLoop();
 	update();
 	draw();
 }
 
-function fillR( arr, color = "#000" )
+function drawEyeblow()
 {
-	con.fillStyle = color;
-	con.fillRect(arr.x, arr.y, 4, 4);
-}
-
-function drawCurve(start, end, cp, stats = false)
-{
-	if (stats)
+	for (let i=0; i<2; i++)
 	{
-		con.moveTo(start.x, start.y);
+		con.lineWidth = 1;
+		con.fillStyle = "#000";
+		con.strokeStyle = "#000";
+		con.beginPath();
+		drawCurve2(eyeblow_start[i], eyeblow_end[i], eyeblow_upper_cp1[i], eyeblow_upper_cp2[i], true );
+		drawCurve2(eyeblow_end[i], eyeblow_start[i], eyeblow_lower_cp2[i], eyeblow_lower_cp1[i] );
+		con.fill();
+		fillR(eyeblow_upper_cp1[i]);
+		fillR(eyeblow_upper_cp2[i]);
+		fillR(eyeblow_lower_cp1[i]);
+		fillR(eyeblow_lower_cp2[i]);
 	}
-	con.quadraticCurveTo(cp.x, cp.y, end.x, end.y)
 }
-function drawCurve2(start, end, cp1, cp2, stats = false)
+
+function drawEar()
 {
-	if (stats)
+	for (let i=0; i<2; i++)
 	{
-		con.moveTo(start.x, start.y);
+		con.lineWidth = 1;
+		con.fillStyle = "#fee";
+		con.strokeStyle = "#000";
+		con.beginPath();
+		drawCurve2(ear_start[i], earlobe_start[i], ear_cp1[i], ear_cp2[i], true );
+		drawCurve(earlobe_start[i], ear_end[i], earlobe_cp1[i] );
+		con.stroke();
+		con.fill();
+
+		con.globalAlpha = 0.2;
+		con.beginPath();
+		drawCurve2(inner_ear_start[i], inner_ear_end[i], inner_ear_cp1[i], inner_ear_cp2[i], true );
+		con.stroke();
+		con.fillStyle = "#000";
+		con.beginPath();
+		drawCurve2(inner_ear_start[i], inner_ear_end[i], inner_ear_cp1[i], inner_ear_cp2[i], true );
+		con.fill();
+		con.globalAlpha = 1;
+
+		fillR(inner_ear_start[i], "blue");
+		fillR(inner_ear_end[i], "blue");
+		fillR(inner_ear_cp1[i], "blue");
+		fillR(inner_ear_cp2[i], "blue");
 	}
-	con.bezierCurveTo(
-		cp1.x, cp1.y,
-		cp2.x, cp2.y,
-		end.x, end.y);
 }
 
-let upper_cp2_rand = {x: rand(1,10), y:rand(4, 10) };
-let upper_cp1_rand = {x: rand(20,50), y:rand(4, 10) };
-let eye_right_cp1_rand = {x: rand(10, 20), y:rand(6, 10)};
-let eye_right_cp2_rand = {x: rand(10, 20), y:rand(20, 60)};
-let eye_left_cp1_rand = {x: rand(1, 2), y:rand(6, 10)};
-let eye_left_cp2_rand = {x: rand(1, 2), y:rand(20, 60)};
-let eye_end_rand = {x: rand(10, 20), y: rand(35, 40)};
+function drawOutline()
+{
+	con.lineWidth = 1;
+	con.fillStyle = "#fee";
+	con.strokeStyle = "#000";
+	con.beginPath();
+	drawCurve2(chin_start, chin_end, chin_cp1, chin_cp2, true );
+	drawCurve2(cheek_start[0], cheek_end[0], cheek_cp1[0], cheek_cp2[0], false );
+	drawCurve2(cheek_end[0], cheek_end[1], head_cp1, head_cp2 );
+	drawCurve2(cheek_end[1], cheek_start[1], cheek_cp2[1], cheek_cp1[1], false );
+	con.stroke();
+	con.fill();
+	for (let i=0; i<2; i++)
+	{
+		fillR(cheek_start[i], "red");
+		fillR(cheek_end[i], "green");
+	}
+}
 
-let upper_eyeline_rand = {y: rand(10, 30)};
+function drawEyelid()
+{
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#fee";
+		con.strokeStyle = "#f00";
+		con.beginPath();
+		drawCurve2(eye_head[i], upper_eyeline_end[i], upper_eyeline_cp1[i], upper_eyeline_cp2[i], true);
+		drawCurve2(upper_eyeline_end[i], eye_head[i],  eyelid_cp2[i], eyelid_cp1[i]);
+		//con.stroke();
+		con.fill();
+	}
+}
+function drawLowerEyelid()
+{
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#fee";
+		con.strokeStyle = "#f00";
+		con.beginPath();
+		drawCurve(lower_eyelid_start[i], eye_end[i], lower_eyelid_cp1[i], true);
+		drawCurve2(eye_end[i], lower_eyelid_start[i], lower_eyelid_cp4[i],lower_eyelid_cp3[i]);
+		//con.stroke();
+		con.fill();
+		fillR(lower_eyelid_cp3[i]);
+		fillR(lower_eyelid_cp4[i]);
+	}
+}
 
-let nose_top = {x:center.x, y:center.y+100};
-let nose_bottom = {x:center.x, y:nose_top.y + 12};
+function drawWhiteEyes()
+{
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#fff";
+		con.strokeStyle = "#f00";
+		con.beginPath();
+		drawCurve(lower_eyelid_start[i], eye_end[i], lower_eyelid_cp1[i], true);
+		drawCurve2(eye_end[i], eye_head[i], lower_eyeline_cp2[i], upper_eyeline_cp1[i]);
+		//con.stroke();
+		con.fill();
+	}
+}
 
-let mouth_center = {x: center.x, y: nose_bottom.y + 55};
+function drawEyes2()
+{
+	drawIris();
+	drawEyeline();
+}
+function drawEyeline()
+{
+	// 左右の座標は既に用意してある
+	// 配列で管理しているのでループのインデックス番号を合わせて回す
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#000";
+		con.strokeStyle = "#000";
+		con.beginPath();
+		drawCurve2(eye_head[i], upper_eyeline_end[i], upper_eyeline_cp1[i], upper_eyeline_cp2[i], true);
+		con.lineTo(eye_end[i].x,eye_end[i].y);
+		drawCurve2(eye_end[i], eye_head[i], lower_eyeline_cp2[i], upper_eyeline_cp1[i]);
+		con.stroke();
+		con.fill();
+	}
+}
+function drawEyeline2()
+{
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#888";
+		con.strokeStyle = "#888";
+		con.beginPath();
+		drawCurve2(upper_eyeline_start2[i], upper_eyeline_end2[i], eyeline2_cp1[i], eyeline2_cp2[i], true);
+		drawCurve2(upper_eyeline_end2[i], upper_eyeline_start2[i], eyeline2_cp4[i], eyeline2_cp3[i], false);
+		con.stroke();
+		con.fill();
+	}
+}
 
-let outline_center_rand = { y: rand(230, 250)};
-let temple_rand = {x:rand( 160, 180), };
-let outline_cp1_rand = {x: rand(60, 100), y: rand(0, 10)};
-let outline_cp2_rand = {x: rand(160, 165), y: rand(60, 100)};
-let top_of_head_rand = { y: rand(260, 280)};
-let top_of_head_cp1_rand = {x: rand(180, 200), y: rand(180, 200)};
-let top_of_head_cp2_rand = {x: rand(100, 110), };
+function drawNeck()
+{
+	con.lineWidth = 1;
+	con.fillStyle = "#fee";
+	con.strokeStyle = "#000";
+	con.beginPath();
+	drawCurve2(neck_start[0], neck_end[0], neck_cp1[0],neck_cp2[0], true);
+	con.lineTo(neck_end[1].x, neck_end[1].y);
+	drawCurve2(neck_end[1], neck_start[1], neck_cp2[1],neck_cp1[1]);
+	con.fill();
+}
+function drawNeckShadow()
+{
+	con.save();
+	con.translate(0, 30);
+	con.lineWidth = 1;
+	con.fillStyle = "#000";
+	con.strokeStyle = "#f00";
+	con.beginPath();
+	drawCurve2(cheek_end[1], cheek_start[1], cheek_cp2[1], cheek_cp1[1], true );
+	drawCurve2(chin_start, chin_end, chin_cp1, chin_cp2 );
+	drawCurve2(cheek_start[0], cheek_end[0], cheek_cp1[0], cheek_cp2[0], false );
+	con.restore();
+	con.globalAlpha = 0.1;
+	con.fillStyle = "#000";
+	con.strokeStyle = "#f00";
+	con.fill();
+	con.globalAlpha = 1;
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#fff";
+		con.strokeStyle = "#000";
+		con.beginPath();
+		drawCurve2(neck_end[i], neck_start[i], neck_cp2[i],neck_cp1[i], true);
+		con.lineTo(neck_terminal1[i].x, neck_terminal1[i].y);
+		con.lineTo(neck_terminal2[i].x, neck_terminal2[i].y);
+		con.fill();
+	}
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#fee";
+		con.strokeStyle = "#000";
+		con.beginPath();
+		drawCurve2(neck_start[i], neck_end[i], neck_cp1[i],neck_cp2[i], true);
+		con.stroke();
+	}
+}
 
-let eye_blow_start_rand = {y: rand(40, 80)};
-let eye_blow_end_rand = {y: rand(40, 60)};
+function drawEyelashes()
+{
+	for (let i=0; i<2; i++)
+	{
+		con.lineWidth = 1;
+		con.fillStyle = "#000";
+		con.strokeStyle = "#f00";
+		con.beginPath();
+		drawCurve2(eyelash_start[i], eyelash_end[i], eyelash_cp1[i], eyelash_cp2[i], true);
+		drawCurve(eyelash_end[i], upper_eyeline_end2[i], eyelash_cp[i]);
+		con.closePath();
+		con.fill();
+		/*
+		fillR(eyelash_start[i]);
+		fillR(eyelash_end[i]);
+		fillR(eyelash_cp1[i], "red");
+		*/
+	}
+}
 
-let eye_size = rand(20, 30);
+function drawSkinHead()
+{
+	con.lineWidth = 1;
+	con.fillStyle = hair_color;
+	con.strokeStyle = hair_color;
+	con.beginPath();
+	drawCurve2(cheek_end[0], cheek_end[1], head_cp1, head_cp2, true );
+	con.lineTo(forehead_left.x, forehead_left.y);
+	con.lineTo(forehead_right.x, forehead_right.y);
+	//con.lineTo(cheek_end[0].x, cheek_end[0].y);
+	//con.closePath();
+	con.globalAlpha = 1;
+	con.fill();
+	con.globalAlpha = 1;
+	fillR(forehead_right);
+	fillR(forehead_left);
+}
+
+function drawRearHair1()
+{
+	for (let j=0; j<8; j++)
+	{
+		for (let i=0; i<(cheek_end[0].x - cheek_end[1].x); i++)
+		{
+			rear_hair_roots[i] = {x: cheek_end[1].x + i, y: cheek_end[0].y};
+			rear_hair_tips[i] = {x: cheek_end[1].x + i + rand(-10, 10), y: rear_hair_roots[i].y + 200 + rand(0, 200)};
+			rear_hair_cp1[i] = {x: cheek_end[1].x + i + rand(-20, 20), y: rear_hair_roots[i].y + sp(rear_hair_roots[i].y, rear_hair_tips[i].y, 1/3)};
+			rear_hair_cp2[i] = {x: cheek_end[1].x + i + rand(-20, 20), y: rear_hair_roots[i].y + sp(rear_hair_roots[i].y, rear_hair_tips[i].y, 2/3)};
+		}
+		for (let i=0; i<rear_hair_roots.length; i++)
+		{
+			con.lineWidth = 1;
+			con.fillStyle = "#000";
+			con.strokeStyle = hair_color;
+			con.beginPath();
+			drawCurve2(rear_hair_roots[i], rear_hair_tips[i], rear_hair_cp1[i], rear_hair_cp2[i], true );
+			con.globalAlpha = 0.8;
+			con.stroke();
+			/* 影 */
+			/*
+			con.strokeStyle = "#000";
+			con.globalAlpha = 0.1;
+			con.stroke();
+			*/
+		}
+	}
+	con.globalAlpha = 1;
+}
+function generateCoordinateRight(x)
+{
+	return Math.floor(x * (forehead_right.y - cheek_end[0].y) / (forehead_right.x - cheek_end[0].x)); 
+}
+function generateCoordinateLeft(x)
+{
+	return Math.floor(x * (forehead_left.y - cheek_end[1].y) / (forehead_left.x - cheek_end[1].x));
+}
+function drawSideHair1()
+{
+	for (let j=0; j<6; j++)
+	{
+		/*
+		for (let i=0; i<Math.abs(cheek_end[1].x - forehead_left.x); i++)
+		{
+			side_hair_roots[i] = {x: cheek_end[1].x + i, y: cheek_end[1].y + generateCoordinateLeft(i)};
+			side_hair_tips[i] = {x: cheek_end[1].x + i + rand(-1, 1), y: cheek_end[1].y  -generateCoordinateLeft(i) + 1 + rand(-10, 5)};
+			side_hair_cp1[i] = {x: cheek_end[1].x + i + rand(-10, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
+			side_hair_cp2[i] = {x: cheek_end[1].x + i + rand(-10, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
+		}
+		for (let i=0; i<side_hair_roots.length; i++)
+		{
+			con.lineWidth = 1;
+			con.fillStyle = "#000";
+			con.strokeStyle = hair_color;
+			con.beginPath();
+			drawCurve2(side_hair_roots[i], side_hair_tips[i], side_hair_cp1[i], side_hair_cp2[i], true );
+			con.globalAlpha = 0.8;
+			con.stroke();
+		}
+		*/
+		for (let i=0; i<Math.abs(cheek_end[0].x - forehead_right.x); i++)
+		{
+			side_hair_roots[i] = {x: forehead_right.x + i, y: forehead_right.y + generateCoordinateRight(i)};
+			side_hair_tips[i] = {x: forehead_right.x + i + rand(-10, 10), y: forehead_right.y + 400 + rand(-10, 5)};
+			side_hair_cp1[i] = {x: forehead_right.x + i + rand(-10, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
+			side_hair_cp2[i] = {x: forehead_right.x + i + rand(-50, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
+		}
+		for (let i=0; i<side_hair_roots.length; i++)
+		{
+			con.lineWidth = 1;
+			con.fillStyle = "#000";
+			con.strokeStyle = hair_color;
+			con.beginPath();
+			drawCurve2(side_hair_roots[i], side_hair_tips[i], side_hair_cp1[i], side_hair_cp2[i], true );
+			con.globalAlpha = 0.8;
+			con.stroke();
+		}
+	}
+}
+function drawFrontHair1()
+{
+	for (let j=0; j<6; j++)
+	{
+		for (let i=0; i<(forehead_right.x - forehead_left.x); i++)
+		{
+			front_hair_roots[i] = {x: forehead_left.x + i, y: forehead_right.y};
+			front_hair_tips[i] = {x: forehead_left.x + i + rand(-10, 10), y: forehead_right.y + 80 + rand(-10, 10)};
+			front_hair_cp1[i] = {x: forehead_left.x + i + rand(-10, 10), y: front_hair_roots[i].y + sp(front_hair_roots[i].y, front_hair_tips[i].y, 1/3)};
+			front_hair_cp2[i] = {x: forehead_left.x + i + rand(-10, 10), y: front_hair_roots[i].y + sp(front_hair_roots[i].y, front_hair_tips[i].y, 2/3) };
+		}
+		for (let i=0; i<front_hair_roots.length; i++)
+		{
+			con.lineWidth = 1;
+			con.fillStyle = "#000";
+			con.strokeStyle = hair_color;
+			con.beginPath();
+			drawCurve2(front_hair_roots[i], front_hair_tips[i], front_hair_cp1[i], front_hair_cp2[i], true );
+			con.globalAlpha = 0.8;
+			con.stroke();
+		}
+	}
+	con.globalAlpha = 1;
+}
+
+function drawIris()
+{
+	let eye_size = 25;
+	let eye_position = 40;
+	let pn;
+	
+	for (let i=0; i<2; i++)
+	{
+		if (i ===0)
+		{
+			pn = 1;
+		}
+		else
+		{
+			pn = -1;
+		}
+
+		/* 瞳 */
+		/* config */
+		con.lineWidth = 4;
+		con.fillStyle = "#974";
+		con.strokeStyle = "#000";
+
+		/* 瞳の円1 */
+		con.save();
+		con.scale(1, 1.2);
+		con.beginPath();
+		con.arc(eye_head[i].x + eye_position * pn, center.y -48 -8, eye_size,  Math.PI * 2, false);
+		con.restore();
+		con.fill();
+		con.stroke();
+
+		/* config */
+		con.lineWidth = 1;
+		con.fillStyle = "#000";
+		con.strokeStyle = "#000";
+
+		/* 瞳の円2 */
+		con.save();
+		con.scale(1, 1.2);
+		con.beginPath();
+		con.arc(eye_head[i].x + eye_position * pn, center.y -48 -8, 7,  Math.PI * 2, false);
+		con.restore();
+		con.fill();
+
+		/* config */
+		con.lineWidth = 1;
+		con.fillStyle = "#fff";
+		con.strokeStyle = "#fff";
+		/* 瞳の反射 */
+		con.save();
+		con.scale(1, 1.5);
+		con.beginPath();
+		con.arc(eye_head[i].x+ eye_position *pn + 10 , center.y -110 -16, 5,  Math.PI * 2, false);
+		con.arc(eye_head[i].x+ eye_position *pn + 4 , center.y -105 -16, 2,  Math.PI * 2, false);
+		con.restore();
+		con.fill();
+	}
+}
 
 /* 輪郭 */
-function drawOutline(bool)
+function drawOutlines(bool)
 {
 	let pn = 1;
 	bool ? pn = 1: pn = -1;
-
-	let outline_center = {x: center.x , y: center.y + outline_center_rand.y};
-	let temple = {x: center.x + temple_rand.x * pn, y: center.y};
-	let outline_cp1 = {x: outline_center.x + outline_cp1_rand.x * pn, y: outline_center.y - outline_cp1_rand.y};
-	let outline_cp2 = {x: outline_center.x + outline_cp2_rand.x * pn, y: outline_center.y - outline_cp2_rand.y};
-	let top_of_head = {x: center.x, y: center.y - top_of_head_rand.y};
-	let top_of_head_cp1 = {x: top_of_head.x + top_of_head_cp1_rand.x * pn, y: temple.y - top_of_head_cp1_rand.y};
-	let top_of_head_cp2 = {x: top_of_head.x + top_of_head_cp2_rand.x * pn, y: top_of_head.y};
-
-	let ear_start = {x: temple.x -5 * pn , y: temple.y - 20};
-	let ear_end = {x: temple.x + 20 * pn , y: temple.y + 40};
-	let ear_cp1 = {x: ear_start.x + 50 * pn, y: ear_start.y - 50};
-	let ear_cp2 = {x: ear_end.x + 10 * pn , y: ear_end.y - 20 };
-	let ear_start2 = {x: temple.x -5 * pn , y: temple.y + 2};
-	let ear_end2 = {x: temple.x + 10 * pn , y: temple.y + 40};
-	let ear2_cp1 = {x: ear_start2.x + 50 * pn, y: ear_start2.y - 50};
-	let ear2_cp2 = {x: ear_end2.x + 10 * pn , y: ear_end2.y - 20 };
-	let inner_ear_start = {x: ear_start2.x -10 * pn, y: ear_start2.y - 10};
-	let inner_ear_end = {x: temple.x +5 * pn, y: temple.y + 60};
-	let inner_ear_cp1 = {x: inner_ear_start.x +40 * pn, y: temple.y + 10};
-	let inner_ear_cp2 = {x: inner_ear_start.x +40 * pn, y: temple.y + 20};
-	let inner_ear2_start = {x: inner_ear_start.x -2 * pn , y: inner_ear_start.y + 10};
-	let inner_ear2_terminal = {x: inner_ear_end.x -2 * pn, y: inner_ear_end.y - 10};
-	let inner_ear2_terminal_cp = {x: inner_ear2_terminal.x -20 * pn, y: inner_ear2_terminal.y + 10};
-	let inner_ear2_end = { x: inner_ear2_terminal.x -50 * pn, y: inner_ear2_terminal.y};
-	let inner_ear2_cp1 = {x: inner_ear2_start.x +40 * pn, y: inner_ear2_start.y + 10};
-	let inner_ear2_cp2 = {x: inner_ear2_terminal.x +10 * pn, y: inner_ear2_terminal.y - 20};
-	let earlobe_start = {x: ear_end.x , y: ear_end.y};
-	let earlobe_end = {x: temple.x - 20 * pn, y: earlobe_start.y + 40 };
-	let earlobe_cp1 = {x: earlobe_start.x - 5 * pn, y: earlobe_start.y + 20 };
-	let earlobe_cp2 = {x: temple.x +1 * pn, y: earlobe_start.y + 50 };
-
-	let tragus_start = {x: inner_ear2_start.x, y: inner_ear2_start.y + 10};
-	let tragus_end = {x: inner_ear2_start.x, y: inner_ear2_end.y +10};
-	let tragus_cp = {x: temple.x+20*pn, y: inner_ear2_start.y +(inner_ear2_end.y - inner_ear2_start.y)/2};
-	console.log(tragus_start);
-	console.log(tragus_end);
-	console.log(tragus_cp);
 
 	/* config */
 	con.lineWidth = 1;
@@ -258,66 +575,54 @@ function drawOutline(bool)
 
 	con.fill();
 	con.stroke();
-
-	/*
-	fillR(inner_ear_start, "blue");
-	fillR(inner_ear_end, "#00f");
-	fillR(inner_ear_cp1, "#444");
-	fillR(inner_ear_cp2, "#444");
-	fillR(ear_start, "red");
-	fillR(ear_end, "#2f2");
-	fillR(ear_cp1, "red");
-	fillR(ear_cp2, "#2f2");
-	fillR(earlobe_start, "red");
-	fillR(earlobe_end, "#2f2");
-	fillR(earlobe_cp1, "red");
-	fillR(earlobe_cp2, "#00f");
-	fillR(outline_center, "red");
-	fillR(temple, "orange");
-	fillR(outline_cp1, "#000");
-	fillR(outline_cp2, "#000");
-	fillR(top_of_head, "#000");
-	fillR(top_of_head_cp1, "red");
-	fillR(top_of_head_cp2, "#00f");
-
-	fillR(inner_ear2_start, "#000");
-	fillR(inner_ear2_end, "#000");
-	fillR(inner_ear2_terminal, "#000");
-	fillR(inner_ear2_terminal_cp, "#000");
-	*/
-	fillR(tragus_start, "blue");
-	fillR(tragus_end, "green");
-	fillR(tragus_cp, "red");
-
 }
 
-function drawMouth(bool)
+function drawMouth()
 {
-	let pn;
-	bool ? pn = 1: pn = -1;
-	let mouth_under_end = {x: mouth_center.x + 30 * pn, y: mouth_center.y - 5};
-	let mouth_upper_end = {x: mouth_center.x + 30 * pn, y: mouth_center.y - 6};
-	let mouth_under_cp = {x: mouth_center.x + 20 * pn, y: nose_bottom.y + 55};
-	let mouth_end_cp1 = {x: mouth_under_end.x + 10 * pn, y: mouth_under_end.y};
-	let mouth_end_cp2 = {x: mouth_upper_end.x + 10 * pn, y: mouth_upper_end.y - 10};
+	/* config */
+	con.lineWidth = 1;
+	con.fillStyle = "#000";
+	con.strokeStyle = "#aaa";
 
-	fillR(mouth_end_cp1, "red");
-	fillR(mouth_end_cp2, "#000");
-	fillR(mouth_under_cp, "green");
-	fillR(mouth_center, "green");
+	con.beginPath();
+	drawCurve2(mouth_start, mouth_end, mouth_cp1, mouth_cp2, true);
+	con.stroke();
 
+	drawLowerLipShadow();
+}
+function drawLowerLip()
+{
+	/* config */
+	con.lineWidth = 1;
+	con.fillStyle = "#f00";
+	con.strokeStyle = "#f00";
+
+	con.beginPath();
+	con.globalAlpha = 0.2;
+	drawCurve2(mouth_end, mouth_start, mouth_cp2, mouth_cp1, true);
+	drawCurve2(mouth_start, mouth_end, lower_lip_cp3, lower_lip_cp4);
+	con.fill();
+	con.globalAlpha = 1;
+}
+function drawLowerLipShadow()
+{
 	/* config */
 	con.lineWidth = 1;
 	con.fillStyle = "#000";
 	con.strokeStyle = "#000";
 
 	con.beginPath();
-	drawCurve(mouth_center, mouth_under_end, mouth_under_cp, true );
-	drawCurve2(mouth_under_end, mouth_upper_end, mouth_end_cp1, mouth_end_cp2 );
-	drawCurve2(mouth_upper_end, mouth_center,   mouth_under_cp, mouth_under_cp );
+	con.globalAlpha = 0.2;
+	drawCurve2(lower_lip_start, lower_lip_end, lower_lip_cp1, lower_lip_cp2, true);
+	drawCurve2(lower_lip_end, lower_lip_start, lower_lip_cp4, lower_lip_cp3);
 	con.fill();
-	
-
+	con.globalAlpha = 1;
+	/*
+	fillR(lower_lip_start, "red");
+	fillR(lower_lip_end, "red");
+	fillR(lower_lip_cp1, "red");
+	fillR(lower_lip_cp2, "red");
+	*/
 }
 
 function drawNose()
@@ -330,202 +635,15 @@ function drawNose()
 	con.beginPath();
 	con.moveTo(nose_top.x, nose_top.y);
 	con.lineTo(nose_bottom.x, nose_bottom.y);
-	con.lineTo(nose_top.x-6, nose_top.y +6);
-	con.lineTo(nose_top.x, nose_top.y);
-	con.fill();
-}
-
-function _drawEye (bool)
-{
-	let pn;
-	bool ? pn = 1: pn = -1;
-	let base = { x: 15 * pn, y: 30 };
-	let span = pn * 20;
-
-	/* 目頭の座標 */
-	let eye_head = { x: center.x + 35 * pn, y: center.y};
-	/* 目尻の座標 */
-	let eye_end = { x: center.x + 100 * pn + eye_end_rand.x * pn, y: center.y + eye_end_rand.y};
-
-	let eyeline_end = {x: eye_head.x + 115 * pn, y: eye_head.y -15};
-	let eyeline_end_cp1 = {x: eye_head.x + 80 * pn, y: eye_head.y - 70};
-	let eyeline_end_cp2 = {x: eyeline_end.x -10 * pn, y: eyeline_end.y + 10};
-	let under_eyeline_cp = {x: eye_end.x +48 * pn, y: eyeline_end.y + 20};
-
-	/* 二重のシワ */
-	let upper_eyeline_start = {x: eye_head.x, y: eye_head.y -upper_eyeline_rand.y};
-	let upper_eyeline_end = {x: eyeline_end.x - 30 * pn, y: eyeline_end.y - 25};
-	let upper_eyeline_cp1 = {x: upper_eyeline_start.x + 30 * pn, y: upper_eyeline_start.y - 25};
-	let upper_eyeline_cp2 = {x: upper_eyeline_end.x - 30 * pn, y: upper_eyeline_end.y - 5};
-	let upper_eyeline_cp3 = {x: upper_eyeline_cp1.x, y: upper_eyeline_cp1.y + 5 };
-	let upper_eyeline_cp4 = {x: upper_eyeline_cp2.x, y: upper_eyeline_cp2.y + 5};
-
-	/* 目の上のラインの下側CP１ */
-	//let under_cp1 = { x: base.x * 5 + center.x, y: -base.y/2 + center.y };
-	//let under_cp2 = { x: base.x * 6 + center.x, y: center.y };
-	//let upper_cp2 = { x: under_cp1.x + pn * upper_cp2_rand.x, y: under_cp1.y - upper_cp2_rand.y};
-	//let upper_cp1 = { x: under_cp1.x + pn * upper_cp1_rand.x, y: under_cp2.y - upper_cp1_rand.y};
-	let under_cp1 = { x: eye_head.x+ 80 * pn , y: eye_head.y - 50};
-	let under_cp2 = { x: eye_head.x+ 140 * pn , y: eye_head.y };
-	let upper_cp1 = { x: eye_head.x+ 150 * pn , y: eye_head.y - 5};
-	let upper_cp2 = { x: eye_head.x+ 80 * pn , y: eye_head.y - 60};
-
-	/*
-	fillR(under_cp1, "pink");
-	fillR(under_cp2, "cyan");
-	fillR(upper_cp1, "red");
-	fillR(upper_cp2, "blue");
-	*/
-
-	/* 目の下のラインの左座標 */
-	let eye_base_start = { x: center.x + 50 * pn , y: center.y + 40 };
-	/* 目の下のラインの右端座標 */
-	let eye_base_end = { x: eye_base_start.x + 30 * pn , y: eye_base_start.y };
-	let eye_base_cp = {x: pn * Math.abs(eye_base_end.x - eye_base_start.x)/2 + eye_base_start.x, y: eye_base_start.y + 5};
-	let eye_upper_center = {x: eye_base_cp.x, y: center.y -10};
-	let eye_right_cp1 = {x: eye_base_end.x +  eye_right_cp1_rand.x * pn, y: eye_base_end.y -  eye_right_cp1_rand.y};
-	let eye_right_cp2 = {x: eye_base_end.x + eye_right_cp2_rand.x * pn, y: eye_base_end.y - eye_right_cp2_rand.y};
-	let eye_left_cp1 = {x: eye_base_start.x - eye_left_cp1_rand.x * pn, y: eye_base_end.y - eye_left_cp2_rand.y};
-	let eye_left_cp2 = {x: eye_base_start.x - eye_left_cp2_rand.x * pn, y: eye_base_end.y - eye_left_cp2_rand.y};
-
-	/* 白目のcp */
-	let white_eye_cp1 = {x: eye_end.x - 10 * pn, y: eye_end.y - 5};
-	let white_eye_cp2 = {x: eye_head.x , y: eye_end.y + 20};
-	fillR(white_eye_cp1, "red");
-	fillR(white_eye_cp2, "red");
-
-	/* 眉毛の座標 */
-	let eye_blow_start = { x: eye_head.x + 10 * pn, y: eye_head.y - eye_blow_start_rand.y };
-	let eye_blow_end = { x: eye_head.x + 120 * pn , y: eye_head.y - eye_blow_end_rand.y};
-	let eye_blow_under_cp = { x: eye_blow_start.x + 80 * pn, y: eye_blow_start.y - 30};
-	let eye_blow_upper_cp = { x: eye_blow_start.x + 80 * pn, y: eye_blow_start.y - 40};
-	/*
-	fillR(eye_blow_start, "red");
-	fillR(eye_blow_end, "purple");
-	fillR(eye_blow_under_cp, "#000");
-	fillR(eye_blow_upper_cp, "green");
-	*/
-
-	let eyelid_cp1 = { x: upper_cp1.x , y: upper_cp1.y - 20 };
-	let eyelid_cp2 = { x: upper_cp2.x , y: upper_cp2.y - 20 };
-	let under_eye_start = {x: 60, y: 50};
-	let under_eye_end = {x: 80, y: 50};
-
-	/* 白目の部分 */
-	/* config */
-	con.lineWidth = 1;
-	con.fillStyle = "#fff";
-	con.strokeStyle = "#fff";
-
-	con.beginPath();
-	drawCurve2(eye_head, eye_end, under_cp1, under_cp2, true);
-	drawCurve2(eye_end, eye_head, white_eye_cp1, white_eye_cp2);
-	con.fill();
-
-
-	let eye_position = 52;
-	/* 瞳 */
-	/* config */
-	con.lineWidth = 4;
-	con.fillStyle = "#974";
-	con.strokeStyle = "#000";
-
-	/* 瞳の円1 */
-	con.save();
-	con.scale(1, 1.2);
-	con.beginPath();
-	con.arc(eye_head.x + eye_position * pn, center.y -48, eye_size,  Math.PI * 2, false);
-	con.restore();
-	con.fill();
+	//con.lineTo(nose_top.x-6, nose_top.y +6);
+	//con.lineTo(nose_top.x, nose_top.y);
 	con.stroke();
-
-	/* config */
-	con.lineWidth = 1;
-	con.fillStyle = "#000";
-	con.strokeStyle = "#000";
-
-	/* 瞳の円2 */
-	con.save();
-	con.scale(1, 1.2);
 	con.beginPath();
-	con.arc(eye_head.x + eye_position * pn, center.y -48, 10,  Math.PI * 2, false);
-	con.restore();
+	drawCurve2(nose_top, nose_bottom, nose_cp1, nose_cp2);
 	con.fill();
-
-	/* config */
-	con.lineWidth = 1;
-	con.fillStyle = "#fff";
-	con.strokeStyle = "#fff";
-	/* 瞳の反射 */
-	con.save();
-	con.scale(1, 1.5);
-	con.beginPath();
-	con.arc(eye_head.x+ eye_position * pn + 10 , center.y -110, 5,  Math.PI * 2, false);
-	con.arc(eye_head.x+ eye_position * pn + 4 , center.y -105, 2,  Math.PI * 2, false);
-	con.restore();
-	con.fill();
-
-	/* まぶたの上の領域 */
-	con.fillStyle = "#fee";
-	con.beginPath();
-	drawCurve2(eye_end, eye_head, upper_cp1, upper_cp2, true);
-	drawCurve2(eye_head, eye_end, eyelid_cp2, eyelid_cp1);
-	con.fill();
-
-	/* config */
-	con.lineWidth = 1;
-	con.fillStyle = "#000";
-	con.strokeStyle = "#000";
-
-	/* まぶた */
-	con.beginPath();
-	drawCurve2(eye_head, eyeline_end, eyeline_end_cp1, eyeline_end_cp2, true);
-	drawCurve(eyeline_end, eye_end, under_eyeline_cp);
-	drawCurve2(eye_end, eye_head, under_cp2, under_cp1);
-	con.fill();
-	/* 二重 */
-	con.beginPath();
-	drawCurve2(upper_eyeline_start, upper_eyeline_end, upper_eyeline_cp1, upper_eyeline_cp2, true);
-	drawCurve2(upper_eyeline_end, upper_eyeline_start, upper_eyeline_cp4, upper_eyeline_cp3, false);
-	con.globalAlpha = 0.5;
-	con.fill();
-	
-	/* config */
-	con.globalAlpha = 1;
-	con.lineWidth = 1;
-	con.fillStyle = "#000";
-	con.strokeStyle = "#000";
-	/* 眉毛 */
-	con.beginPath();
-	drawCurve(eye_blow_start, eye_blow_end, eye_blow_under_cp, true);
-	drawCurve(eye_blow_end, eye_blow_start, eye_blow_upper_cp);
-	con.fill();
-
-	/*
-	fillR(eye_base_cp, "#000");
-	fillR(eye_base_start, "green");
-	fillR(eye_base_end, "blue");
-	fillR(eye_right_cp1, "#000");
-	fillR(eye_right_cp2, "red");
-	fillR(eye_left_cp1, "#000");
-	fillR(eye_left_cp2, "red");
-	fillR(eyelid_cp1, "#faa");
-	fillR(eyelid_cp2, "#faa");
-	*/
-	fillR(eyeline_end, "#25a");
-	fillR(eyeline_end_cp1, "#25a");
-	fillR(eyeline_end_cp2, "#25a");
-	fillR(upper_eyeline_start, "#f00");
-	fillR(upper_eyeline_end, "#f00");
-	fillR(upper_eyeline_cp1, "#f00");
-	fillR(upper_eyeline_cp2, "#f00");
+	//fillR(nose_cp1);
 }
 
-function drawEyes ()
-{
-	_drawEye(true);
-	_drawEye(false);
-}
 
 function drawSign()
 {
