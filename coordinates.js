@@ -10,7 +10,8 @@ let oy;
 /* 中心座標 */
 
 let center = { x: can.width/2, y: can.height/2 + 40 };
-let hair_color = "#660033";
+//let hair_color = "#660033";
+let hair_color = "#bb8";
 
 
 /* プラスかマイナス */
@@ -330,3 +331,10 @@ let side_hair_roots = [];
 let side_hair_tips = [];
 let side_hair_cp1 = [];
 let side_hair_cp2 = [];
+
+let side_hair_left = {
+	x: cheek_end[1].x -10, y: cheek_end[1].y
+};
+let side_hair_right = {
+	x: cheek_end[0].x +10, y: cheek_end[0].y
+};

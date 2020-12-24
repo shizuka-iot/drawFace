@@ -43,9 +43,9 @@ function update()
 function draw()
 {
 	con.clearRect(0, 0, can.width, can.height);
-	drawNeckShadow();
-	drawRearHair1();
+	//drawRearHair1();
 	drawNeck();
+	drawNeckShadow();
 	drawEar();
 	drawOutline();
 	drawWhiteEyes();
@@ -59,8 +59,8 @@ function draw()
 	drawEyelashes()
 	drawLowerEyelid();
 	drawSkinHead();
-	drawFrontHair1();
-	drawSideHair1();
+	drawFrontHair2();
+	drawSideHair2();
 }
 
 /******************************************************
@@ -68,7 +68,8 @@ function draw()
 ******************************************************/
 function mainLoop()
 {
-	requestAnimationFrame(mainLoop);
+	//requestAnimationFrame(mainLoop);
+	//setInterval(mainLoop, 1000/2)
 	update();
 	draw();
 }
@@ -78,8 +79,11 @@ function mainLoop()
  * 全体の処理
 ******************************************************/
 window.onload = ()=>{
-	//mainLoop();
+	/*
+	mainLoop();
 	update();
+	setInterval(mainLoop, 1000/8)
+	*/
 	draw();
 }
 
@@ -359,48 +363,256 @@ function generateCoordinateLeft(x)
 {
 	return Math.floor(x * (forehead_left.y - cheek_end[1].y) / (forehead_left.x - cheek_end[1].x));
 }
-function drawSideHair1()
+
+
+
+/***********************
+ * サイドヘアー
+***********************/
+function drawSideHair2()
 {
-	for (let j=0; j<6; j++)
+	let side_hair_bunch=4;/* 髪の束数 */
+
+	//let span = Math.floor(Math.abs(cheek_end[1].x - forehead_left.x)/side_hair_bunch);
+	/* 髪の束の間隔 */
+	let span = Math.floor(Math.abs(side_hair_left.x - forehead_left.x)/side_hair_bunch);
+
+	/* サイクル */
+	for (let j=0; j<1; j++)
 	{
+
+		/* 配列初期化 */
+		side_hair_roots = [];
+		side_hair_tips = [];
+		side_hair_cp1 = [];
+		side_hair_cp2 = [];
+
+
+		/* 左サイド髪の座標生成 */
+		for (let i=0; i<=side_hair_bunch; i++)
+		{
+			/* ループの最初 */
+			if (i === 0)
+			{
+				side_hair_roots[i] = {
+					x: side_hair_left.x - i*span, 
+					y: side_hair_left.y};
+				side_hair_tips[i] = {
+					x: side_hair_left.x + i*span + rand(0, 60), 
+					y: side_hair_left.y + rand(0, 20) + 200};
+				side_hair_cp1[i] = {
+					x: side_hair_left.x + i*span/2 + rand(-5, 5), 
+					y: side_hair_left.y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
+				side_hair_cp2[i] = {
+					x: side_hair_left.x + i*span/2 + rand(-1, 1), 
+					y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
+			}
+			else
+			{
+				side_hair_roots[i] = {
+					x: cheek_end[1].x + i*span, 
+					y: cheek_end[1].y + generateCoordinateLeft(i*span)};
+				side_hair_tips[i] = {
+					x: cheek_end[1].x + i*span + rand(0, 60), 
+					y: cheek_end[1].y /* -generateCoordinateLeft(i*span)*/ + rand(0, 20) + 200};
+				side_hair_cp1[i] = {
+					x: cheek_end[1].x + i*span/2 + rand(-5, 5), 
+					y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
+				side_hair_cp2[i] = {
+					x: cheek_end[1].x + i*span/2 + rand(-1, 1), 
+					y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
+			}
+		}
+
+
+		/* 左サイド髪の描画 */
+		con.beginPath();
+		con.moveTo(side_hair_left.x, side_hair_left.y);
+		con.lineWidth = 1;
+		con.fillStyle = hair_color;
+		con.strokeStyle = "#000";
+
+		for (let i=0; i<side_hair_bunch; i++)
+		{
+			drawCurve2(side_hair_roots[i], side_hair_tips[i], side_hair_cp1[i], side_hair_cp2[i] );
+
+			if( i+1<side_hair_bunch)
+			{
+				drawCurve2(side_hair_tips[i+1], side_hair_roots[i+1], side_hair_cp2[i], side_hair_cp1[i+1]);
+			}
+			else
+			{
+				drawCurve2(side_hair_tips[side_hair_tips.length -1], forehead_left, side_hair_cp2[side_hair_tips.length -1], side_hair_cp1[side_hair_tips.length -1]);
+			}
+			con.stroke();
+		}
+		con.fill();
+
+
+		/* 配列の再初期化 */
+		side_hair_roots = [];
+		side_hair_tips = [];
+		side_hair_cp1 = [];
+		side_hair_cp2 = [];
+
+
+		/* 右サイド髪の座標生成 */
+		for (let i=0; i<=side_hair_bunch; i++)
+		{
+			side_hair_roots[i] = {
+				x: forehead_right.x + i*span, 
+				y: forehead_right.y + generateCoordinateRight(i*span)};
+			side_hair_tips[i] = {
+				x: forehead_right.x + i*span + rand(-60, 0), 
+				y: cheek_end[0].y + rand(10, 20) + 200};
+			side_hair_cp1[i] = {
+				x: forehead_right.x + i*span/2 + rand(0, 10), 
+				y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
+			side_hair_cp2[i] = {
+				x: forehead_right.x + i*span/2 + rand(-10, 10), 
+				y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
+		}
+
 		/*
-		for (let i=0; i<Math.abs(cheek_end[1].x - forehead_left.x); i++)
-		{
-			side_hair_roots[i] = {x: cheek_end[1].x + i, y: cheek_end[1].y + generateCoordinateLeft(i)};
-			side_hair_tips[i] = {x: cheek_end[1].x + i + rand(-1, 1), y: cheek_end[1].y  -generateCoordinateLeft(i) + 1 + rand(-10, 5)};
-			side_hair_cp1[i] = {x: cheek_end[1].x + i + rand(-10, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
-			side_hair_cp2[i] = {x: cheek_end[1].x + i + rand(-10, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
-		}
-		for (let i=0; i<side_hair_roots.length; i++)
-		{
-			con.lineWidth = 1;
-			con.fillStyle = "#000";
-			con.strokeStyle = hair_color;
-			con.beginPath();
-			drawCurve2(side_hair_roots[i], side_hair_tips[i], side_hair_cp1[i], side_hair_cp2[i], true );
-			con.globalAlpha = 0.8;
-			con.stroke();
-		}
+		side_hair_roots.push({
+		x: side_hair_right.x + side_hair_roots.length-1*span, 
+		y: side_hair_right.y});
+		side_hair_tips.push({
+		x: side_hair_right.x + side_hair_roots.length-1*span + rand(-60, 0), 
+		y: cheek_end[0].y + rand(10, 20) + 200});
+		side_hair_cp1.push({
+		x: side_hair_right.x + side_hair_roots.length-1*span/2 + rand(0, 10), 
+		y: side_hair_roots[side_hair_roots.length-1].y + sp(side_hair_roots[side_hair_roots.length-1].y, side_hair_tips[side_hair_roots.length-1].y, 1/3)});
+		side_hair_cp2.push({
+		x: side_hair_right.x + side_hair_roots.length-1*span/2 + rand(-10, 10), 
+		y: side_hair_roots[side_hair_roots.length-1].y + sp(side_hair_roots[side_hair_roots.length-1].y, side_hair_tips[side_hair_roots.length-1].y, 2/3) });
 		*/
-		for (let i=0; i<Math.abs(cheek_end[0].x - forehead_right.x); i++)
+
+
+		/* 右サイド髪の描画 */
+		con.beginPath();
+		con.moveTo(side_hair_roots[0].x, side_hair_roots[0].y);
+		for (let i=0; i<side_hair_bunch; i++)
 		{
-			side_hair_roots[i] = {x: forehead_right.x + i, y: forehead_right.y + generateCoordinateRight(i)};
-			side_hair_tips[i] = {x: forehead_right.x + i + rand(-10, 10), y: forehead_right.y + 400 + rand(-10, 5)};
-			side_hair_cp1[i] = {x: forehead_right.x + i + rand(-10, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 1/3)};
-			side_hair_cp2[i] = {x: forehead_right.x + i + rand(-50, 10), y: side_hair_roots[i].y + sp(side_hair_roots[i].y, side_hair_tips[i].y, 2/3) };
-		}
-		for (let i=0; i<side_hair_roots.length; i++)
-		{
+			/* */
+			drawCurve2(side_hair_roots[i], side_hair_tips[i], side_hair_cp1[i], side_hair_cp2[i] );
 			con.lineWidth = 1;
-			con.fillStyle = "#000";
-			con.strokeStyle = hair_color;
-			con.beginPath();
-			drawCurve2(side_hair_roots[i], side_hair_tips[i], side_hair_cp1[i], side_hair_cp2[i], true );
-			con.globalAlpha = 0.8;
+			con.fillStyle = hair_color;
+			con.strokeStyle = "#000";
+
+
+			/*  */
+			if( i+1<side_hair_bunch)
+			{
+				drawCurve2(side_hair_tips[i+1], side_hair_roots[i+1], side_hair_cp2[i], side_hair_cp1[i+1]);
+			}
+			else
+			{
+				drawCurve2(
+					side_hair_tips[side_hair_tips.length -1], 
+					cheek_end[0], 
+					side_hair_cp2[side_hair_tips.length -1], 
+					side_hair_cp1[side_hair_tips.length -1]);
+				/*
+				drawCurve2(
+					side_hair_tips[side_hair_tips.length -1], 
+					side_hair_right, 
+					side_hair_cp2[side_hair_tips.length -1], 
+					side_hair_cp1[side_hair_tips.length -1]);
+					*/
+			}
 			con.stroke();
 		}
+		con.fill();
+	}// forループ終わり
+}
+
+
+function drawFrontHair2()
+{
+	/* 前髪の束数 */
+	let hair_bunch = 15;
+
+	/* 前髪の長さの基準 */
+	let hair_length = 100;
+
+	/* 前髪の間隔 */
+	let span = Math.floor((forehead_right.x - forehead_left.x)/hair_bunch);
+
+
+	for (let j=0; j<=0; j++)
+	{
+		let span2 = j*span/2;
+
+		/* 座標生成 */
+		for (let i=0; i<=hair_bunch; i++)
+		{
+			let hair_rand = rand(-10, 10);
+
+			if (i === 0 || i===hair_bunch)
+			{
+				front_hair_roots[i] = {
+					x: forehead_left.x + i*span + span2, 
+					y: forehead_right.y};
+			}
+			else
+			{
+				front_hair_roots[i] = {
+					x: forehead_left.x + i*span + span2, 
+					y: forehead_right.y + rand(10,20)};
+			}
+
+			front_hair_tips[i] = {
+				x: forehead_left.x + i*span + span/2 + rand(-20, 20), 
+				y: forehead_right.y + hair_length + rand(0, 30)};
+			front_hair_cp1[i] = {
+				x: forehead_left.x + i*span + hair_rand, 
+				y: front_hair_roots[i].y + sp(front_hair_roots[i].y, front_hair_tips[i].y, 1/4)};
+			front_hair_cp2[i] = {
+				x: forehead_left.x + i*span + hair_rand, 
+				y: front_hair_roots[i].y + sp(front_hair_roots[i].y, front_hair_tips[i].y, 2/4) };
+		}
+
+		/* config */
+		con.lineWidth = 1;
+		con.fillStyle = hair_color;
+		//con.strokeStyle = hair_color;
+		con.strokeStyle = "#000";
+
+		/* パスを開始 */
+		con.beginPath();
+		/* 開始座標を指定 */
+		con.moveTo(front_hair_roots[0].x, front_hair_roots[0].y);
+
+		/* 描画処理 */
+		for (let i=0; i<=hair_bunch; i++)
+		{
+			drawCurve2(front_hair_roots[i], front_hair_tips[i], front_hair_cp1[i], front_hair_cp2[i]);
+
+			if( i+1<=hair_bunch)
+			{
+				//con.lineTo(front_hair_tips[i + 1].x, front_hair_tips[i + 1].y);
+				drawCurve2(
+					front_hair_tips[i+1], 
+					front_hair_roots[i+1], 
+					front_hair_cp2[i+1], 
+					front_hair_cp1[i+1]);
+			}
+			else
+			{
+				drawCurve2(
+					front_hair_tips[front_hair_tips.length -1], 
+					forehead_right, 
+					front_hair_cp2[front_hair_tips.length -1], 
+					front_hair_cp1[front_hair_tips.length -1]);
+			}
+			con.stroke();
+		}
+		con.fill();
 	}
 }
+
+
 function drawFrontHair1()
 {
 	for (let j=0; j<6; j++)
@@ -430,6 +642,7 @@ function drawIris()
 {
 	let eye_size = 25;
 	let eye_position = 40;
+	let eye_position_rand = rand(-1,1);
 	let pn;
 	
 	for (let i=0; i<2; i++)
@@ -479,8 +692,8 @@ function drawIris()
 		con.save();
 		con.scale(1, 1.5);
 		con.beginPath();
-		con.arc(eye_head[i].x+ eye_position *pn + 10 , center.y -110 -16, 5,  Math.PI * 2, false);
-		con.arc(eye_head[i].x+ eye_position *pn + 4 , center.y -105 -16, 2,  Math.PI * 2, false);
+		con.arc(eye_head[i].x+ eye_position *pn + 10 + eye_position_rand , center.y -110 -16, 5,  Math.PI * 2, false);
+		con.arc(eye_head[i].x+ eye_position *pn + 4  + eye_position_rand, center.y -105 -16, 2,  Math.PI * 2, false);
 		con.restore();
 		con.fill();
 	}
@@ -686,4 +899,8 @@ function drawCenter ()
 	con.moveTo(center.x, -10 + center.y);
 	con.lineTo(center.x,  10 + center.y);
 	con.stroke();
+}
+
+function drawHair001()
+{
 }
