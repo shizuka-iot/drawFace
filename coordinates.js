@@ -11,7 +11,8 @@ let oy;
 
 let center = { x: can.width/2, y: can.height/2 + 40 };
 //let hair_color = "#660033";
-let hair_color = "#bb8";
+//let hair_color = "#bb8";
+let hair_color = "#333";
 
 
 /* プラスかマイナス */
@@ -366,6 +367,17 @@ let neck_end = [
 	{x: neck_start[0].x + 150, y: mouth_end.y + 150},
 	{x: neck_start[1].x - 150, y: mouth_end.y + 150},
 ];
+
+
+let neck_start2 = [
+	{x: neck_start[0].x, y: neck_start[0].y + 50},
+	{x: neck_start[1].x, y: neck_start[1].y + 50},
+];
+let neck_end2 = [
+	{x: neck_end[0].x, y: neck_end[0].y + 50},
+	{x: neck_end[1].x, y: neck_end[1].y + 50},
+];
+
 let neck_terminal1 = [
 	{x: neck_start[0].x, y: neck_start[0].y - 150},
 	{x: neck_start[1].x, y: neck_start[1].y - 150},
@@ -382,6 +394,14 @@ let neck_cp2 = [
 	{x: neck_start[0].x  , y: neck_end[0].y -10},
 	{x: neck_start[1].x , y: neck_end[1].y -10},
 ];
+let neck_shadow_cp1 = {
+	x: neck_start[1].x + sp(neck_start[1].x, neck_end[1].x, 2/3) , 
+	y: neck_start2[1].y +60
+};
+let neck_shadow_cp2 = {
+		x: neck_start[1].x + sp(neck_start[1].x, neck_end[1].x, 1/3) , 
+		y: neck_start2[1].y +60
+};
 
 let lower_lip_start = {x: center.x - 20, y:mouth_start.y +15};
 let lower_lip_end = {x: center.x + 20, y:mouth_start.y +15};
@@ -410,10 +430,10 @@ let front_hair_tips = [];
 let front_hair_cp1 = [];
 let front_hair_cp2 = [];
 
-let rear_hair_roots = [];
-let rear_hair_tips = [];
-let rear_hair_cp1 = [];
-let rear_hair_cp2 = [];
+let back_hair_roots = [];
+let back_hair_tips = [];
+let back_hair_cp1 = [];
+let back_hair_cp2 = [];
 
 let side_hair_roots = [];
 let side_hair_tips = [];
@@ -423,9 +443,14 @@ let side_hair_cp2 = [];
 
 let side_hair_upper_cp1 = {
 	x: head_cp1.x -10,
-	y: head_cp1.y
+	y: head_cp1.y -20,
 };
 let side_hair_upper_cp2 = {
 	x: head_cp2.x +10,
-	y: head_cp2.y
+	y: head_cp2.y -20,
 };
+
+let temple = [
+	{x: cheek_end[1].x, y: cheek_end[1].y },// 左
+	{x: cheek_end[0].x, y: cheek_end[0].y },// 右
+];
