@@ -12,29 +12,11 @@ let oy;
 let center = { x: can.width/2, y: can.height/2 + 40 };
 //let hair_color = "#660033";
 //let hair_color = "#bb8";
-let hair_color = "#aaa";
+let hair_color = "#222";
 
 
 /* プラスかマイナス */
 let pn = 0;
-
-
-/*************************************************************
- * 目
- * eye_head
- * eye_end
- * upper_eyeline_start
- * upper_eyeline_end
- * upper_upper_eyeline_cp1
- * upper_upper_eyeline_cp2
- * lower_eyeline_start
- * lower_eyeline_end
- * upper_eyelid_start
- * upper_eyelid_end
- * lower_eyelid_start
- * lower_eyelid_end
- *
-*************************************************************/
 
 
 /* 目頭 */
@@ -157,47 +139,6 @@ let eyelash_cp = [
 	{x: upper_eyeline_end[1].x +10, y: eyelash_end[1].y},
 ];
 
-let eyeblow_start = [
-	{x: eye_head[0].x + 5, y: eye_head[0].y -50},
-	{x: eye_head[1].x - 5, y: eye_head[1].y -50},
-];
-let eyeblow_end = [
-	{x: upper_eyeline_end[0].x + 5, y: upper_eyeline_end[0].y -40},
-	{x: upper_eyeline_end[1].x - 5, y: upper_eyeline_end[1].y -40},
-];
-// y座標を+10くらいにすれば太眉になる。-20くらいで細眉
-let eyeblow_lower_cp1 = [
-	{
-		x: eyeblow_start[0].x + sp(eyeblow_end[0].x ,eyeblow_start[0].x, 1/3), 
-		y: eyeblow_start[0].y -20},
-	{
-		x: eyeblow_start[1].x - sp(eyeblow_end[1].x ,eyeblow_start[1].x, 1/3), 
-		y: eyeblow_start[1].y -20},
-];
-let eyeblow_lower_cp2 = [
-	{
-		x: eyeblow_start[0].x + Math.floor(Math.abs(eyeblow_end[0].x - eyeblow_start[0].x))*2/3, 
-		y: eyeblow_start[0].y -20},
-	{
-		x: eyeblow_start[1].x - Math.floor(Math.abs(eyeblow_end[1].x - eyeblow_start[1].x))*2/3, 
-		y: eyeblow_start[1].y -20},
-];
-let eyeblow_upper_cp1 = [
-	{
-		x: eyeblow_start[0].x + Math.floor(Math.abs(eyeblow_end[0].x - eyeblow_start[0].x))/3, 
-		y: eyeblow_start[0].y -10},
-	{
-		x: eyeblow_start[1].x - Math.floor(Math.abs(eyeblow_end[1].x - eyeblow_start[1].x))/3, 
-		y: eyeblow_start[1].y -10},
-];
-let eyeblow_upper_cp2 = [
-	{
-		x: eyeblow_start[0].x + Math.floor(Math.abs(eyeblow_end[0].x - eyeblow_start[0].x))*2/3, 
-		y: eyeblow_start[0].y -20},
-	{
-		x: eyeblow_start[1].x - Math.floor(Math.abs(eyeblow_end[1].x - eyeblow_start[1].x))*2/3, 
-		y: eyeblow_start[1].y -20},
-];
 let eyelid_cp1 = [
 	{x: upper_eyeline_start[0].x, y: upper_eyeline_start[0].y - 60},
 	{x: upper_eyeline_start[1].x, y: upper_eyeline_start[1].y - 60},
@@ -239,7 +180,7 @@ let lower_eyelid_cp4 = [
 /*************************************************************
  * 鼻
 *************************************************************/
-let nose_top = {x:center.x, y:center.y+100};
+let nose_top = {x:center.x, y:center.y +90};
 let nose_bottom = {x:center.x, y:nose_top.y + 12};
 let nose_cp1 = {
 	x:nose_top.x + 5 , 
@@ -250,14 +191,14 @@ let nose_cp2 = {
 
 
 
-let mouth_start = {x: center.x - 36, y: center.y + 140};
-let mouth_end = {x: center.x + 36, y: center.y + 140};
+let mouth_start = {x: center.x - 30, y: center.y + 130};
+let mouth_end = {x: center.x + 30, y: center.y + 130};
 let mouth_cp1 = {
 	x: mouth_start.x + Math.floor(Math.abs(mouth_start.x - mouth_end.x)*1/3), 
-	y: mouth_start.y + 10};
+	y: mouth_start.y - 2};
 let mouth_cp2 = {
 	x: mouth_start.x + Math.floor(Math.abs(mouth_start.x - mouth_end.x)*2/3), 
-	y: mouth_start.y + 10};
+	y: mouth_start.y - 2};
 
 let chin_start = {x: center.x - 30, y: mouth_start.y + 50};
 let chin_end = {x: center.x + 30, y: mouth_start.y + 50};
@@ -403,8 +344,8 @@ let neck_shadow_cp2 = {
 		y: neck_start2[1].y +60
 };
 
-let lower_lip_start = {x: center.x - 20, y:mouth_start.y +15};
-let lower_lip_end = {x: center.x + 20, y:mouth_start.y +15};
+let lower_lip_start = {x: center.x - 20, y:mouth_start.y +10};
+let lower_lip_end = {x: center.x + 20, y:mouth_start.y +10};
 let lower_lip_cp1 = {
 	x: lower_lip_start.x + sp(lower_lip_start.x, lower_lip_end.x, 1/3), 
 	y: lower_lip_start.y + 5};
@@ -440,12 +381,16 @@ let side_hair_tips = [];
 let side_hair_cp1 = [];
 let side_hair_cp2 = [];
 
+let outside_hair_roots = [];
+let outside_hair_tips = [];
+let outside_hair_cp1 = [];
+let outside_hair_cp2 = [];
 
-let side_hair_upper_cp1 = {
+let outside_hair_upper_cp1 = {
 	x: head_cp1.x -10,
 	y: head_cp1.y -20,
 };
-let side_hair_upper_cp2 = {
+let outside_hair_upper_cp2 = {
 	x: head_cp2.x +10,
 	y: head_cp2.y -20,
 };
@@ -456,3 +401,25 @@ let temple = [
 ];
 let temple_left =	{x: cheek_end[1].x, y: cheek_end[1].y };
 let temple_right = {x: cheek_end[0].x, y: cheek_end[0].y };
+
+let outside_back_hair_roots = [];
+let outside_back_hair_tips = [];
+let outside_back_hair_cp1 = [];
+let outside_back_hair_cp2 = [];
+
+let outside_back_hair_left = {
+	x: center.x - 190,
+	y: center.y,
+};
+let outside_back_hair_right = {
+	x: center.x + 190,
+	y: center.y,
+};
+let outside_back_head_cp1 = {
+	x: head_cp1.x -10,
+	y: head_cp1.y -30,
+};
+let outside_back_head_cp2 = {
+	x: head_cp2.x +10,
+	y: head_cp2.y -30,
+};
