@@ -12,7 +12,7 @@ let oy;
 let center = { x: can.width/2, y: can.height/2 + 40 };
 //let hair_color = "#660033";
 //let hair_color = "#bb8";
-let hair_color = "#333";
+let hair_color = "#aaa";
 
 
 /* プラスかマイナス */
@@ -454,3 +454,5 @@ let temple = [
 	{x: cheek_end[1].x, y: cheek_end[1].y },// 左
 	{x: cheek_end[0].x, y: cheek_end[0].y },// 右
 ];
+let temple_left =	{x: cheek_end[1].x, y: cheek_end[1].y };
+let temple_right = {x: cheek_end[0].x, y: cheek_end[0].y };
