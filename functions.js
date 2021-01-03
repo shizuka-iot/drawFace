@@ -38,10 +38,6 @@ function drawCurve2(start, end, cp1, cp2, stats = false)
 		end.x, end.y);
 }
 
-function generateCoordinate()
-{
-}
-
 function sp( start, end, value)
 {
 	return Math.floor(Math.abs(end - start) * value);

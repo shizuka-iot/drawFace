@@ -10,9 +10,13 @@ let oy;
 /* 中心座標 */
 
 let center = { x: can.width/2, y: can.height/2 + 40 };
+let top_of_head = {x: center.x, y: center.y -240};
+let eye_position = 41;
+let eye_size = 28;
 //let hair_color = "#660033";
 //let hair_color = "#bb8";
-let hair_color = "#222";
+//let hair_color = "#242428";
+let hair_color = "#aeaeaa";
 
 
 /* プラスかマイナス */
@@ -112,26 +116,25 @@ let eyelash_end = [
 	{x : upper_eyeline_end[1].x - 10, y: upper_eyeline_end[1].y},
 ]
 let eyelashes = [
-	{}
 ];
 let eyelash_cp1 = [
 	{
-		x: eyelash_start[0].x + Math.floor(Math.abs(eyelash_start[0].x - eyelash_end[0].x)/2), 
-		y: eyelash_end[0].y + Math.floor(Math.abs(eyelash_start[0].y - eyelash_end[0].y)/2 -5)
+		x: eyelash_start[0].x + sp(eyelash_start[0].x, eyelash_end[0].x, 1/2), 
+		y: eyelash_end[0].y + sp(eyelash_start[0].y, eyelash_end[0].y, 1/2) -5
 	},
 	{
-		x: eyelash_start[1].x - Math.floor(Math.abs(eyelash_start[1].x - eyelash_end[1].x)/2), 
-		y: eyelash_end[1].y + Math.floor(Math.abs(eyelash_start[1].y - eyelash_end[1].y)/2 -5)
+		x: eyelash_start[1].x - sp(eyelash_start[1].x, eyelash_end[1].x, 1/2), 
+		y: eyelash_end[1].y + sp(eyelash_start[1].y, eyelash_end[1].y, 1/2) -5
 	},
 ]
 let eyelash_cp2 = [
 	{
-		x: eyelash_start[0].x + Math.floor(Math.abs(eyelash_start[0].x - eyelash_end[0].x)/2), 
-		y: eyelash_end[0].y + Math.floor(Math.abs(eyelash_start[0].y - eyelash_end[0].y)/2 -5)
+		x: eyelash_start[0].x + sp(eyelash_start[0].x, eyelash_end[0].x, 1/2), 
+		y: eyelash_end[0].y + sp(eyelash_start[0].y, eyelash_end[0].y, 1/2) -5
 	},
 	{
-		x: eyelash_start[1].x - Math.floor(Math.abs(eyelash_start[1].x - eyelash_end[1].x)/2), 
-		y: eyelash_end[1].y + Math.floor(Math.abs(eyelash_start[1].y - eyelash_end[1].y)/2 -5)
+		x: eyelash_start[1].x - sp(eyelash_start[1].x, eyelash_end[1].x, 1/2), 
+		y: eyelash_end[1].y + sp(eyelash_start[1].y, eyelash_end[1].y, 1/2) -5
 	},
 ]
 let eyelash_cp = [
@@ -169,8 +172,8 @@ let lower_eyelid_cp2 = [
 		y: eye_end[1].y + 30},
 ];
 let lower_eyelid_cp3 = [
-	{x: lower_eyelid_start[0].x , y: lower_eyelid_start[0].y + 60},
-	{x: lower_eyelid_start[1].x , y: lower_eyelid_start[1].y + 60},
+	{x: eye_head[0].x , y: eye_head[0].y + 80},
+	{x: eye_head[1].x , y: eye_head[1].y + 80},
 ];
 let lower_eyelid_cp4 = [
 	{x: eye_end[0].x , y: eye_end[0].y + 60},
@@ -190,6 +193,22 @@ let nose_cp2 = {
 	y:nose_top.y - Math.floor(Math.abs(nose_top.y - nose_bottom.y)*2/3) };
 
 
+let eyelid_bottom = [
+	{x: eye_head[0].x + eye_position, y: center.y + eye_size +5}, 
+	{x: eye_head[1].x - eye_position, y: center.y + eye_size +5}, 
+];
+let eyelid_bottom_cp1 = [
+	{x: eye_head[0].x, y: eyelid_bottom[0].y}, 
+	{x: eye_head[1].x, y: eyelid_bottom[1].y}, 
+];
+let eyelid_bottom_cp3 = [
+	{x: eye_end[0].x - sp(eye_end[0].x, eyelid_bottom[0].x, 1/2), y: eyelid_bottom[0].y}, 
+	{x: eye_end[1].x + sp(eyelid_bottom[1].x,eye_end[1].x,  1/2), y: eyelid_bottom[1].y}, 
+];
+let eyelid_bottom_cp4 = [
+	{x: eye_head[0].x, y: eyelid_bottom[0].y}, 
+	{x: eye_head[1].x, y: eyelid_bottom[1].y}, 
+];
 
 let mouth_start = {x: center.x - 30, y: center.y + 130};
 let mouth_end = {x: center.x + 30, y: center.y + 130};
@@ -234,9 +253,8 @@ let cheek_cp2 = [
 		y:cheek_start[1].y - sp(cheek_start[1].y, cheek_end[1].y, 2/8)},
 ];
 
-let top_of_head = {x: center.x, y: center.y - 320};
-let head_cp1 = {x: cheek_end[0].x + 60, y:top_of_head.y};
-let head_cp2 = {x: cheek_end[1].x - 60, y:top_of_head.y};
+let head_cp1 = {x: cheek_end[0].x + 60, y:center.y -320};
+let head_cp2 = {x: cheek_end[1].x - 60, y:center.y -320};
 
 let ear_start = [
 	{x: upper_eyeline_end[0].x, y: upper_eyeline_end[0].y - 20},
@@ -301,18 +319,18 @@ let earlobe_cp1 = [
 let earlobe_cp2 = [];
 
 let neck_start = [
-	{x: mouth_end.x + 40, y: mouth_end.y},
-	{x: mouth_start.x - 40, y: mouth_start.y},
+	{x: mouth_end.x + 40, y: center.y + 100},
+	{x: mouth_start.x - 40, y: center.y + 100},
 ];
 let neck_end = [
-	{x: neck_start[0].x + 150, y: mouth_end.y + 150},
-	{x: neck_start[1].x - 150, y: mouth_end.y + 150},
+	{x: neck_start[0].x + 150, y: mouth_end.y + 160},
+	{x: neck_start[1].x - 150, y: mouth_end.y + 160},
 ];
 
 
 let neck_start2 = [
-	{x: neck_start[0].x, y: neck_start[0].y + 50},
-	{x: neck_start[1].x, y: neck_start[1].y + 50},
+	{x: neck_start[0].x, y: neck_start[0].y + 60},
+	{x: neck_start[1].x, y: neck_start[1].y + 60},
 ];
 let neck_end2 = [
 	{x: neck_end[0].x, y: neck_end[0].y + 50},
@@ -328,20 +346,20 @@ let neck_terminal2 = [
 	{x: neck_end[1].x, y: neck_terminal1[1].y },
 ];
 let neck_cp1 = [
-	{x: neck_start[0].x , y: neck_end[0].y -10},
-	{x: neck_start[1].x , y: neck_end[1].y -10},
+	{x: neck_start[0].x -5, y: neck_start[0].y +130},
+	{x: neck_start[1].x +5, y: neck_start[1].y +130},
 ];
 let neck_cp2 = [
-	{x: neck_start[0].x  , y: neck_end[0].y -10},
-	{x: neck_start[1].x , y: neck_end[1].y -10},
+	{x: neck_start[0].x -30 , y: neck_start[0].y +160},
+	{x: neck_start[1].x +30 , y: neck_start[1].y +160},
 ];
 let neck_shadow_cp1 = {
 	x: neck_start[1].x + sp(neck_start[1].x, neck_end[1].x, 2/3) , 
-	y: neck_start2[1].y +60
+	y: neck_start2[1].y +50
 };
 let neck_shadow_cp2 = {
 		x: neck_start[1].x + sp(neck_start[1].x, neck_end[1].x, 1/3) , 
-		y: neck_start2[1].y +60
+		y: neck_start2[1].y +50
 };
 
 let lower_lip_start = {x: center.x - 20, y:mouth_start.y +10};
