@@ -44,7 +44,7 @@ function draw()
 {
 	con.clearRect(0, 0, can.width, can.height);
 	drawOutsideBackHair()
-	//drawBackHair3();
+	drawBackHair3();
 	drawNeck();
 	drawNeckShadow();
 	drawEar();
@@ -61,16 +61,17 @@ function draw()
 	drawSkinHead();
 	//drawFrontHair3(0, 120, 20);
 	//drawFrontHair2(120, 20);
-	//drawSideHair3(180, 3);
+	drawSideHair3(180, 3);
+	//drawSideHair2();
+	drawOutsideHair();
 	con.save();
 	con.globalCompositeOperation = "lighter";
 	//drawHairHighlight();
 	con.globalCompositeOperation = "source-over";
 	con.restore();
-	//drawOutsideHair();
 	drawDebug();
-	drawCatalinaHair(300, 1/2);
-	drawCatalinaHair(300, 1/2, RIGHT);
+	drawCatalinaHair(400, 1/2, 8, 100);
+	drawCatalinaHair(400, 1/2, 8, 100, RIGHT);
 }
 
 /******************************************************
@@ -421,10 +422,12 @@ function drawSkinHead()
 	//con.closePath();
 	con.globalAlpha = 1;
 	con.fill();
+	/*
 	con.fillStyle = "#000";
 	con.globalAlpha = 0.5;
 	con.fill();
 	con.globalAlpha = 1;
+	*/
 }
 
 function generateCoordinateRight(x)
@@ -435,24 +438,6 @@ function generateCoordinateLeft(x)
 {
 	return Math.floor(x * (forehead_left.y - cheek_end[1].y) / (forehead_left.x - cheek_end[1].x));
 }
-
-// 2店間の座標から傾きを求めy座標を求める
-// 引数はx座標・y座標を持つ連想配列
-function generateCoordinateY(start_coordinate, end_coordinate, x)
-{
-	let y = Math.floor(x * Math.abs(end_coordinate.y - start_coordinate.y) / Math.abs(end_coordinate.x - start_coordinate.x));
-	return y;
-}
-function generateCoordinateX(start_coordinate, end_coordinate, y)
-{
-	let x = Math.floor(y / (Math.abs(end_coordinate.y - start_coordinate.y) / Math.abs(end_coordinate.x - start_coordinate.x)));
-	if (start_coordinate.x > end_coordinate.x)
-	{
-		return -x;
-	}
-	return x;
-}
-
 
 function drawHairHighlight()
 {
@@ -2047,16 +2032,33 @@ function drawCenter ()
 	con.stroke();
 }
 
+
 const LEFT = -1;
 const RIGHT = 1;
-function drawCatalinaHair(length, split, direction = LEFT)
-{
-	let hair_bunch = 5;
-	/*
-	 * 分け目の位置を変数で保持
-	 * 分け目の範囲はforehead_leftからforehead_rightの間
-	 */
 
+// 2店間の座標から傾きを求めy座標を求める
+// 引数はx座標・y座標を持つ連想配列
+function generateCoordinateY(start_coordinate, end_coordinate, x)
+{
+	let vx = Math.abs(end_coordinate.x - start_coordinate.x);//xの増加量
+	let vy = Math.abs(end_coordinate.y - start_coordinate.y);//yの増加量
+	//let y = (((x * vy / vx)*100))/100;
+	let y = x * vy / vx;
+	return y;
+}
+function generateCoordinateX(start_coordinate, end_coordinate, y)
+{
+	let vx = Math.abs(end_coordinate.x - start_coordinate.x);//xの増加量
+	let vy = Math.abs(end_coordinate.y - start_coordinate.y);//yの増加量
+	let x = (Math.floor((y / (vy / vx))*100))/100;
+	if (start_coordinate.x > end_coordinate.x)
+	{
+		return -x;
+	}
+	return x;
+}
+function drawCatalinaHair(length, split, hair_bunch, tip_base, direction = LEFT)
+{
 	// 分け目の座標
 	// 左右で分けずに左のforeheadを基点とする
 	let split_point = 
@@ -2067,16 +2069,19 @@ function drawCatalinaHair(length, split, direction = LEFT)
 	let start_root =
 		{
 			x: split_point.x + 10,
-			y: split_point.y - 110,
+			y: split_point.y - 120,
 		}
 
 	/* 髪の間隔 */
 	let roots_span = {
-		x: Math.floor(Math.abs(start_root.x - split_point.x)/hair_bunch),
-		y: Math.floor(Math.abs(start_root.y - split_point.y)/hair_bunch),
+		// ここで少数点を切り捨てると誤差が生じるのでできるだけ小数点を多く含めるようにする。
+
+		//x: (Math.floor((Math.abs(start_root.x - split_point.x)/hair_bunch)*100))/100,
+		x: Math.abs(start_root.x - split_point.x)/hair_bunch,
+		y: Math.abs(start_root.y - split_point.y)/hair_bunch,
 	}
 	//let tips_span = 10;// 任意の値
-	let tip_base = 80;
+	//let tip_base = 80;
 	let tips_span = Math.floor(tip_base/hair_bunch);
 
 	let hair_roots = [];
@@ -2092,35 +2097,69 @@ function drawCatalinaHair(length, split, direction = LEFT)
 		{
 			let hair_rand = rand(-10, -9);
 
+			/*
+			 *
+			 *
+			 *
+			 * 根本
+			 *
+			 *
+			 *
+			 *
+			 */
 			hair_roots[i] = {
 				x: split_point.x + generateCoordinateX(split_point, start_root, i*roots_span.y), 
 				y: split_point.y - generateCoordinateY(split_point, start_root, i*roots_span.x),
-			}
+			};
 
+
+			/*
+			 *
+			 *
+			 *
+			 * 毛先
+			 *
+			 *
+			 *
+			 *
+			 */
 			if (direction === 1)
 			{
 				hair_tips[i] = {
-					x: split_point.x + 100*direction + i*tips_span*direction + rand(-20, 0), 
+					x: split_point.x + 50*direction + i*tips_span*direction + rand(-180, 0), 
 					y: split_point.y + length - rand(0, 40)};
 			}
 			else
 			{
 				hair_tips[i] = {
-					x: hair_roots[i].x + 100*direction + i*tips_span*direction + rand(-20, 0), 
+					x: hair_roots[i].x + 50*direction + i*tips_span*direction + rand(-180, 0), 
 					y: split_point.y + length - rand(0, 40)};
 			}
+
+
+
 			hair_cp1[i] = {
-				x: hair_tips[i].x + direction*10,
+				x: hair_roots[i].x + direction*100 + i*10*direction,
 				y: hair_roots[i].y - sp(hair_roots[i].y, hair_tips[i].y, 1/4) + i*10,
+				/*
+				x: hair_tips[i].x,
+				y: hair_roots[i].y,
+				*/
 			}
 			hair_cp2[i] = {
-				x: hair_tips[i].x + direction*40,
+				x: hair_roots[i].x + direction*200,
 				y: hair_roots[i].y + sp(hair_roots[i].y, hair_tips[i].y, 1/2) ,
+				/*
+				x: hair_tips[i].x,
+				y: hair_roots[i].y + sp(hair_roots[i].y, hair_tips[i].y, 3/4) ,
+				*/
 				}
-			fillR(hair_roots[i], "red");
+			/*
+			*/
 			fillR(hair_tips[i], "green");
 			fillR(hair_cp1[i], "blue");
 			fillR(hair_cp2[i], "orange");
+			fillR(hair_roots[i], "red");
 		}
 		/* config */
 		con.lineWidth = 1;
@@ -2159,11 +2198,6 @@ function drawCatalinaHair(length, split, direction = LEFT)
 			}
 			con.stroke();
 		}
-		/*
-		//con.fill();
-		drawCurve2(first_tip1, split_point, first_root_cp2, first_root_cp1);
-		con.stroke();
-		*/
 		con.fill();
 	}
 	fillR(split_point, "#090");
