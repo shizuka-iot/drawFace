@@ -26,7 +26,7 @@ class DrawFace
 
 
 		/* 中心座標 */
-		this.center = { x: can.width/2, y: can.height/2 + 40 };
+		this.center = { x: this.can.width/2, y: this.can.height/2 + 40 };
 		this.top_of_head = {x: this.center.x, y: this.center.y -240};
 		this.eye_position = eye_position;
 		this.eye_size = eye_size;
@@ -656,10 +656,10 @@ class DrawFace
 					y: this.cheek_end[0].y + rand(10, 20) + hair_length};
 				this.side_hair_cp1[i] = {
 					x: this.forehead_right.x + i*span/2 + rand(0, 10), 
-					y: this.side_hair_roots[i].y + sp(this.side_hair_roots[i].y, this.side_hair_tips[i].y, 1/3)};
+					y: this.side_hair_roots[i].y + this.sp(this.side_hair_roots[i].y, this.side_hair_tips[i].y, 1/3)};
 				this.side_hair_cp2[i] = {
 					x: this.forehead_right.x + i*span/2 + rand(-10, 10), 
-					y: this.side_hair_roots[i].y + sp(this.side_hair_roots[i].y, this.side_hair_tips[i].y, 2/3) };
+					y: this.side_hair_roots[i].y + this.sp(this.side_hair_roots[i].y, this.side_hair_tips[i].y, 2/3) };
 			}
 
 			/* 右サイド髪の描画 */
@@ -953,10 +953,10 @@ class DrawFace
 					y: this.forehead_right.y + hair_length + rand(0, 30)};
 				this.front_hair_cp1[i] = {
 					x: this.forehead_left.x + i*span + hair_rand, 
-					y: this.front_hair_roots[i].y + sp(this.front_hair_roots[i].y, this.front_hair_tips[i].y, 1/4)};
+					y: this.front_hair_roots[i].y + this.sp(this.front_hair_roots[i].y, this.front_hair_tips[i].y, 1/4)};
 				this.front_hair_cp2[i] = {
 					x: this.forehead_left.x + i*span + hair_rand, 
-					y: this.front_hair_roots[i].y + sp(this.front_hair_roots[i].y, this.front_hair_tips[i].y, 2/4) };
+					y: this.front_hair_roots[i].y + this.sp(this.front_hair_roots[i].y, this.front_hair_tips[i].y, 2/4) };
 			}
 
 

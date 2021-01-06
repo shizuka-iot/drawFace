@@ -1,17 +1,20 @@
 
 "use strict";
 
+/*
 const can = document.getElementById('can');
 const con = can.getContext("2d");
 
 can.width = 800;
 can.height = 640;
+*/
 
 function rand(min, max)
 {
 	return Math.floor( Math.random() * (max + 1 - min) ) + min ;
 }
 
+/*
 function fillR( arr, color = "#000" )
 {
 	con.fillStyle = color;
@@ -42,3 +45,4 @@ function sp( start, end, value)
 {
 	return Math.floor(Math.abs(end - start) * value);
 }
+*/
