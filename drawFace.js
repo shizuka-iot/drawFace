@@ -91,14 +91,14 @@ function mainLoop()
 /******************************************************
  * 全体の処理
 ******************************************************/
+/*
 window.onload = ()=>{
-	/*
-	mainLoop();
-	update();
-	draw();
-	*/
+	//mainLoop();
+	//update();
+	//draw();
 	setInterval(mainLoop, 1000/5)
 }
+*/
 
 function drawEyeblow( eyeblow_cp_par)
 {

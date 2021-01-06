@@ -1,6 +1,5 @@
 
 /* マウス用の座標 */
-
 let px;
 let py;
 let ox;
