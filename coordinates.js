@@ -17,6 +17,7 @@ let eye_size = 28;
 //let hair_color = "#bb8";
 //let hair_color = "#242428";
 let hair_color = "#aeaeaa";
+//let hair_color = "#333";
 
 
 /* プラスかマイナス */
