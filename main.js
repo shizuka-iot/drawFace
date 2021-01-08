@@ -1,6 +1,9 @@
 
 
 let hair_arr = {
+		color_r: 180,
+		color_g: 180,
+		color_b: 180,
 		front_hair_type: 2,
 		outside_back_hair_bunch: 10 ,
 		outside_back_hair_length : 100,
@@ -14,9 +17,40 @@ let hair_arr = {
 		outside_hair_length: 100,
 };
 
+let iris_arr = {
+	color_r: 20,
+	color_g: 20,
+	color_b: 20,
+};
 
 let eye_size = 28;
 let eye_position = {x: 41, y: 0};
+
+let iris_color_r = document.getElementById("iris_color_r");
+iris_color_r.oninput = (e)=>{
+	face.iris_color_r = Number(iris_color_r.value);
+};
+let iris_color_g = document.getElementById("iris_color_g");
+iris_color_g.oninput = (e)=>{
+	face.iris_color_g = Number(iris_color_g.value);
+};
+let iris_color_b = document.getElementById("iris_color_b");
+iris_color_b.oninput = (e)=>{
+	face.iris_color_b = Number(iris_color_b.value);
+};
+
+let hair_color_r = document.getElementById("hair_color_r");
+hair_color_r.oninput = (e)=>{
+	face.hair_color_r = Number(hair_color_r.value);
+};
+let hair_color_g = document.getElementById("hair_color_g");
+hair_color_g.oninput = (e)=>{
+	face.hair_color_g = Number(hair_color_g.value);
+};
+let hair_color_b = document.getElementById("hair_color_b");
+hair_color_b.oninput = (e)=>{
+	face.hair_color_b = Number(hair_color_b.value);
+};
 
 // エレメント取得
 // 目の大きさ
@@ -109,7 +143,7 @@ for (let i=0; i<front_hair_types.length; i++)
 
 
 // クラスインスタンス作成
-let face = new DrawFace("can2", "aeaeaa", eye_size, eye_position, hair_arr);
+let face = new DrawFace("can2", "aeaeaa", eye_size, eye_position, hair_arr, iris_arr);
 
 // メインループ関数
 // インスタンスの更新メソッド・描画メソッドを実行
