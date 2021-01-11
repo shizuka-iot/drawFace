@@ -1,13 +1,22 @@
+body {
+	margin: 0;
+}
 #can {
 	border: 1px solid #000;
 }
 #can2 {
 	border: 1px solid #000;
+	position: sticky;
+	top: 0;
+}
+
+.canvas_wrapper {
+	margin: 1rem;
 }
 
 .center {
 	justify-content: center;
-	align-items: center;
+	align-items: start;
 }
 
 .row {
@@ -21,4 +30,11 @@
 
 .params {
 	margin: 1rem;
+	margin-left: 0;
+}
+
+.parts {
+	border: 1px solid #000;
+	margin-bottom: 0.5rem;
+	padding: 0.5rem;
 }

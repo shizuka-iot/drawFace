@@ -12,11 +12,48 @@
 	</div>
 	-->
 	<main class="row">
-		<div class="row center">
+		<div class="row center canvas_wrapper">
 			<canvas id="can2" width="800" height="640">
 		</div>
 
 		<div class="params">
+			<div class="parts">
+				<div class="eye_head">
+					<label for="eye_head_width">目頭の水平</label>
+						<input type="range" id="eye_head_width" value="0" min="-255" max="255">
+				</div>
+				<div class="eye_head">
+					<label for="eye_head_height">目頭の高さ</label>
+					<input type="range" id="eye_head_height" value="0" min="-255" max="255">
+				</div>
+			</div>
+
+			<div class="parts">
+				<div class="cheek">
+					<label for="cheek_width">頬の幅</label>
+						<input type="range" id="cheek_width" value="30" min="0" max="255">
+				</div>
+				<div class="chin">
+					<label for="chin_width">顎の幅</label>
+					<input type="range" id="chin_width" value="0" min="-255" max="255">
+				</div>
+			</div>
+
+			<div class="parts">
+				<div class="mouth">
+					<label for="mouth_width">口の幅</label>
+						<input type="range" id="mouth_width" value="30" min="0" max="255">
+				</div>
+				<div class="mouth">
+					<label for="mouth_height">口の高さ</label>
+					<input type="range" id="mouth_height" value="0" min="-255" max="255">
+				</div>
+				<div class="mouth">
+					<label for="mouth_cp_height">口の制御点</label>
+					<input type="range" id="mouth_cp_height" value="10" min="-255" max="255">
+				</div>
+			</div>
+
 			<div class="parts">
 				<div class="iris_color">
 					<label for="iris_color_r">虹彩の赤</label>
@@ -30,6 +67,34 @@
 					<label for="iris_color_b">虹彩の青</label>
 					<input type="range" id="iris_color_b" value="50" min="0" max="255">
 				</div>
+			</div>
+
+			<div class="parts">
+				<div class="eyeblow">
+					<label for="eyeblow_head_x">眉頭の水平</label>
+					<input type="range" id="eyeblow_head_x" value="0" min="-255" max="255">
+				</div>
+
+				<div class="eyeblow">
+					<label for="eyeblow_head_height">眉頭の高さ</label>
+					<input type="range" id="eyeblow_head_height" value="0" min="-255" max="255">
+				</div>
+
+				<div class="eyeblow">
+					<label for="eyeblow_end_x">眉尻の水平</label>
+					<input type="range" id="eyeblow_end_x" value="0" min="-255" max="255">
+				</div>
+
+				<div class="eyeblow">
+					<label for="eyeblow_end_height">眉尻の高さ</label>
+					<input type="range" id="eyeblow_end_height" value="0" min="-255" max="255">
+				</div>
+
+				<div class="eyeblow">
+					<label for="eyeblow_cp_height">眉毛のCP</label>
+					<input type="range" id="eyeblow_cp_height" value="20" min="-255" max="255">
+				</div>
+
 			</div>
 
 			<div class="parts">

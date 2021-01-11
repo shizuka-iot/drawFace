@@ -1,30 +1,108 @@
 
+let eye_size = 28;
+let eye_position = {x: 41, y: 0};
+
+let eye_arr = {
+	eyeblow_cp_par: -20,
+	eye_head_width: 0,
+	eye_head_height: 0,
+};
+
+let eyeblow_arr = {
+	head_x: 0,
+	head_height: 0,
+	end_x: 0,
+	end_height: 0,
+	cp_height: -20,
+};
+let eyeblow_cp_height = document.getElementById("eyeblow_cp_height");
+eyeblow_cp_height.oninput = (e)=>{
+	face.eyeblow_arr.cp_height = Number(eyeblow_cp_height.value);
+};
+let eyeblow_head_x = document.getElementById("eyeblow_head_x");
+eyeblow_head_x.oninput = (e)=>{
+	face.eyeblow_arr.head_x = Number(eyeblow_head_x.value);
+};
+eyeblow_head_height.oninput = (e)=>{
+	face.eyeblow_arr.head_height = Number(eyeblow_head_height.value);
+};
+eyeblow_end_x.oninput = (e)=>{
+	face.eyeblow_arr.end_x = Number(eyeblow_end_x.value);
+};
+eyeblow_end_height.oninput = (e)=>{
+	face.eyeblow_arr.end_height = Number(eyeblow_end_height.value);
+};
+
+
+
+let eye_head_width = document.getElementById("eye_head_width");
+eye_head_width.oninput = (e)=>{
+	face.eye_head_width = Number(eye_head_width.value);
+};
+let eye_head_height = document.getElementById("eye_head_height");
+eye_head_height.oninput = (e)=>{
+	face.eye_head_height = Number(eye_head_height.value);
+};
+
+
 
 let hair_arr = {
 		color_r: 180,
 		color_g: 180,
 		color_b: 180,
 		front_hair_type: 2,
-		outside_back_hair_bunch: 10 ,
-		outside_back_hair_length : 100,
-		back_hair_bunch : 10,
-		back_hair_length: 100,
-		front_hair_bunch: 10,
-		front_hair_length: 100,
-		side_hair_length : 100,
-		side_hair_bunch : 5,
-		outside_hair_bunch: 5,
-		outside_hair_length: 100,
+		outside_back_hair_bunch: 1 ,
+		outside_back_hair_length : 10,
+		back_hair_bunch : 1,
+		back_hair_length: 10,
+		front_hair_bunch: 1,
+		front_hair_length: 10,
+		side_hair_length : 10,
+		side_hair_bunch : 1,
+		outside_hair_bunch: 1,
+		outside_hair_length: 10,
 };
+
+let outline_arr = {
+	cheek_width: 0,
+	chin_width: 0,
+};
+let cheek_width = document.getElementById("cheek_width");
+cheek_width.oninput = (e)=>{
+	face.cheek_width = Number(cheek_width.value);
+};
+let chin_width = document.getElementById("chin_width");
+chin_width.oninput = (e)=>{
+	face.chin_width = Number(chin_width.value);
+};
+
+
+
+let mouth_arr = {
+	width: 30,
+	height: 0,
+	cp_height: 10,
+};
+let mouth_width = document.getElementById("mouth_width");
+mouth_width.oninput = (e)=>{
+	face.mouth_width = Number(mouth_width.value);
+};
+let mouth_height = document.getElementById("mouth_height");
+mouth_height.oninput = (e)=>{
+	face.mouth_height = Number(mouth_height.value);
+};
+let mouth_cp_height = document.getElementById("mouth_cp_height");
+mouth_cp_height.oninput = (e)=>{
+	face.mouth_cp_height = Number(mouth_cp_height.value);
+};
+
+
 
 let iris_arr = {
 	color_r: 20,
 	color_g: 20,
 	color_b: 20,
 };
-
-let eye_size = 28;
-let eye_position = {x: 41, y: 0};
 
 let iris_color_r = document.getElementById("iris_color_r");
 iris_color_r.oninput = (e)=>{
@@ -143,7 +221,7 @@ for (let i=0; i<front_hair_types.length; i++)
 
 
 // クラスインスタンス作成
-let face = new DrawFace("can2", "aeaeaa", eye_size, eye_position, hair_arr, iris_arr);
+let face = new DrawFace("can2", "aeaeaa", eye_size, eye_position, hair_arr, iris_arr, mouth_arr, outline_arr, eye_arr, eyeblow_arr);
 
 // メインループ関数
 // インスタンスの更新メソッド・描画メソッドを実行
