@@ -6,6 +6,8 @@ let eye_arr = {
 	eyeblow_cp_par: -20,
 	eye_head_width: 0,
 	eye_head_height: 0,
+	upper_eyeline_end_x_slide: 0,
+	span_to_eye_x: 0,
 };
 
 let eyeblow_arr = {
@@ -14,6 +16,15 @@ let eyeblow_arr = {
 	end_x: 0,
 	end_height: 0,
 	cp_height: -20,
+};
+
+let span_to_eye_x = document.getElementById("span_to_eye_x");
+span_to_eye_x.oninput = (e)=>{
+	face.span_to_eye_x = Number(span_to_eye_x.value);
+};
+let upper_eyeline_end_x_slide = document.getElementById("upper_eyeline_end_x_slide");
+upper_eyeline_end_x_slide.oninput = (e)=>{
+	face.upper_eyeline_end_x_slide = Number(upper_eyeline_end_x_slide.value);
 };
 let eyeblow_cp_height = document.getElementById("eyeblow_cp_height");
 eyeblow_cp_height.oninput = (e)=>{
