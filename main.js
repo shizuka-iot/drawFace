@@ -65,6 +65,7 @@ let coordinates = {
 			tips: 0,
 			bunch: 6,
 			length: 80,
+			tip_span: 0,
 		},
 		outside_back: {
 			bunch: 1,
@@ -100,6 +101,10 @@ let coordinates = {
 	},
 };
 
+let front_hair_tip_span = document.getElementById("front_hair_tip_span");
+front_hair_tip_span.oninput = (e) => {
+	face.coordinates.hair.front.tip_span = Number(front_hair_tip_span.value);
+};
 let front_hair_tips = document.getElementById("front_hair_tips");
 front_hair_tips.oninput = (e) => {
 	face.coordinates.hair.front.tips = Number(front_hair_tips.value);

@@ -651,17 +651,7 @@ class DrawFace
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
 		this.drawDebug();
 		this.drawOutsideBackHair(this.coordinates.hair.outside_back.bunch, this.coordinates.hair.outside_back.length);
-		switch (this.coordinates.hair.back.type)
-		{
-			case 2:
-				this.drawBackHair2(this.coordinates.hair.back.bunch, this.coordinates.hair.back.length);
-				break;
-			case 3:
-				this.drawBackHair(this.coordinates.hair.back.bunch, this.coordinates.hair.back.length);
-				break;
-			default:
-				break;
-		}
+		this._selectBackHair();
 		this.drawNeck();
 		this.drawNeckShadow();
 		this.drawEar();
@@ -680,6 +670,29 @@ class DrawFace
 		/*
 		this.drawSideHair2(this.coordinates.hair.side.bunch, this.coordinates.hair.side.length);
 		*/
+		this._selectFrontHair();
+		this.drawSideHair4(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch);
+
+		this._selectSideHair();
+		this.drawOutsideHair(this.coordinates.hair.outside.bunch, this.coordinates.hair.outside.length);
+	}
+
+	_selectBackHair()
+	{
+		switch (this.coordinates.hair.back.type)
+		{
+			case 2:
+				this.drawBackHair2(this.coordinates.hair.back.bunch, this.coordinates.hair.back.length);
+				break;
+			case 3:
+				this.drawBackHair(this.coordinates.hair.back.bunch, this.coordinates.hair.back.length);
+				break;
+			default:
+				break;
+		}
+	}
+	_selectFrontHair()
+	{
 		switch (this.coordinates.hair.front.type)
 		{
 			case 2:
@@ -698,8 +711,9 @@ class DrawFace
 			default:
 				break;
 		}
-		this.drawSideHair4(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch);
-
+	}
+	_selectSideHair()
+	{
 		switch (this.coordinates.hair.side.type)
 		{
 			case 2:
@@ -714,13 +728,6 @@ class DrawFace
 			default:
 				break;
 		}
-		this.drawOutsideHair(this.coordinates.hair.outside.bunch, this.coordinates.hair.outside.length);
-
-		/*
-		this.drawCatalinaHair(300, 1/2, 5, 10);
-		this.drawCatalinaHair(300, 1/2, 5, 10, RIGHT);
-		this.drawFrontHairFromTop();
-		*/
 	}
 
 
@@ -937,6 +944,7 @@ class DrawFace
 
 
 
+	// 左サイドの座標生成
 	_generateSideHair4LeftCoordinates(hair_length, hair_bunch, span)
 	{
 			this._initializeSideHairArray();
@@ -1268,7 +1276,7 @@ class DrawFace
 					//x: this.temple_left.x + i*span + span/2 + rand(-20, 20), 
 
 					// 左こめかみ付近に毛先を集中させる
-					x: this.temple_left.x + i*2 + rand(-30, 0) + this.coordinates.hair.front.tips, 
+					x: this.temple_left.x + i*this.coordinates.hair.front.tip_span + rand(-30, 0) + this.coordinates.hair.front.tips, 
 					y: this.forehead_right.y + hair_length + rand(0, 30)};
 				// 毛根の座標生成
 				// 最初と最後は高さを固定
@@ -1464,7 +1472,7 @@ class DrawFace
 
 					// 毛先の座標生成
 					this.front_hair_tips[i] = {
-						x: this.temple_left.x + i*span + rand(-10, 10), // 毛先のx座標は根本の座標から前後に揺らす
+						x: this.temple_left.x + i*this.coordinates.hair.front.tip_span + this.coordinates.hair.front.tips + rand(-10, 10), // 毛先のx座標は根本の座標から前後に揺らす
 						y: this.forehead_right.y + hair_length + /*rand(0, 2)*/ + hair_length_plus};
 				}
 				else if (i===hair_bunch)// 最後
@@ -1476,7 +1484,8 @@ class DrawFace
 
 					// 毛先の座標生成
 					this.front_hair_tips[i] = {
-						x: this.temple_right.x + rand(-5, 5), // 毛先のx座標は根本の座標から前後に揺らす
+						//x: this.temple_right.x + rand(-5, 5), // 毛先のx座標は根本の座標から前後に揺らす
+						x: this.temple_left.x + i*this.coordinates.hair.front.tip_span + this.coordinates.hair.front.tips + rand(-10, 10), // 毛先のx座標は根本の座標から前後に揺らす
 						y: this.forehead_right.y + hair_length + hair_length_plus};
 				}
 				else// 間
@@ -1487,7 +1496,8 @@ class DrawFace
 
 					// 毛先の座標生成
 					this.front_hair_tips[i] = {
-						x: this.temple_left.x + i*span -10 + rand(-10, 10), // 毛先のx座標は根本の座標から前後に揺らす
+						//x: this.temple_left.x + i*span -10 + rand(-10, 10), // 毛先のx座標は根本の座標から前後に揺らす
+						x: this.temple_left.x + i*this.coordinates.hair.front.tip_span + this.coordinates.hair.front.tips + rand(-10, 10), // 毛先のx座標は根本の座標から前後に揺らす
 						y: this.forehead_right.y + hair_length + hair_length_plus};
 				}
 
