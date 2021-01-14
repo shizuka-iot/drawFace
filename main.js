@@ -13,6 +13,19 @@ let coordinates = {
 		},
 		upper_eyeline_end: {
 			x: 0,
+			y: 0,
+		},
+		upper_eyeline_cp: {
+			x: 0,
+			y: 0,
+		},
+		upper_eyeline_cp1: {
+			x: 0,
+			y: 0,
+		},
+		upper_eyeline_cp2: {
+			x: 0,
+			y: 0,
 		},
 		span_to_eye_x: 0,
 		iris: {
@@ -43,12 +56,13 @@ let coordinates = {
 	// 髪
 	hair: {
 		color: {
-			r: 10,
-			g: 10,
-			b: 10,
+			r: 100,
+			g: 100,
+			b: 100,
 		},
 		front: {
 			type: 2,
+			tips: 0,
 			bunch: 6,
 			length: 80,
 		},
@@ -57,6 +71,7 @@ let coordinates = {
 			length: 10,
 		},
 		back: {
+			type: 2,
 			bunch: 1,
 			length: 10,
 		},
@@ -85,8 +100,35 @@ let coordinates = {
 	},
 };
 
+let front_hair_tips = document.getElementById("front_hair_tips");
+front_hair_tips.oninput = (e) => {
+	face.coordinates.hair.front.tips = Number(front_hair_tips.value);
+};
+let upper_eyeline_cp_y = document.getElementById("upper_eyeline_cp_y");
+upper_eyeline_cp_y.oninput = (e) => {
+	face.coordinates.eye.upper_eyeline_cp.y = Number(upper_eyeline_cp_y.value);
+};
+let upper_eyeline_cp1_y = document.getElementById("upper_eyeline_cp1_y");
+upper_eyeline_cp1_y.oninput = (e) => {
+	face.coordinates.eye.upper_eyeline_cp1.y = Number(upper_eyeline_cp1_y.value);
+};
+let upper_eyeline_cp2_y = document.getElementById("upper_eyeline_cp2_y");
+upper_eyeline_cp2_y.oninput = (e) => {
+	face.coordinates.eye.upper_eyeline_cp2.y = Number(upper_eyeline_cp2_y.value);
+};
+let upper_eyeline_cp1_x = document.getElementById("upper_eyeline_cp1_x");
+upper_eyeline_cp1_x.oninput = (e) => {
+	face.coordinates.eye.upper_eyeline_cp1.x = Number(upper_eyeline_cp1_x.value);
+};
+let upper_eyeline_cp2_x = document.getElementById("upper_eyeline_cp2_x");
+upper_eyeline_cp2_x.oninput = (e) => {
+	face.coordinates.eye.upper_eyeline_cp2.x = Number(upper_eyeline_cp2_x.value);
+};
 
+// エレメント取得
 let span_to_eye_x = document.getElementById("span_to_eye_x");
+// 取得したエレメントの入力状態を監視
+// 入力があれば関数内の処理
 span_to_eye_x.oninput = (e)=>{
 	face.coordinates.eye.span_to_eye_x = Number(span_to_eye_x.value);
 };
@@ -262,11 +304,18 @@ let front_hair_types = document.getElementsByName("front_hair_type");
 for (let i=0; i<front_hair_types.length; i++)
 {
 	front_hair_types[i].onclick = ()=>{
-		//face.front_hair_type = Number(front_hair_types[i].value);
 		face.coordinates.hair.front.type = Number(front_hair_types[i].value);
 	}
 }
 
+
+let back_hair_types = document.getElementsByName("back_hair_type");
+for (let i=0; i<back_hair_types.length; i++)
+{
+	back_hair_types[i].onclick = ()=>{
+		face.coordinates.hair.back.type = Number(back_hair_types[i].value);
+	}
+}
 
 // クラスインスタンス作成
 let face = new DrawFace("can2", coordinates);
@@ -282,6 +331,5 @@ function mainLoop2()
 // 実際に関数を実行
 // ループを定期的に呼び出す
 window.onload = ()=>{
-	//setInterval(mainLoop, 1000/5);
 	setInterval(mainLoop2, 1000/5);
 }
