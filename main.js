@@ -101,6 +101,26 @@ let coordinates = {
 	},
 };
 
+/*
+function watchOninputFromElement(html_id)
+{
+	let id = document.getElementById(html_id);
+	id.oninput = (e)=> {
+	};
+}
+function test(html_id)
+{
+	let id = document.getElementById(html_id);
+	let str = html_id;
+	let str2 = str.replace(/_/g, ".");
+	id.oninput = (e)=> {
+		face.coordinates.str2 = Number(id.value);
+		console.log(face.coordinates.str2);
+	};
+}
+test("front_hair_tips");
+*/
+
 let front_hair_tip_span = document.getElementById("front_hair_tip_span");
 front_hair_tip_span.oninput = (e) => {
 	face.coordinates.hair.front.tip_span = Number(front_hair_tip_span.value);
@@ -336,5 +356,6 @@ function mainLoop2()
 // 実際に関数を実行
 // ループを定期的に呼び出す
 window.onload = ()=>{
+	//mainLoop2();
 	setInterval(mainLoop2, 1000/5);
 }
