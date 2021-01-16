@@ -535,6 +535,24 @@ class DrawFace
 			cp1: [],
 			cp2: [],
 		};
+		this.back_hair_arrays = {
+			roots: [],
+			tips: [],
+			cp1: [],
+			cp2: [],
+		};
+		this.outside_back_hair_arrays = {
+			roots: [],
+			tips: [],
+			cp1: [],
+			cp2: [],
+		};
+		this.outside_hair_arrays = {
+			roots: [],
+			tips: [],
+			cp1: [],
+			cp2: [],
+		};
 
 		this.side_hair_roots = [];
 		this.side_hair_tips = [];
@@ -581,6 +599,22 @@ class DrawFace
 			x: this.head_cp2.x +10,
 			y: this.head_cp2.y -30,
 		};
+		this.eye_shadow_start = [
+			{x: this.eye_head[0].x, y: this.eye_head[0].y + 10},
+			{x: this.eye_head[1].x, y: this.eye_head[1].y + 10},
+		];
+		this.eye_shadow_end = [
+			{x: this.upper_eyeline_end[0].x -10, y: this.eye_head[0].y + 10},
+			{x: this.upper_eyeline_end[1].x +10, y: this.eye_head[1].y + 10},
+		];
+		this.eye_shadow_cp1 = [
+			{x: this.upper_eyeline_cp1[0].x, y: this.upper_eyeline_cp1[0].y + 10},
+			{x: this.upper_eyeline_cp1[1].x, y: this.upper_eyeline_cp1[1].y + 10},
+		];
+		this.eye_shadow_cp2 = [
+			{x: this.upper_eyeline_cp2[0].x, y: this.upper_eyeline_cp2[0].y + 10},
+			{x: this.upper_eyeline_cp2[1].x, y: this.upper_eyeline_cp2[1].y + 10},
+		];
 	}
 
 
@@ -874,14 +908,9 @@ class DrawFace
 		this.con.moveTo(this.side_hair_roots[0].x, this.side_hair_roots[0].y);
 		for (let i=0; i<hair_bunch; i++)
 		{
-			/* */
 			this.drawCurve2(this.side_hair_roots[i], this.side_hair_tips[i], this.side_hair_cp1[i], this.side_hair_cp2[i] );
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
+			this._config(this.hair_color, "#000");
 
-
-			/*  */
 			if( i+1<hair_bunch)
 			{
 				this.drawCurve2(this.side_hair_tips[i+1], this.side_hair_roots[i+1], this.side_hair_cp2[i], this.side_hair_cp1[i+1]);
@@ -969,9 +998,7 @@ class DrawFace
 		/* 左サイド髪の描画 */
 		this.con.beginPath();
 		this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
-		this.con.lineWidth = 1;
-		this.con.fillStyle = this.hair_color;
-		this.con.strokeStyle = "#000";
+		this._config(this.hair_color, "#000");
 
 		for (let i=0; i<hair_bunch; i++)
 		{
@@ -994,9 +1021,7 @@ class DrawFace
 		/* 左サイド髪の描画 */
 		this.con.beginPath();
 		this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
-		this.con.lineWidth = 1;
-		this.con.fillStyle = this.hair_color;
-		this.con.strokeStyle = "#000";
+		this._config(this.hair_color, "#000");
 
 		for (let i=0; i<hair_bunch; i++)
 		{
@@ -1024,9 +1049,7 @@ class DrawFace
 		{
 			this.drawCurve2(this.top_of_head, arrays.tips[i], arrays.cp1[i], arrays.cp2[i] );
 			//this.drawCurve2(this.top_of_head, this.side_hair_tips[i], this.side_hair_cp1[i], this.side_hair_cp2[i] );
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
+			this._config(this.hair_color, "#000");
 
 
 			if( i+1<hair_bunch)
@@ -1230,10 +1253,7 @@ class DrawFace
 					}
 			}
 
-			this.con.globalAlpha = 1;
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
+			this._config(this.hair_color, "#000");
 
 			/* パスを開始 */
 			this.con.beginPath();
@@ -1266,9 +1286,7 @@ class DrawFace
 			this.con.fill();
 
 		}
-		this.con.fillStyle = this.hair_color;
-		this.con.globalAlpha = 0.3;
-		this.con.strokeStyle = "#000";
+		this._config(this.hair_color, "#000", 0.3);
 		this.con.beginPath();
 		this.con.moveTo(split_point.x, split_point.y);
 		this.con.lineTo(start_root.x, start_root.y);
@@ -1359,11 +1377,7 @@ class DrawFace
 
 			for (let i=hair_bunch; i>0; i--)
 			{
-				this.con.globalAlpha = 1;
-				this.con.lineWidth = 1;
-				this.con.fillStyle = this.hair_color;
-				//this.con.strokeStyle = "#000";
-				this.con.strokeStyle = "#888";
+				this._config(this.hair_color, "#888");
 				this.con.beginPath();
 				this.drawCurve2(front_roots[i], front_tips[i], front_cp1[i], front_cp2[i], true);
 
@@ -1587,20 +1601,14 @@ class DrawFace
 				}
 			}
 			this.con.restore();
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#000";
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 0.4;
+			this._config("#000", "#000", 0.4);
 
 			this.con.fill();// 影を描画
 
 
 
 			/* config */
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 1;
+			this._config(this.hair_color, "#000");
 
 			/* パスを開始 */
 			this.con.beginPath();
@@ -1761,18 +1769,11 @@ class DrawFace
 			}
 			this.con.restore();
 			/* config */
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#000";
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 0.4;
+			this._config("#000", "#000", 0.4);
 
 			this.con.fill();// 影を描画
 
-
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 1;
+			this._config(this.hair_color, "#000");
 
 			this.con.beginPath();
 			this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
@@ -1932,19 +1933,12 @@ class DrawFace
 				}
 			}
 			this.con.restore();
-			/* config */
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#000";
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 0.4;
+			this._config("#000", "#000", 0.4);
 
 			this.con.fill();// 影を描画
 
 
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 1;
+			this._config(this.hair_color, "#000", 1);
 
 			this.con.beginPath();
 			this.con.moveTo(this.front_hair_roots[0].x, this.front_hair_roots[0].y);
@@ -2001,9 +1995,7 @@ class DrawFace
 		let span = Math.floor(side_hair_volume/hair_bunch);
 
 
-		this.con.lineWidth = 1;
-		this.con.fillStyle = this.hair_color;
-		this.con.strokeStyle = "#000";
+		this._config(this.hair_color, "#000");
 		this.con.beginPath();
 		this.con.moveTo(outside_hair_left.x, outside_hair_left.y);
 		this.con.lineTo(this.temple_left.x, this.temple_left.y);
@@ -2218,9 +2210,7 @@ class DrawFace
 			/* 左サイド髪の描画 */
 			this.con.beginPath();
 			this.con.moveTo(this.side_hair_roots[0].x, this.side_hair_roots[0].y);
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
+			this._config(this.hair_color, "#000");
 
 			for (let i=0; i<side_hair_bunch; i++)
 			{
@@ -2286,9 +2276,6 @@ class DrawFace
 					this.side_hair_tips[i], 
 					this.side_hair_cp1[i], 
 					this.side_hair_cp2[i] );
-				this.con.lineWidth = 1;
-				this.con.fillStyle = this.hair_color;
-				this.con.strokeStyle = "#000";
 
 
 				if( i+1<side_hair_bunch)
@@ -2308,6 +2295,7 @@ class DrawFace
 						this.side_hair_cp1[this.side_hair_tips.length -1]); // 毛先のCP
 				}
 			}
+			this._config(this.hair_color, "#000");
 			this.con.stroke();
 			this.con.fill();
 		}// forループ終わり
@@ -2315,25 +2303,19 @@ class DrawFace
 
 	drawSkinHead()
 	{
-		this.con.lineWidth = 1;
-		this.con.globalAlpha = 1;
-		this.con.fillStyle = this.hair_color;
-		this.con.strokeStyle = this.hair_color;
+		this._config(this.hair_color, this.hair_color, 1, 1);
 		this.con.beginPath();
 		this.drawCurve2(this.temple_right, this.temple_left, this.head_cp1, this.head_cp2, true );
 		this.con.lineTo(this.forehead_left.x, this.forehead_left.y);
 		this.drawCurve(this.forehead_left, this.forehead_right, this.top_of_head );
 		this.con.lineTo(this.temple_right.x, this.temple_right.y);
 		this.con.fill();
-		//this.con.stroke();
 	}
 
 
 	drawLowerEyelid()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#fee";
-		this.con.strokeStyle = "#ff0";
+		this._config("#fee", "#ff0");
 		this.con.beginPath();
 		this.con.moveTo(this.upper_eyeline_end[1].x, this.upper_eyeline_end[1].y);
 		this.con.lineTo(this.eye_end[1].x, this.eye_end[1].y);
@@ -2349,18 +2331,6 @@ class DrawFace
 		this.drawCurve2(this.chin_start, this.temple_left, this.cheek_cp1[1], this.cheek_cp2[1] );
 		this.con.lineTo(this.upper_eyeline_end[1].x, this.upper_eyeline_end[1].y);
 		this.con.fill();
-		/*
-		this.con.stroke();
-		for (let i=0; i<2; i++)
-		{
-			this.fillR(this.upper_eyeline_end[i], "blue");
-			this.fillR(this.cheek_cp1[i], "blue");
-			this.fillR(this.cheek_cp2[i], "blue");
-			this.fillR(this.eyelid_bottom_cp3[i], "red");
-			this.fillR(this.eyelid_bottom_cp1[i], "orange");
-			this.fillR(this.eye_end[i], "blue");
-		}
-		*/
 	}
 
 	drawEyelashes(number = 3)
@@ -2369,16 +2339,9 @@ class DrawFace
 		let span = Math.floor(Math.abs(this.eyelash_end[0].x - this.eye_head[0].x, )/ split);
 		let cp_span = Math.floor(Math.abs(this.eyelash_end[0].x - this.eyelash_cp[0].x ));
 
-		this.con.lineWidth = 1;
-		this.con.fillStyle = this.hair_color;
-		this.con.strokeStyle = "#f00";
-		this.con.beginPath();
-
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#f00";
+			this._config(this.hair_color, "#f00");
 			this.con.beginPath();
 			this.drawCurve2(this.eyelash_start[i], this.eyelash_end[i], this.eyelash_cp1[i], this.eyelash_cp2[i], true);
 			this.drawCurve(this.eyelash_end[i], this.upper_eyeline_end2[i], this.eyelash_cp[i]);
@@ -2392,9 +2355,7 @@ class DrawFace
 	{
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#555";
+			this._config(this.hair_color, "#555");
 			this.con.beginPath();
 			this.drawCurve2(this.eyeblow_start[i], this.eyeblow_end[i], this.eyeblow_upper_cp1[i], this.eyeblow_upper_cp2[i], true );
 			this.drawCurve2(this.eyeblow_end[i], this.eyeblow_start[i], this.eyeblow_lower_cp2[i], this.eyeblow_lower_cp1[i] );
@@ -2411,9 +2372,7 @@ class DrawFace
 	{
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#888";
-			this.con.strokeStyle = "#888";
+			this._config("#888", "#888");
 			this.con.beginPath();
 			this.drawCurve2(this.upper_eyeline_start2[i], this.upper_eyeline_end2[i], this.eyeline2_cp1[i], this.eyeline2_cp2[i], true);
 			this.drawCurve2(this.upper_eyeline_end2[i], this.upper_eyeline_start2[i], this.eyeline2_cp4[i], this.eyeline2_cp3[i], false);
@@ -2424,9 +2383,7 @@ class DrawFace
 
 	drawEyelid()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#fee";
-		this.con.strokeStyle = "#f00";
+		this._config("#fee", "#000");
 		this.con.beginPath();
 		this.drawCurve2(this.upper_eyeline_end[1], this.eye_head[1], this.upper_eyeline_cp2[1], this.upper_eyeline_cp1[1], true);
 		this.con.lineTo(this.eye_head[0].x, this.eye_head[0].y);
@@ -2457,11 +2414,7 @@ class DrawFace
 			}
 
 			/* 瞳 */
-			/* config */
-			this.con.lineWidth = 4;
-			this.con.fillStyle = this.iris_color;
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 0.9;
+			this._config(this.iris_color, "#000", 0.9, 4);
 
 			/* 瞳の円1 */
 			this.con.save();
@@ -2476,11 +2429,7 @@ class DrawFace
 			this.con.fill();
 			this.con.stroke();
 
-			/* config */
-			this.con.globalAlpha = 1;
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#000";
-			this.con.strokeStyle = "#000";
+			this._config("#000", "#000", 1);
 
 			/* 瞳の円2 */
 			this.con.save();
@@ -2495,10 +2444,7 @@ class DrawFace
 			this.con.restore();
 			this.con.fill();
 
-			/* config */
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#fff";
-			this.con.strokeStyle = "#fff";
+			this._config("#fff", "#fff");
 			/* 瞳の反射 */
 			this.con.save();
 			this.con.translate(0, -(this.center.y*eye_highlight_scale - this.center.y));
@@ -2520,11 +2466,7 @@ class DrawFace
 			this.con.fill();
 
 
-			/* config */
-			this.con.lineWidth = 1;
-			this.con.globalAlpha = 0.8;
-			this.con.fillStyle = "#fff";
-			this.con.strokeStyle = "#fff";
+			this._config("#fff", "#fff", 0.8);
 			/* 瞳の反射 */
 			this.con.save();
 			this.con.translate(0, -(this.center.y*eye_highlight_scale - this.center.y));
@@ -2567,9 +2509,7 @@ class DrawFace
 		this.drawEyeShadow();
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
+			this._config(this.hair_color, "#000");
 			this.con.beginPath();
 			this.drawCurve2(this.eye_head[i], this.upper_eyeline_end[i], this.upper_eyeline_cp1[i], this.upper_eyeline_cp2[i], true);
 			this.con.lineTo(this.eye_end[i].x,this.eye_end[i].y);
@@ -2584,32 +2524,13 @@ class DrawFace
 
 	drawEyeShadow()
 	{
-		let eye_shadow_start = [
-			{x: this.eye_head[0].x, y: this.eye_head[0].y + 10},
-			{x: this.eye_head[1].x, y: this.eye_head[1].y + 10},
-		];
-		let eye_shadow_end = [
-			{x: this.upper_eyeline_end[0].x -10, y: this.eye_head[0].y + 10},
-			{x: this.upper_eyeline_end[1].x +10, y: this.eye_head[1].y + 10},
-		];
-		let eye_shadow_cp1 = [
-			{x: this.upper_eyeline_cp1[0].x, y: this.upper_eyeline_cp1[0].y + 10},
-			{x: this.upper_eyeline_cp1[1].x, y: this.upper_eyeline_cp1[1].y + 10},
-		];
-		let eye_shadow_cp2 = [
-			{x: this.upper_eyeline_cp2[0].x, y: this.upper_eyeline_cp2[0].y + 10},
-			{x: this.upper_eyeline_cp2[1].x, y: this.upper_eyeline_cp2[1].y + 10},
-		];
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#000";
-			this.con.strokeStyle = "#f00";
 			this.con.beginPath();
 			this.drawCurve2(this.eye_head[i], this.upper_eyeline_end[i], this.upper_eyeline_cp1[i], this.upper_eyeline_cp2[i], true);
-			this.con.lineTo(eye_shadow_end[i].x, eye_shadow_end[i].y);
-			this.drawCurve2(eye_shadow_end[i], eye_shadow_start[i], eye_shadow_cp2[i], eye_shadow_cp1[i]);
-			this.con.globalAlpha = 0.3;
+			this.con.lineTo(this.eye_shadow_end[i].x, this.eye_shadow_end[i].y);
+			this.drawCurve2(this.eye_shadow_end[i], this.eye_shadow_start[i], this.eye_shadow_cp2[i], this.eye_shadow_cp1[i]);
+			this._config("#000", "#f00", 0.3);
 			this.con.fill();
 			this.con.globalAlpha = 1;
 		}
@@ -2618,9 +2539,7 @@ class DrawFace
 
 	drawDebug()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#111";
-		this.con.strokeStyle = "#111";
+		this._config("#111", "#111");
 		this.con.font="16px 'ＭＳ　ゴシック'";
 
 		this.con.fillText("クライアントマウス(X: "+ox + ",  Y: " + oy + ")", 
@@ -2665,9 +2584,7 @@ class DrawFace
 					y: this.outside_back_hair_roots[i].y + this.sp(this.outside_back_hair_roots[i].y, this.outside_back_hair_tips[i].y, 2/3) };
 			}
 
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
+			this._config(this.hair_color, "#000");
 
 			this.con.beginPath();
 			// 最初の根本に移動
@@ -2737,9 +2654,6 @@ class DrawFace
 					this.outside_back_hair_cp2[i] 
 				);
 
-				this.con.lineWidth = 1;
-				this.con.fillStyle = this.hair_color;
-				this.con.strokeStyle = "#000";
 
 
 				if( i+1<hair_bunch)
@@ -2765,6 +2679,7 @@ class DrawFace
 				this.outside_back_head_cp1, // 毛先のCP
 				this.outside_back_head_cp2); // 毛先のCP
 
+			this._config(this.hair_color, "#000");
 			this.con.stroke();
 			this.con.fill();
 		}// forループ終わり
@@ -2865,10 +2780,7 @@ class DrawFace
 			}
 
 
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 0.4;
+			this._config(this.hair_color, "#000", 0.4);
 
 			this.con.beginPath();
 			this.con.moveTo(this.back_hair_roots[0].x, this.back_hair_roots[0].y);
@@ -2998,10 +2910,7 @@ class DrawFace
 			}
 
 
-			this.con.lineWidth = 1;
-			this.con.fillStyle = this.hair_color;
-			this.con.strokeStyle = "#000";
-			this.con.globalAlpha = 0.4;
+			this._config(this.hair_color, "#000", 0.4);
 
 			this.con.beginPath();
 			this.con.moveTo(this.back_hair_roots[0].x, this.back_hair_roots[0].y);
@@ -3041,16 +2950,13 @@ class DrawFace
 
 	drawNeck()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#fee";
-		this.con.strokeStyle = "#000";
+		this._config("#fee", "#000");
 		this.con.beginPath();
 		this.drawCurve2(this.neck_start[0], this.neck_end[0], this.neck_cp1[0],this.neck_cp2[0], true);
 		this.con.lineTo(this.neck_end[1].x, this.neck_end[1].y);
 		this.drawCurve2(this.neck_end[1], this.neck_start[1], this.neck_cp2[1],this.neck_cp1[1]);
 		this.con.fill();
-		this.con.fillStyle = "#000";
-		this.con.globalAlpha = 0.1;
+		this._config("#000", "#000", 0.1, 1);
 		this.con.fill();
 		this.con.globalAlpha = 1;
 		this.con.stroke();
@@ -3060,9 +2966,7 @@ class DrawFace
 
 	drawNeckShadow()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#000";
-		this.con.strokeStyle = "#000";
+		this._config("#000", "#000", 1, 1);
 		this.con.beginPath();
 		this.con.moveTo(this.neck_start[0].x, this.neck_start[0].y);
 		this.con.lineTo(this.neck_start2[0].x, this.neck_start2[0].y);
@@ -3079,9 +2983,7 @@ class DrawFace
 	{
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#fee";
-			this.con.strokeStyle = "#000";
+			this._config("#fee", "#000");
 			this.con.beginPath();
 
 			this.drawCurve2(
@@ -3123,24 +3025,19 @@ class DrawFace
 
 	drawOutline()
 	{
-		this.con.lineWidth = 3;
-		this.con.fillStyle = "#fee";
-		this.con.strokeStyle = "#000";
+		this._config("#fee", "#000", 1, 3);
 		this.con.beginPath();
 
 		// あごの左からあごの右
 		this.drawCurve2(this.chin_start, this.chin_end, this.chin_cp1, this.chin_cp2, true );
 
 		// あごの右からこめかみ
-		//this.drawCurve2(this.cheek_start[0], this.cheek_end[0], this.cheek_cp1[0], this.cheek_cp2[0], false );
 		this.drawCurve2(this.chin_end, this.temple_right, this.cheek_cp1[0], this.cheek_cp2[0], false );
 
 		// 右のこめかみから頭を経由して左のこめかみまで
-		//this.drawCurve2(this.cheek_end[0], this.cheek_end[1], this.head_cp1, this.head_cp2 );
 		this.drawCurve2(this.temple_right, this.temple_left, this.head_cp1, this.head_cp2 );
 
 		// 左のこめかみから頬まで
-		//this.drawCurve2(this.cheek_end[1], this.cheek_start[1], this.cheek_cp2[1], this.cheek_cp1[1], false );
 		this.drawCurve2(this.temple_left, this.chin_start, this.cheek_cp2[1], this.cheek_cp1[1], false );
 		this.con.stroke();
 		this.con.fill();
@@ -3152,9 +3049,7 @@ class DrawFace
 	{
 		for (let i=0; i<2; i++)
 		{
-			this.con.lineWidth = 1;
-			this.con.fillStyle = "#fff";
-			this.con.strokeStyle = "#f00";
+			this._config("#fff", "#000");
 			this.con.beginPath();
 			this.drawCurve(this.lower_eyelid_start[i], this.eye_end[i], this.lower_eyelid_cp1[i], true);
 			this.drawCurve2(this.eye_end[i], this.eye_head[i], this.lower_eyeline_cp2[i], this.upper_eyeline_cp1[i]);
@@ -3168,9 +3063,7 @@ class DrawFace
 
 	drawNose()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#744";
-		this.con.strokeStyle = "#744";
+		this._config("#744", "#744");
 		this.con.beginPath();
 		this.con.moveTo(this.nose_top.x, this.nose_top.y);
 		this.con.lineTo(this.nose_bottom.x, this.nose_bottom.y);
@@ -3184,9 +3077,7 @@ class DrawFace
 
 	drawMouth()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#000";
-		this.con.strokeStyle = "#aaa";
+		this._config("#744", "#aaa", 1, 2);
 		this.con.beginPath();
 		this.drawCurve2(this.mouth_start, this.mouth_end, this.mouth_cp1, this.mouth_cp2, true);
 		this.con.stroke();
@@ -3197,11 +3088,8 @@ class DrawFace
 
 	_drawLowerLipShadow()
 	{
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#000";
-		this.con.strokeStyle = "#000";
+		this._config("#000", "#000", 0.2);
 		this.con.beginPath();
-		this.con.globalAlpha = 0.2;
 		this.drawCurve2(this.lower_lip_start, this.lower_lip_end, this.lower_lip_cp1, this.lower_lip_cp2, true);
 		this.drawCurve2(this.lower_lip_end, this.lower_lip_start, this.lower_lip_cp4, this.lower_lip_cp3);
 		this.con.fill();
@@ -3211,10 +3099,7 @@ class DrawFace
 
 	drawCenter ()
 	{
-		/* config */
-		this.con.lineWidth = 1;
-		this.con.fillStyle = "#f00";
-		this.con.strokeStyle = "#f00";
+		this._config("#f00", "#f00");
 
 		/* 横描画 */
 		this.con.beginPath();
