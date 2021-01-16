@@ -64,7 +64,7 @@ let coordinates = {
 			type: 2,
 			tips: 0,
 			bunch: 6,
-			length: 80,
+			length: 0,
 			tip_span: 0,
 		},
 		outside_back: {
@@ -79,6 +79,14 @@ let coordinates = {
 		side: {
 			bunch: 1,
 			length: 10,
+			left: {
+				length: 10,
+				bunch: 1,
+			},
+			right: {
+				length: 10,
+				bunch: 1,
+			},
 		},
 		outside: {
 			bunch: 1,
@@ -259,6 +267,16 @@ let front_bunch = document.getElementById("front_hair_bunch");
 let side_length = document.getElementById("side_hair_length");
 // 横髪の束数
 let side_bunch = document.getElementById("side_hair_bunch");
+// 横髪の長さ: 右
+let hair_side_right_length = document.getElementById("hair_side_right_length");
+hair_side_right_length.oninput = (e)=>{
+	face.coordinates.hair.side.right.length = Number(hair_side_right_length.value);
+};
+// 横髪の束数: 右
+let hair_side_right_bunch = document.getElementById("hair_side_right_bunch");
+hair_side_right_bunch.oninput = (e)=>{
+	face.coordinates.hair.side.right.bunch = Number(hair_side_right_bunch.value);
+};
 
 // 横髪外側の長さ
 let outside_length = document.getElementById("outside_hair_length");
