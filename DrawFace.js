@@ -28,6 +28,8 @@ class DrawFace
 		// 全ての座標を計算
 		this.initAllCoordinates();
 
+		//this.mainLoop();
+
 	}// コンストラクタ閉じ括弧
 
 	initCanvas(canvas_id, canvas_width, canvas_height)
@@ -721,15 +723,6 @@ class DrawFace
 		arrays.cp1 = [];
 		arrays.cp2 = [];
 	}
-
-	mainLoop()
-	{
-		//requestAnimationFrame(mainLoop);
-		//setInterval(mainLoop, 1000/2)
-		this.update();
-		this.draw();
-	}
-
 
 	update()
 	{
