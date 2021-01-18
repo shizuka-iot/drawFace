@@ -129,20 +129,20 @@ class DrawFace
 		/* アッパーアイラインCP2 */
 		this.upper_eyeline_cp2 = [
 			{ 
-				x: this.eye_head[0].x + Math.floor(Math.abs(this.eye_head[0].x - this.upper_eyeline_end[0].x)*2/3) + this.coordinates.eye.upper_eyeline_cp2.x, 
+				x: this.eye_head[0].x + this.sp(this.eye_head[0].x, this.upper_eyeline_end[0].x, 2/3) + this.coordinates.eye.upper_eyeline_cp2.x, 
 				y: this.center.y -30 + this.coordinates.eye.upper_eyeline_cp2.y + this.coordinates.eye.upper_eyeline_cp.y},
 			{ 
-				x: this.eye_head[1].x - Math.floor(Math.abs(this.eye_head[1].x - this.upper_eyeline_end[1].x)*2/3) - this.coordinates.eye.upper_eyeline_cp2.x, 
+				x: this.eye_head[1].x - this.sp(this.eye_head[1].x, this.upper_eyeline_end[1].x, 2/3) - this.coordinates.eye.upper_eyeline_cp2.x, 
 				y: this.center.y-30 + this.coordinates.eye.upper_eyeline_cp2.y + this.coordinates.eye.upper_eyeline_cp.y},
 		];
 		/* ロウワーアイラインCP1 */
 		this.lower_eyeline_cp1 = [
 			{ 
-				x: this.eye_head[0].x + Math.floor(Math.abs(this.eye_head[0].x - this.upper_eyeline_end[0].x)/3), 
+				x: this.eye_head[0].x + this.sp(this.eye_head[0].x, this.upper_eyeline_end[0].x, 1/3), 
 				y: this.center.y -30
 			},
 			{ 
-				x: this.eye_head[1].x - Math.floor(Math.abs(this.eye_head[1].x - this.upper_eyeline_end[1].x)/3), 
+				x: this.eye_head[1].x - this.sp(this.eye_head[1].x, this.upper_eyeline_end[1].x, 1/3), 
 				y: this.center.y -30
 			},
 		];
@@ -245,18 +245,18 @@ class DrawFace
 		];
 		this.lower_eyelid_cp1 = [
 			{
-				x: this.lower_eyelid_start[0].x + Math.floor(Math.abs(this.lower_eyelid_start[0].x - this.eye_end[0].x))*1/3, 
+				x: this.lower_eyelid_start[0].x + this.sp(this.lower_eyelid_start[0].x , this.eye_end[0].x, 1/3), 
 				y: this.eye_end[0].y + 30},
 			{
-				x: this.lower_eyelid_start[1].x - Math.floor(Math.abs(this.lower_eyelid_start[1].x - this.eye_end[1].x))*1/3, 
+				x: this.lower_eyelid_start[1].x - this.sp(this.lower_eyelid_start[1].x , this.eye_end[1].x, 1/3), 
 				y: this.eye_end[1].y + 30},
 		];
 		this.lower_eyelid_cp2 = [
 			{
-				x: this.lower_eyelid_start[0].x + Math.floor(Math.abs(this.lower_eyelid_start[0].x - this.eye_end[0].x))*2/3, 
+				x: this.lower_eyelid_start[0].x + this.sp(this.lower_eyelid_start[0].x , this.eye_end[0].x, 2/3), 
 				y: this.eye_end[0].y + 30},
 			{
-				x: this.lower_eyelid_start[1].x - Math.floor(Math.abs(this.lower_eyelid_start[1].x - this.eye_end[1].x))*2/3, 
+				x: this.lower_eyelid_start[1].x - this.sp(this.lower_eyelid_start[1].x , this.eye_end[1].x, 2/3), 
 				y: this.eye_end[1].y + 30},
 		];
 		this.lower_eyelid_cp3 = [
@@ -275,10 +275,10 @@ class DrawFace
 		this.nose_bottom = {x:this.center.x, y:this.nose_top.y + 12};
 		this.nose_cp1 = {
 			x:this.nose_top.x + 5 , 
-			y:this.nose_top.y + Math.floor(Math.abs(this.nose_top.y - this.nose_bottom.y))/2 };
+			y:this.nose_top.y + this.sp(this.nose_top.y , this.nose_bottom.y, 1/2) };
 		this.nose_cp2 = {
 			x:this.nose_top.x , 
-			y:this.nose_top.y - Math.floor(Math.abs(this.nose_top.y - this.nose_bottom.y)*2/3) };
+			y:this.nose_top.y - this.sp(this.nose_top.y , this.nose_bottom.y, 2/3) };
 
 
 		this.eyelid_bottom = [
@@ -300,10 +300,10 @@ class DrawFace
 		this.mouth_start = {x: this.center.x - this.coordinates.mouth.width, y: this.center.y + 130 + this.coordinates.mouth.height};
 		this.mouth_end = {x: this.center.x + this.coordinates.mouth.width, y: this.center.y + 130 + this.coordinates.mouth.height};
 		this.mouth_cp1 = {
-			x: this.mouth_start.x + (Math.abs(this.mouth_start.x - this.mouth_end.x)*1/3), 
+			x: this.mouth_start.x + this.sp(this.mouth_start.x , this.mouth_end.x, 1/3), 
 			y: this.mouth_start.y + this.coordinates.mouth.cp_height};
 		this.mouth_cp2 = {
-			x: this.mouth_start.x + Math.floor(Math.abs(this.mouth_start.x - this.mouth_end.x)*2/3), 
+			x: this.mouth_start.x + this.sp(this.mouth_start.x , this.mouth_end.x, 2/3), 
 			y: this.mouth_start.y + this.coordinates.mouth.cp_height};
 
 		this.chin_start = {
@@ -498,18 +498,18 @@ class DrawFace
 		];
 		this.eyeblow_upper_cp1 = [
 			{
-				x: this.eyeblow_start[0].x + Math.floor(Math.abs(this.eyeblow_end[0].x - this.eyeblow_start[0].x))/3, 
+				x: this.eyeblow_start[0].x + this.sp(this.eyeblow_end[0].x , this.eyeblow_start[0].x,1/3), 
 				y: this.eyeblow_start[0].y -10},
 			{
-				x: this.eyeblow_start[1].x - Math.floor(Math.abs(this.eyeblow_end[1].x - this.eyeblow_start[1].x))/3, 
+				x: this.eyeblow_start[1].x - this.sp(this.eyeblow_end[1].x , this.eyeblow_start[1].x, 1/3), 
 				y: this.eyeblow_start[1].y -10},
 		];
 		this.eyeblow_upper_cp2 = [
 			{
-				x: this.eyeblow_start[0].x + Math.floor(Math.abs(this.eyeblow_end[0].x - this.eyeblow_start[0].x))*2/3, 
+				x: this.eyeblow_start[0].x + this.sp(this.eyeblow_end[0].x , this.eyeblow_start[0].x, 2/3), 
 				y: this.eyeblow_start[0].y -20},
 			{
-				x: this.eyeblow_start[1].x - Math.floor(Math.abs(this.eyeblow_end[1].x - this.eyeblow_start[1].x))*2/3, 
+				x: this.eyeblow_start[1].x - this.sp(this.eyeblow_end[1].x , this.eyeblow_start[1].x, 2/3), 
 				y: this.eyeblow_start[1].y -20},
 		];
 		// y座標を+10くらいにすれば太眉になる。-20くらいで細眉
@@ -523,10 +523,10 @@ class DrawFace
 		];
 		this.eyeblow_lower_cp2 = [
 			{
-				x: this.eyeblow_start[0].x + Math.floor(Math.abs(this.eyeblow_end[0].x - this.eyeblow_start[0].x))*2/3, 
+				x: this.eyeblow_start[0].x + this.sp(this.eyeblow_end[0].x , this.eyeblow_start[0].x, 2/3), 
 				y: this.eyeblow_start[0].y -20},
 			{
-				x: this.eyeblow_start[1].x - Math.floor(Math.abs(this.eyeblow_end[1].x - this.eyeblow_start[1].x))*2/3, 
+				x: this.eyeblow_start[1].x - this.sp(this.eyeblow_end[1].x , this.eyeblow_start[1].x, 2/3), 
 				y: this.eyeblow_start[1].y -20},
 		];
 
