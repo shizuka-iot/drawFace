@@ -111,6 +111,15 @@ let coordinates = {
 		outside: {
 			bunch: 1,
 			length: 10,
+			volume: 100,
+			left: {
+				length: 10,
+				volume: 10,
+			},
+			right: {
+				length: 10,
+				volume: 10,
+			},
 		},
 	},
 

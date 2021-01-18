@@ -311,7 +311,7 @@ let face = new DrawFace("can2", coordinates);
 
 // メインループ関数
 // インスタンスの更新メソッド・描画メソッドを実行
-function mainLoop2()
+function mainLoop()
 {
 	face.update();
 	face.draw();
@@ -320,6 +320,6 @@ function mainLoop2()
 // 実際に関数を実行
 // ループを定期的に呼び出す
 window.onload = ()=>{
-	// mainLoop2(); // ループを止めたい時にアンコメントしてsetIntervalのほうをコメントアウト
-	setInterval(mainLoop2, 1000/5);
+	//mainLoop2(); // ループを止めたい時にアンコメントしてsetIntervalのほうをコメントアウト
+	setInterval(mainLoop, 1000/5);
 }
