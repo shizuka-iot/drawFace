@@ -18,144 +18,177 @@
 
 		<div class="params">
 
-			<div class="parts">
-				<div class="hair_color">
-					<label for="hair_color_r">ヘアカラー赤</label>
-						<input type="range" id="hair_color_r" value="50" min="0" max="255">
+			<fieldset>
+				<legend>ヘアカラー</legend>
+				<div class="parts">
+					<div class="hair_color">
+						<label for="hair_color_r">ヘアカラー赤</label>
+							<input type="range" id="hair_color_r" value="50" min="0" max="255">
+					</div>
+					<div class="hair_color">
+						<label for="hair_color_g">ヘアカラー緑</label>
+						<input type="range" id="hair_color_g" value="50" min="0" max="255">
+					</div>
+					<div class="hair_color">
+						<label for="hair_color_b">ヘアカラー青</label>
+						<input type="range" id="hair_color_b" value="50" min="0" max="255">
+					</div>
 				</div>
-				<div class="hair_color">
-					<label for="hair_color_g">ヘアカラー緑</label>
-					<input type="range" id="hair_color_g" value="50" min="0" max="255">
-				</div>
-				<div class="hair_color">
-					<label for="hair_color_b">ヘアカラー青</label>
-					<input type="range" id="hair_color_b" value="50" min="0" max="255">
-				</div>
-			</div>
+			</fieldset>
 
-			<div class="parts">
-				<div class="iris_color">
-					<label for="iris_color_r">虹彩の赤</label>
-						<input type="range" id="iris_color_r" value="50" min="0" max="255">
-				</div>
-				<div class="iris_color">
-					<label for="iris_color_g">虹彩の緑</label>
-					<input type="range" id="iris_color_g" value="50" min="0" max="255">
-				</div>
-				<div class="iris_color">
-					<label for="iris_color_b">虹彩の青</label>
-					<input type="range" id="iris_color_b" value="50" min="0" max="255">
-				</div>
-			</div>
 
-			<div class="parts">
-				<div class="eye_head">
-					<label for="eye_head_width">目頭の水平</label>
-						<input type="range" id="eye_head_width" value="0" min="-255" max="255">
-				</div>
-				<div class="eye_head">
-					<label for="eye_head_height">目頭の高さ</label>
-					<input type="range" id="eye_head_height" value="0" min="-255" max="255">
-				</div>
-				<div class="span_to_eye">
-					<label for="span_to_eye_x">目とこめかみの距離</label>
-					<input type="range" id="span_to_eye_x" value="0" min="-10" max="255">
-				</div>
-				<div class="upper_eyeline_end">
-					<label for="upper_eyeline_end_x">アイライン終端X</label>
-					<input type="range" id="upper_eyeline_end_x" value="0" min="-255" max="255">
-				</div>
-				<div class="upper_eyeline_end">
-					<label for="upper_eyeline_end_y">アイライン終端Y</label>
-					<input type="range" id="upper_eyeline_end_y" value="0" min="-255" max="255">
-				</div>
-				<div class="upper_eyeline_cp">
-					<label for="upper_eyeline_cp1_y">アイラインCP1高さ</label>
-					<input type="range" id="upper_eyeline_cp1_y" value="0" min="-255" max="255">
-				</div>
-				<div class="upper_eyeline_cp">
-					<label for="upper_eyeline_cp2_y">アイラインCP2高さ</label>
-					<input type="range" id="upper_eyeline_cp2_y" value="0" min="-255" max="255">
-				</div>
-				<div class="upper_eyeline_cp">
-					<label for="upper_eyeline_cp_x">アイラインCP1x座標</label>
-					<input type="range" id="upper_eyeline_cp1_x" value="0" min="-255" max="255">
-				</div>
-				<div class="upper_eyeline_cp">
-					<label for="upper_eyeline_cp_x">アイラインCP2x座標</label>
-					<input type="range" id="upper_eyeline_cp2_x" value="0" min="-255" max="255">
-				</div>
-				<div class="upper_eyeline_cp">
-					<label for="upper_eyeline_cp_y">アイラインCP両方高さ</label>
-					<input type="range" id="upper_eyeline_cp_y" value="0" min="-255" max="255">
-				</div>
-			</div>
+			<fieldset>
+				<legend>目</legend>
 
-			<div class="parts">
-				<div class="cheek">
-					<label for="cheek_width">頬の幅</label>
-						<input type="range" id="cheek_width" value="30" min="-255" max="255">
-				</div>
-				<div class="cheek">
-					<label for="cheek_cp1_x">頬のCP1X</label>
-						<input type="range" id="cheek_cp1_x" value="0" min="-255" max="255">
-				</div>
-				<div class="cheek">
-					<label for="cheek_cp2_x">頬のCP2X</label>
-						<input type="range" id="cheek_cp2_x" value="30" min="-255" max="255">
-				</div>
-				<div class="chin">
-					<label for="chin_width">顎の幅</label>
-					<input type="range" id="chin_width" value="0" min="-255" max="255">
-				</div>
-				<div class="chin">
-					<label for="chin_height">顎の高さ</label>
-					<input type="range" id="chin_height" value="0" min="-255" max="255">
-				</div>
-			</div>
-
-			<div class="parts">
-				<div class="mouth">
-					<label for="mouth_width">口の幅</label>
-						<input type="range" id="mouth_width" value="30" min="0" max="255">
-				</div>
-				<div class="mouth">
-					<label for="mouth_height">口の高さ</label>
-					<input type="range" id="mouth_height" value="0" min="-255" max="255">
-				</div>
-				<div class="mouth">
-					<label for="mouth_cp_height">口の制御点</label>
-					<input type="range" id="mouth_cp_height" value="10" min="-255" max="255">
-				</div>
-			</div>
-
-			<div class="parts">
-				<div class="eyeblow">
-					<label for="eyeblow_head_x">眉頭の水平</label>
-					<input type="range" id="eyeblow_head_x" value="0" min="-255" max="255">
+				<div class="parts">
+					<div class="iris_color">
+						<label for="iris_color_r">虹彩の赤</label>
+							<input type="range" id="iris_color_r" value="50" min="0" max="255">
+					</div>
+					<div class="iris_color">
+						<label for="iris_color_g">虹彩の緑</label>
+						<input type="range" id="iris_color_g" value="50" min="0" max="255">
+					</div>
+					<div class="iris_color">
+						<label for="iris_color_b">虹彩の青</label>
+						<input type="range" id="iris_color_b" value="50" min="0" max="255">
+					</div>
 				</div>
 
-				<div class="eyeblow">
-					<label for="eyeblow_head_height">眉頭の高さ</label>
-					<input type="range" id="eyeblow_head_height" value="0" min="-255" max="255">
+				<div class="parts">
+					<div class="slider">
+						<label for="eye_size">目の大きさ</label>
+						<input id="eye_size" type="range" value="1" min="1" max="100" step="1">
+					</div>
+					<div class="slider">
+						<label for="eye_position_y">目の高さ</label>
+						<input id="eye_position_y" type="range" value="1" min="-100" max="100" step="1">
+					</div>
+					<div class="slider">
+						<label for="eye_position_x">目の水平</label>
+						<input id="eye_position_x" type="range" value="1" min="1" max="100" step="1">
+					</div>
 				</div>
-
-				<div class="eyeblow">
-					<label for="eyeblow_end_x">眉尻の水平</label>
-					<input type="range" id="eyeblow_end_x" value="0" min="-255" max="255">
+				<div class="parts">
+					<div class="eye_head">
+						<label for="eye_head_width">目頭の水平</label>
+							<input type="range" id="eye_head_width" value="0" min="-255" max="255">
+					</div>
+					<div class="eye_head">
+						<label for="eye_head_height">目頭の高さ</label>
+						<input type="range" id="eye_head_height" value="0" min="-255" max="255">
+					</div>
+					<div class="span_to_eye">
+						<label for="span_to_eye_x">目とこめかみの距離</label>
+						<input type="range" id="span_to_eye_x" value="0" min="-10" max="255">
+					</div>
+					<div class="upper_eyeline_end">
+						<label for="upper_eyeline_end_x">アイライン終端X</label>
+						<input type="range" id="upper_eyeline_end_x" value="0" min="-255" max="255">
+					</div>
+					<div class="upper_eyeline_end">
+						<label for="upper_eyeline_end_y">アイライン終端Y</label>
+						<input type="range" id="upper_eyeline_end_y" value="0" min="-255" max="255">
+					</div>
+					<div class="upper_eyeline_cp">
+						<label for="upper_eyeline_cp1_y">アイラインCP1高さ</label>
+						<input type="range" id="upper_eyeline_cp1_y" value="0" min="-255" max="255">
+					</div>
+					<div class="upper_eyeline_cp">
+						<label for="upper_eyeline_cp2_y">アイラインCP2高さ</label>
+						<input type="range" id="upper_eyeline_cp2_y" value="0" min="-255" max="255">
+					</div>
+					<div class="upper_eyeline_cp">
+						<label for="upper_eyeline_cp_x">アイラインCP1x座標</label>
+						<input type="range" id="upper_eyeline_cp1_x" value="0" min="-255" max="255">
+					</div>
+					<div class="upper_eyeline_cp">
+						<label for="upper_eyeline_cp_x">アイラインCP2x座標</label>
+						<input type="range" id="upper_eyeline_cp2_x" value="0" min="-255" max="255">
+					</div>
+					<div class="upper_eyeline_cp">
+						<label for="upper_eyeline_cp_y">アイラインCP両方高さ</label>
+						<input type="range" id="upper_eyeline_cp_y" value="0" min="-255" max="255">
+					</div>
 				</div>
+			</fieldset>
 
-				<div class="eyeblow">
-					<label for="eyeblow_end_height">眉尻の高さ</label>
-					<input type="range" id="eyeblow_end_height" value="0" min="-255" max="255">
+
+
+			<fieldset>
+				<legend>輪郭</legend>
+				<div class="parts">
+					<div class="cheek">
+						<label for="cheek_width">頬の幅</label>
+							<input type="range" id="cheek_width" value="30" min="-255" max="255">
+					</div>
+					<div class="cheek">
+						<label for="cheek_cp1_x">頬のCP1X</label>
+							<input type="range" id="cheek_cp1_x" value="0" min="-255" max="255">
+					</div>
+					<div class="cheek">
+						<label for="cheek_cp2_x">頬のCP2X</label>
+							<input type="range" id="cheek_cp2_x" value="30" min="-255" max="255">
+					</div>
+					<div class="chin">
+						<label for="chin_width">顎の幅</label>
+						<input type="range" id="chin_width" value="0" min="-255" max="255">
+					</div>
+					<div class="chin">
+						<label for="chin_height">顎の高さ</label>
+						<input type="range" id="chin_height" value="0" min="-255" max="255">
+					</div>
 				</div>
+			</fieldset>
 
-				<div class="eyeblow">
-					<label for="eyeblow_cp_height">眉毛のCP</label>
-					<input type="range" id="eyeblow_cp_height" value="20" min="-255" max="255">
+			<fieldset>
+				<legend>口</legend>
+				<div class="parts">
+					<div class="mouth">
+						<label for="mouth_width">口の幅</label>
+							<input type="range" id="mouth_width" value="30" min="0" max="255">
+					</div>
+					<div class="mouth">
+						<label for="mouth_height">口の高さ</label>
+						<input type="range" id="mouth_height" value="0" min="-255" max="255">
+					</div>
+					<div class="mouth">
+						<label for="mouth_cp_height">口の制御点</label>
+						<input type="range" id="mouth_cp_height" value="10" min="-255" max="255">
+					</div>
 				</div>
+			</fieldset>
 
-			</div>
+			<fieldset>
+				<legend>眉毛</legend>
+				<div class="parts">
+					<div class="eyeblow">
+						<label for="eyeblow_head_x">眉頭の水平</label>
+						<input type="range" id="eyeblow_head_x" value="0" min="-255" max="255">
+					</div>
+
+					<div class="eyeblow">
+						<label for="eyeblow_head_height">眉頭の高さ</label>
+						<input type="range" id="eyeblow_head_height" value="0" min="-255" max="255">
+					</div>
+
+					<div class="eyeblow">
+						<label for="eyeblow_end_x">眉尻の水平</label>
+						<input type="range" id="eyeblow_end_x" value="0" min="-255" max="255">
+					</div>
+
+					<div class="eyeblow">
+						<label for="eyeblow_end_height">眉尻の高さ</label>
+						<input type="range" id="eyeblow_end_height" value="0" min="-255" max="255">
+					</div>
+
+					<div class="eyeblow">
+						<label for="eyeblow_cp_height">眉毛のCP</label>
+						<input type="range" id="eyeblow_cp_height" value="20" min="-255" max="255">
+					</div>
+
+				</div>
+			</fieldset>
 
 			<fieldset>
 				<legend>前髪</legend>
@@ -257,6 +290,17 @@
 						<input id="back_hair_tip_span" type="range" value="0" min="0" max="100" step="1">
 					</div>
 				</div>
+
+				<div class="parts">
+					<div class="slider">
+						<label for="outside_back_hair_length">外側後ろ髪長さ</label>
+						<input id="outside_back_hair_length" type="range" value="1" min="1" max="500" step="1">
+					</div>
+					<div class="slider">
+						<label for="outside_back_hair_bunch">外側後ろ髪束数</label>
+						<input id="outside_back_hair_bunch" type="range" value="1" min="1" max="30" step="1">
+					</div>
+				</div>
 			</fieldset>
 
 
@@ -283,44 +327,19 @@
 						<input id="hair_side_right_bunch" type="range" value="1" min="1" max="30" step="1">
 					</div>
 				</div>
+
+				<div class="parts">
+					<div class="slider">
+						<label for="outside_hair_length">外側横髪長さ</label>
+						<input id="outside_hair_length" type="range" value="1" min="1" max="500" step="1">
+					</div>
+					<div class="slider">
+						<label for="outside_hair_bunch">外側横髪束数</label>
+						<input id="outside_hair_bunch" type="range" value="1" min="1" max="30" step="1">
+					</div>
+				</div>
 			</fieldset>
 
-			<div class="parts">
-				<div class="slider">
-					<label for="outside_hair_length">外側横髪長さ</label>
-					<input id="outside_hair_length" type="range" value="1" min="1" max="500" step="1">
-				</div>
-				<div class="slider">
-					<label for="outside_hair_bunch">外側横髪束数</label>
-					<input id="outside_hair_bunch" type="range" value="1" min="1" max="30" step="1">
-				</div>
-			</div>
-
-			<div class="parts">
-				<div class="slider">
-					<label for="outside_back_hair_length">外側後ろ髪長さ</label>
-					<input id="outside_back_hair_length" type="range" value="1" min="1" max="500" step="1">
-				</div>
-				<div class="slider">
-					<label for="outside_back_hair_bunch">外側後ろ髪束数</label>
-					<input id="outside_back_hair_bunch" type="range" value="1" min="1" max="30" step="1">
-				</div>
-			</div>
-
-			<div class="parts">
-				<div class="slider">
-					<label for="eye_size">目の大きさ</label>
-					<input id="eye_size" type="range" value="1" min="1" max="100" step="1">
-				</div>
-				<div class="slider">
-					<label for="eye_position_y">目の高さ</label>
-					<input id="eye_position_y" type="range" value="1" min="-100" max="100" step="1">
-				</div>
-				<div class="slider">
-					<label for="eye_position_x">目の水平</label>
-					<input id="eye_position_x" type="range" value="1" min="1" max="100" step="1">
-				</div>
-			</div>
 		</div>
 	</main>
 </body>
