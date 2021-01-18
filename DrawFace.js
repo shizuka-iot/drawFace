@@ -1250,7 +1250,7 @@ class DrawFace
 		{
 			this.con.save();
 			//this.con.translate(3, 10);
-			this.con.scale(1, 1.14);
+			this.con.scale(1, 1.05);
 			this.con.beginPath();
 			this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
 			this._drawStandardHairSub(hair_bunch, hair_arrays, true);
