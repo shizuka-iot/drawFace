@@ -733,7 +733,7 @@ class DrawFace
 	draw()
 	{
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
-		this.drawDebug();
+		//this.drawDebug();
 		this.drawOutsideBackHair(this.coordinates.hair.outside_back.bunch, this.coordinates.hair.outside_back.length);
 		this._selectBackHair();
 		this.drawNeck();
@@ -750,6 +750,7 @@ class DrawFace
 		this.drawEyeblow();
 		this.drawNose();
 		this.drawSkinHead();
+		this.drawSideburns(this.coordinates.hair.sideburns);
 		this._selectFrontHair();
 		this._selectSideHair();
 	}
@@ -789,8 +790,8 @@ class DrawFace
 	{
 		switch (this.coordinates.hair.side.type)
 		{
-			case 4:
-				this.drawSideHair4(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch, this.side_hair_arrays, this.temple_left, this.forehead_right);
+			case 0:
+				this.drawSideHairStandard(this.coordinates.hair.side, this.side_hair_arrays, this.temple_left, this.forehead_right);
 				break;
 			default:
 				break;
@@ -824,25 +825,6 @@ class DrawFace
 
 
 
-	drawFrontHairFromTop()
-	{
-		this.fillR(this.top_of_head, "red");
-
-		// 座標生成
-	}
-
-
-
-	_generateCoordinatesOfFrontHairFromTop()
-	{
-		for (let i=0; i<hair_bunch; i++)
-		{
-			
-		}
-	}
-
-
-
 	_initializeSideHairArray()
 	{
 		this.side_hair_roots = [];
@@ -853,7 +835,7 @@ class DrawFace
 
 
 	
-	_generateSideHair2LeftCoordinates(hair_length, hair_bunch, span)
+	_generateSideburnsLeftCoordinates(hair_length, hair_bunch, span)
 	{
 			this._initializeSideHairArray();
 
@@ -862,7 +844,7 @@ class DrawFace
 			{
 				this.side_hair_roots[i] = {
 					x: this.temple_left.x + i*span, 
-					y: this.temple_left.y + this.generateCoordinateLeft(i*span)};
+					y: this.temple_left.y + this.generateSideburnsCoordinateLeft(i*span)};
 				this.side_hair_tips[i] = {
 					x: this.temple_left.x + i*span + rand(-60, 0), 
 					y: this.temple_left.y + rand(0, 20) + hair_length};
@@ -928,7 +910,7 @@ class DrawFace
 
 
 
-	_generateSideHair2RightCoordinates(hair_length, hair_bunch, span)
+	_generateSideburnsRightCoordinates(hair_length, hair_bunch, span)
 	{
 		this._initializeSideHairArray();
 		/* 右サイド髪の座標生成 */
@@ -936,7 +918,7 @@ class DrawFace
 		{
 			this.side_hair_roots[i] = {
 				x: this.forehead_right.x + i*span, 
-				y: this.forehead_right.y + this.generateCoordinateRight(i*span)};
+				y: this.forehead_right.y + this.generateSideburnsCoordinateRight(i*span)};
 			this.side_hair_tips[i] = {
 				x: this.forehead_right.x + i*span + rand(-60, 0), 
 				y: this.cheek_end[0].y + rand(10, 20) + hair_length};
@@ -952,7 +934,7 @@ class DrawFace
 
 
 	// 左サイドの座標生成
-	_generateSideHair4LeftCoordinates(hair_length, hair_bunch, span)
+	_generateSideHairStandardLeftCoordinates(hair_length, hair_bunch, span)
 	{
 			this._initializeSideHairArray();
 
@@ -961,7 +943,7 @@ class DrawFace
 			{
 				this.side_hair_roots[i] = {
 					x: this.temple_left.x + i*span, 
-					y: this.temple_left.y + this.generateCoordinateLeft(i*span)};
+					y: this.temple_left.y + this.generateSideburnsCoordinateLeft(i*span)};
 				this.side_hair_tips[i] = {
 					x: this.temple_left.x + i*span + span/2 + rand(-30, 0), 
 					y: this.temple_left.y + rand(0, 20) + hair_length};
@@ -973,7 +955,7 @@ class DrawFace
 					y: this.top_of_head.y + 100};
 			}
 	}
-	_generateSideHair4RightCoordinates(hair_length, hair_bunch, span)
+	_generateSideHairStandardRightCoordinates(hair_length, hair_bunch, span)
 	{
 		this._initializeSideHairArray();
 		/* 右サイド髪の座標生成 */
@@ -981,7 +963,7 @@ class DrawFace
 		{
 			this.side_hair_roots[i] = {
 				x: this.forehead_right.x + i*span,
-				y: this.forehead_right.y + this.generateCoordinateRight(i*span)};
+				y: this.forehead_right.y + this.generateSideburnsCoordinateRight(i*span)};
 			this.side_hair_tips[i] = {
 				x: this.forehead_right.x + i*span +span/2 + rand(-60, 10), 
 				y: this.cheek_end[0].y + rand(10, 20) + hair_length};
@@ -993,30 +975,7 @@ class DrawFace
 				y: this.top_of_head.y + 100 };
 		}
 	}
-	_drawSideHair4Left(hair_bunch, arrays)
-	{
-		/* 左サイド髪の描画 */
-		this.con.beginPath();
-		this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
-		this._config(this.hair_color, "#000");
-
-		for (let i=0; i<hair_bunch; i++)
-		{
-			this.drawCurve2(this.top_of_head, this.side_hair_tips[i], this.side_hair_cp1[i], this.side_hair_cp2[i] );
-
-			if( i+1<hair_bunch)
-			{
-				this.drawCurve2(this.side_hair_tips[i+1], this.top_of_head, this.side_hair_cp2[i], this.side_hair_cp1[i+1]);
-			}
-			else
-			{
-				this.drawCurve2(this.side_hair_tips[this.side_hair_tips.length -1], this.top_of_head, this.side_hair_cp2[this.side_hair_tips.length -1], this.side_hair_cp1[this.side_hair_tips.length -1]);
-			}
-			this.con.stroke();
-		}
-		this.con.fill();
-	}
-	_drawSideHair4Left2(hair_bunch, arrays)
+	_drawSideHairStandardLeft2(hair_bunch, arrays)
 	{
 		/* 左サイド髪の描画 */
 		this.con.beginPath();
@@ -1033,42 +992,43 @@ class DrawFace
 			}
 			else
 			{
-				this.drawCurve2(arrays.tips[arrays.tips.length -1], this.top_of_head, arrays.cp2[arrays.tips.length -1], arrays.cp1[arrays.tips.length -1]);
+				this.drawCurve2(
+					arrays.tips[arrays.tips.length -1], 
+					this.top_of_head, 
+					arrays.cp2[arrays.tips.length -1], 
+					arrays.cp1[arrays.tips.length -1]);
 			}
 			this.con.stroke();
 		}
 		this.con.fill();
 	}
 
-	_drawSideHair4Right(hair_bunch, arrays)
+	_drawSideHairStandardRight(hair_bunch, arrays)
 	{
 		/* 右サイド髪の描画 */
 		this.con.beginPath();
 		this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
+		this._config(this.hair_color, "#000");
+
 		for (let i=0; i<hair_bunch; i++)
 		{
 			this.drawCurve2(this.top_of_head, arrays.tips[i], arrays.cp1[i], arrays.cp2[i] );
-			//this.drawCurve2(this.top_of_head, this.side_hair_tips[i], this.side_hair_cp1[i], this.side_hair_cp2[i] );
-			this._config(this.hair_color, "#000");
-
 
 			if( i+1<hair_bunch)
 			{
 				this.drawCurve2(arrays.tips[i+1], this.top_of_head, arrays.cp2[i], arrays.cp1[i+1]);
-				//this.drawCurve2(this.side_hair_tips[i+1], this.top_of_head, this.side_hair_cp2[i], this.side_hair_cp1[i+1]);
 			}
 			else
 			{
-				this.drawCurve2(arrays.tips[arrays.tips.length -1], this.top_of_head, arrays.cp2[arrays.tips.length -1], arrays.cp1[arrays.tips.length -1]);
-				/*
 				this.drawCurve2(
-					this.side_hair_tips[this.side_hair_tips.length -1], // 毛先から
-					this.top_of_head, // 頬の端まで
-					this.side_hair_cp2[this.side_hair_tips.length -1], // 毛先のCP
-					this.side_hair_cp1[this.side_hair_tips.length -1]); // 毛先のCP
-					*/
+					arrays.tips[arrays.tips.length -1], 
+					this.top_of_head, 
+					arrays.cp2[arrays.tips.length -1], 
+					arrays.cp1[arrays.tips.length -1]);
 			}
+			this.con.stroke();
 		}
+		this.con.fill();
 	}
 
 	_generateHairCoordinates2(arrays, start_coordinate, hair_length, hair_bunch, span, start_x, tip_span, cp1, cp2)
@@ -1152,36 +1112,35 @@ class DrawFace
 	}
 
 	
-	drawSideburns(hair_length, hair_bunch)
+	drawSideburns(coordinates)
 	{
-		let span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/hair_bunch);
+		let left_span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/coordinates.left.bunch);
+		let right_span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/coordinates.right.bunch);
 
 		/* サイクル */
 		for (let j=0; j<4; j++)
 		{
-			this._generateSideHair2LeftCoordinates(hair_length, hair_bunch, span);
-			this._drawSideburnsLeft(hair_bunch);
-			this._generateSideHair2RightCoordinates(hair_length, hair_bunch, span);
-			this._drawSideburnsRight(hair_bunch);
+			this._generateSideburnsLeftCoordinates(coordinates.left.length, coordinates.left.bunch, left_span);
+			this._drawSideburnsLeft(coordinates.left.bunch);
+			this._generateSideburnsRightCoordinates(coordinates.right.length, coordinates.right.bunch, right_span);
+			this._drawSideburnsRight(coordinates.right.bunch);
 			this.con.stroke();
 			this.con.fill();
 		}
 	}
 
-	drawSideHair4(hair_length, hair_bunch, arrays, start_left_coordinate, start_right_coordinate)
-	//drawSideHair4(hair_length, hair_bunch)
+	drawSideHairStandard(side_coordinates, arrays, start_left_coordinate, start_right_coordinate)
 	{
-		let span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/hair_bunch);
+		let left_span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/side_coordinates.left.bunch);
+		let right_span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/side_coordinates.right.bunch);
 
 		/* サイクル */
 		for (let j=0; j<2; j++)
 		{
-			//this._generateSideHair4LeftCoordinates(hair_length, hair_bunch, span);
-			this._generateHairCoordinates(arrays, start_left_coordinate, hair_length, hair_bunch, span);
-			this._drawSideHair4Left2(hair_bunch, arrays);
-			//this._generateSideHair4RightCoordinates(hair_length, hair_bunch, span);
-			this._generateHairCoordinates(arrays, start_right_coordinate, this.coordinates.hair.side.right.length, this.coordinates.hair.side.right.bunch, span);
-			this._drawSideHair4Right(this.coordinates.hair.side.right.bunch, arrays);
+			this._generateHairCoordinates(arrays, start_left_coordinate, side_coordinates.left.length, side_coordinates.left.bunch, left_span);
+			this._drawSideHairStandardLeft2(side_coordinates.left.bunch, arrays);
+			this._generateHairCoordinates(arrays, start_right_coordinate, side_coordinates.right.length, side_coordinates.right.bunch, right_span);
+			this._drawSideHairStandardRight(side_coordinates.right.bunch, arrays);
 			this.con.stroke();
 			this.con.fill();
 		}
@@ -1454,11 +1413,11 @@ class DrawFace
 
 
 
-	generateCoordinateRight(x)
+	generateSideburnsCoordinateRight(x)
 	{
 		return Math.floor(x * (this.forehead_right.y - this.cheek_end[0].y) / (this.forehead_right.x - this.cheek_end[0].x)); 
 	}
-	generateCoordinateLeft(x)
+	generateSideburnsCoordinateLeft(x)
 	{
 		return Math.floor(x * (this.forehead_left.y - this.cheek_end[1].y) / (this.forehead_left.x - this.cheek_end[1].x));
 	}
@@ -1565,7 +1524,16 @@ class DrawFace
 		this.con.fill();
 	}
 
-	drawIris()
+
+
+
+
+	drawEyes()
+	{
+		this._drawIris();
+		this._drawEyeline();
+	}
+	_drawIris()
 	{
 		let eye_position_rand = rand(-1,1);
 
@@ -1660,20 +1628,7 @@ class DrawFace
 			this.con.globalAlpha = 1;
 		}
 	}
-
-
-
-
-	drawEyes()
-	{
-		this.drawIris();
-		this.drawEyeline();
-	}
-
-
-
-
-	drawEyeline()
+	_drawEyeline()
 	{
 		// 左右の座標は既に用意してある
 		// 配列で管理しているのでループのインデックス番号を合わせて回す
@@ -1693,6 +1648,10 @@ class DrawFace
 
 
 
+
+
+
+
 	drawEyeShadow()
 	{
 		for (let i=0; i<2; i++)
@@ -1708,17 +1667,6 @@ class DrawFace
 	}
 
 
-	drawDebug()
-	{
-		this._config("#111", "#111");
-		this.con.font="16px 'ＭＳ　ゴシック'";
-
-		this.con.fillText("クライアントマウス(X: "+ox + ",  Y: " + oy + ")", 
-			50, 50 );
-		this.con.fillText("中心マウス(X: "
-			+(ox - this.center.x) + ",  Y: " + (oy - this.center.y) + ")", 
-			50, 50 *2 );
-	}
 
 
 	/*
@@ -2107,7 +2055,6 @@ class DrawFace
 		this._config("#fee", "#000");
 		this.con.beginPath();
 		this.drawCurve2(this.neck_start[0], this.neck_end[0], this.neck_cp1[0],this.neck_cp2[0], true);
-		//this.con.lineTo(this.neck_end[1].x, this.neck_end[1].y);
 		this.lineTo(this.neck_end[1]);
 		this.drawCurve2(this.neck_end[1], this.neck_start[1], this.neck_cp2[1],this.neck_cp1[1]);
 		this.con.fill();
@@ -2123,9 +2070,7 @@ class DrawFace
 	{
 		this._config("#000", "#000", 1, 1);
 		this.con.beginPath();
-		//this.con.moveTo(this.neck_start[0].x, this.neck_start[0].y);
 		this.moveTo(this.neck_start[0]);
-		//this.con.lineTo(this.neck_start2[0].x, this.neck_start2[0].y);
 		this.lineTo(this.neck_start2[0]);
 		this.drawCurve2(
 			this.neck_start2[0], 
@@ -2133,7 +2078,6 @@ class DrawFace
 			this.neck_shadow_cp1, 
 			this.neck_shadow_cp2
 		);
-		//this.con.lineTo(this.neck_start[1].x, this.neck_start[1].y);
 		this.lineTo(this.neck_start[1]);
 		this.con.globalAlpha = 0.2;
 		this.con.fill();
@@ -2261,6 +2205,17 @@ class DrawFace
 	}
 
 
+	drawDebug()
+	{
+		this._config("#111", "#111");
+		this.con.font="16px 'ＭＳ　ゴシック'";
+
+		this.con.fillText("クライアントマウス(X: "+ox + ",  Y: " + oy + ")", 
+			50, 50 );
+		this.con.fillText("中心マウス(X: "
+			+(ox - this.center.x) + ",  Y: " + (oy - this.center.y) + ")", 
+			50, 50 *2 );
+	}
 	drawCenter ()
 	{
 		this._config("#f00", "#f00");

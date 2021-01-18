@@ -18,6 +18,26 @@ function test(html_id)
 }
 test("front_hair_tips");
 */
+// もみあげ
+let sideburns_left_length = document.getElementById("sideburns_left_length");
+sideburns_left_length.oninput = (e) => {
+	face.coordinates.hair.sideburns.left.length = Number(sideburns_left_length.value);
+};
+let sideburns_right_length = document.getElementById("sideburns_right_length");
+sideburns_right_length.oninput = (e) => {
+	face.coordinates.hair.sideburns.right.length = Number(sideburns_right_length.value);
+};
+let sideburns_left_bunch = document.getElementById("sideburns_left_bunch");
+sideburns_left_bunch.oninput = (e) => {
+	face.coordinates.hair.sideburns.left.bunch = Number(sideburns_left_bunch.value);
+};
+let sideburns_right_bunch = document.getElementById("sideburns_right_bunch");
+sideburns_right_bunch.oninput = (e) => {
+	face.coordinates.hair.sideburns.right.bunch = Number(sideburns_right_bunch.value);
+};
+
+
+
 let back_hair_cp1_y = document.getElementById("back_hair_cp1_y");
 back_hair_cp1_y.oninput = (e) => {
 	face.coordinates.hair.back.cp1.y = Number(back_hair_cp1_y.value);
@@ -209,10 +229,16 @@ let front_length = document.getElementById("front_hair_length");
 // 前髪の束数
 let front_bunch = document.getElementById("front_hair_bunch");
 
-// 横髪の長さ
-let side_length = document.getElementById("side_hair_length");
-// 横髪の束数
-let side_bunch = document.getElementById("side_hair_bunch");
+// 横髪の長さ: 左
+let hair_side_left_length = document.getElementById("hair_side_left_length");
+hair_side_left_length.oninput = (e)=>{
+	face.coordinates.hair.side.left.length = Number(hair_side_left_length.value);
+};
+// 横髪の束数: 左
+let hair_side_left_bunch = document.getElementById("hair_side_left_bunch");
+hair_side_left_bunch.oninput = (e)=>{
+	face.coordinates.hair.side.left.bunch = Number(hair_side_left_bunch.value);
+};
 // 横髪の長さ: 右
 let hair_side_right_length = document.getElementById("hair_side_right_length");
 hair_side_right_length.oninput = (e)=>{
@@ -254,12 +280,6 @@ front_length.oninput = (e)=>{
 };
 front_bunch.oninput = (e)=>{
 	face.coordinates.hair.front.bunch = Number(front_bunch.value);
-};
-side_length.oninput = (e)=>{
-	face.coordinates.hair.side.length = Number(side_length.value);
-};
-side_bunch.oninput = (e)=>{
-	face.coordinates.hair.side.bunch = Number(side_bunch.value);
 };
 outside_length.oninput = (e)=>{
 	face.coordinates.hair.outside.length = Number(outside_length.value);

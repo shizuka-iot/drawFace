@@ -97,7 +97,7 @@ let coordinates = {
 			},
 		},
 		side: {
-			type: 2,
+			type: 0,
 			bunch: 1,
 			length: 10,
 			left: {
@@ -107,6 +107,18 @@ let coordinates = {
 			right: {
 				length: 10,
 				bunch: 1,
+			},
+		},
+		sideburns: {
+			bunch: 1,
+			length: 10,
+			left: {
+				bunch: 1,
+				length: 10,
+			},
+			right: {
+				bunch: 1,
+				length: 10,
 			},
 		},
 		outside: {
