@@ -750,7 +750,7 @@ class DrawFace
 		this.drawEyeblow();
 		this.drawNose();
 		this.drawSkinHead();
-		//this._selectFrontHair();
+		this._selectFrontHair();
 		//this._selectSideHair();
 		this.drawSideHair4(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch, this.side_hair_arrays, this.temple_left, this.forehead_right);
 	}
@@ -782,12 +782,8 @@ class DrawFace
 			case 3:
 				this.drawFrontHair3(this.coordinates.hair.front.bunch, this.coordinates.hair.front.length);
 				break;
-			case 4:
-				this.drawFrontline(this.coordinates.hair.front.bunch, this.coordinates.hair.front.length, 1/2);
-				this.drawFrontline(this.coordinates.hair.front.bunch, this.coordinates.hair.front.length, 1/2, RIGHT);
-				break;
 			case 5:
-				this.drawFrontHair5(this.coordinates.hair.front.bunch, this.coordinates.hair.front.length);
+				this.drawFrontPrincessCut(this.coordinates.hair.front.bunch, this.coordinates.hair.front.length);
 				break;
 			default:
 				break;
@@ -1306,7 +1302,7 @@ class DrawFace
 
 
 
-	drawFrontHair5(hair_bunch, hair_length)
+	drawFrontPrincessCut(hair_bunch, hair_length)
 	{
 		// 配列初期化
 		this._initFrontHairArrays();
