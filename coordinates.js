@@ -97,6 +97,7 @@ let coordinates = {
 			},
 		},
 		side: {
+			type: 2,
 			bunch: 1,
 			length: 10,
 			left: {

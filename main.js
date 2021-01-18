@@ -297,6 +297,13 @@ for (let i=0; i<front_hair_types.length; i++)
 	}
 }
 
+let side_hair_types = document.getElementsByName("side_hair_type");
+for (let i=0; i<side_hair_types.length; i++)
+{
+	side_hair_types[i].onclick = ()=>{
+		face.coordinates.hair.side.type = Number(side_hair_types[i].value);
+	}
+}
 
 let back_hair_types = document.getElementsByName("back_hair_type");
 for (let i=0; i<back_hair_types.length; i++)
@@ -320,6 +327,6 @@ function mainLoop()
 // 実際に関数を実行
 // ループを定期的に呼び出す
 window.onload = ()=>{
-	//mainLoop2(); // ループを止めたい時にアンコメントしてsetIntervalのほうをコメントアウト
+	//mainLoop(); // ループを止めたい時にアンコメントしてsetIntervalのほうをコメントアウト
 	setInterval(mainLoop, 1000/5);
 }

@@ -735,7 +735,7 @@ class DrawFace
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
 		this.drawDebug();
 		this.drawOutsideBackHair(this.coordinates.hair.outside_back.bunch, this.coordinates.hair.outside_back.length);
-		//this._selectBackHair();
+		this._selectBackHair();
 		this.drawNeck();
 		this.drawNeckShadow();
 		this.drawEar();
@@ -751,8 +751,7 @@ class DrawFace
 		this.drawNose();
 		this.drawSkinHead();
 		this._selectFrontHair();
-		//this._selectSideHair();
-		this.drawSideHair4(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch, this.side_hair_arrays, this.temple_left, this.forehead_right);
+		this._selectSideHair();
 	}
 
 	_selectBackHair()
@@ -791,13 +790,13 @@ class DrawFace
 		switch (this.coordinates.hair.side.type)
 		{
 			case 2:
-				this.drawSideHair2(this.coordinates.hair.side.bunch, this.coordinates.hair.side.length);
+				this.drawSideburns(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch);
 				break;
 			case 3:
-				this.drawSideHair3(this.coordinates.hair.side.bunch, this.coordinates.hair.side.length);
+				this.drawSideHair3(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch);
 				break;
 			case 4:
-				this.drawSideHair4(this.coordinates.hair.side.bunch, this.coordinates.hair.side.length);
+				this.drawSideHair4(this.coordinates.hair.side.length, this.coordinates.hair.side.bunch, this.side_hair_arrays, this.temple_left, this.forehead_right);
 				break;
 			default:
 				break;
@@ -883,7 +882,7 @@ class DrawFace
 	}
 
 
-	_drawSideHair2Left(hair_bunch)
+	_drawSideburnsLeft(hair_bunch)
 	{
 		/* 左サイド髪の描画 */
 		this.con.beginPath();
@@ -908,7 +907,7 @@ class DrawFace
 	}
 
 
-	_drawSideHair2Right(hair_bunch)
+	_drawSideburnsRight(hair_bunch)
 	{
 		/* 右サイド髪の描画 */
 		this.con.beginPath();
@@ -1159,7 +1158,7 @@ class DrawFace
 	}
 
 	
-	drawSideHair2(hair_length, hair_bunch)
+	drawSideburns(hair_length, hair_bunch)
 	{
 		let span = Math.floor(Math.abs(this.temple_left.x - this.forehead_left.x)/hair_bunch);
 
@@ -1167,9 +1166,9 @@ class DrawFace
 		for (let j=0; j<4; j++)
 		{
 			this._generateSideHair2LeftCoordinates(hair_length, hair_bunch, span);
-			this._drawSideHair2Left(hair_bunch);
+			this._drawSideburnsLeft(hair_bunch);
 			this._generateSideHair2RightCoordinates(hair_length, hair_bunch, span);
-			this._drawSideHair2Right(hair_bunch);
+			this._drawSideburnsRight(hair_bunch);
 			this.con.stroke();
 			this.con.fill();
 		}
