@@ -14,6 +14,10 @@ let coordinates = {
 			width: 0,
 			height: 0,
 		},
+		eye_end: {
+			x: 0,
+			y: 0,
+		},
 		upper_eyeline_end: {
 			x: 0,
 			y: 0,
@@ -27,6 +31,14 @@ let coordinates = {
 			y: 0,
 		},
 		upper_eyeline_cp2: {
+			x: 0,
+			y: 0,
+		},
+		lower_eyeline_cp1: {
+			x: 0,
+			y: 0,
+		},
+		lower_eyeline_cp2: {
 			x: 0,
 			y: 0,
 		},

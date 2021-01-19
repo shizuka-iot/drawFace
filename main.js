@@ -120,6 +120,23 @@ upper_eyeline_cp2_x.oninput = (e) => {
 	face.coordinates.eye.upper_eyeline_cp2.x = Number(upper_eyeline_cp2_x.value);
 };
 
+let lower_eyeline_cp1_y = document.getElementById("lower_eyeline_cp1_y");
+lower_eyeline_cp1_y.oninput = (e) => {
+	face.coordinates.eye.lower_eyeline_cp1.y = Number(lower_eyeline_cp1_y.value);
+};
+let lower_eyeline_cp2_y = document.getElementById("lower_eyeline_cp2_y");
+lower_eyeline_cp2_y.oninput = (e) => {
+	face.coordinates.eye.lower_eyeline_cp2.y = Number(lower_eyeline_cp2_y.value);
+};
+let lower_eyeline_cp1_x = document.getElementById("lower_eyeline_cp1_x");
+lower_eyeline_cp1_x.oninput = (e) => {
+	face.coordinates.eye.lower_eyeline_cp1.x = Number(lower_eyeline_cp1_x.value);
+};
+let lower_eyeline_cp2_x = document.getElementById("lower_eyeline_cp2_x");
+lower_eyeline_cp2_x.oninput = (e) => {
+	face.coordinates.eye.lower_eyeline_cp2.x = Number(lower_eyeline_cp2_x.value);
+};
+
 // エレメント取得
 let span_to_eye_x = document.getElementById("span_to_eye_x");
 // 取得したエレメントの入力状態を監視
@@ -164,6 +181,14 @@ eye_head_height.oninput = (e)=>{
 	face.coordinates.eye.eye_head.height = Number(eye_head_height.value);
 };
 
+let eye_end_x = document.getElementById("eye_end_x");
+eye_end_x.oninput = (e)=>{
+	face.coordinates.eye.eye_end.x = Number(eye_end_x.value);
+};
+let eye_end_y = document.getElementById("eye_end_y");
+eye_end_y.oninput = (e)=>{
+	face.coordinates.eye.eye_end.y = Number(eye_end_y.value);
+};
 
 
 let cheek_width = document.getElementById("cheek_width");
