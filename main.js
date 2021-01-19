@@ -18,6 +18,24 @@ function test(html_id)
 }
 test("front_hair_tips");
 */
+
+// れんげ　上瞼cp
+let renge_upper_eyelid_cp_y = document.getElementById("renge_upper_eyelid_cp_y");
+renge_upper_eyelid_cp_y.oninput = (e) => {
+	face.coordinates.renge.upper_eyelid.cp.y = Number(renge_upper_eyelid_cp_y.value);
+};
+
+
+
+let nose_position_y = document.getElementById("nose_position_y");
+nose_position_y.oninput = (e) => {
+	face.coordinates.nose.position.y = Number(nose_position_y.value);
+};
+
+
+
+
+
 // もみあげ
 let sideburns_left_length = document.getElementById("sideburns_left_length");
 sideburns_left_length.oninput = (e) => {
@@ -291,6 +309,10 @@ let outside_back_length = document.getElementById("outside_back_hair_length");
 let outside_back_bunch = document.getElementById("outside_back_hair_bunch");
 
 // イベントが起きたときの処理
+let eye_scale = document.getElementById("eye_scale");
+eye_scale.oninput = (e)=>{
+	face.coordinates.eye.scale = Number(eye_scale.value);
+};
 eye_size_param.oninput = (e)=>{
 	face.coordinates.eye.size = Number(eye_size_param.value);
 };
