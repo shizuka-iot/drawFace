@@ -24,6 +24,11 @@ let renge_upper_eyelid_cp_y = document.getElementById("renge_upper_eyelid_cp_y")
 renge_upper_eyelid_cp_y.oninput = (e) => {
 	face.coordinates.renge.upper_eyelid.cp.y = Number(renge_upper_eyelid_cp_y.value);
 };
+// れんげ　下瞼cp
+let renge_lower_eyelid_cp_y = document.getElementById("renge_lower_eyelid_cp_y");
+renge_lower_eyelid_cp_y.oninput = (e) => {
+	face.coordinates.renge.lower_eyelid.cp.y = Number(renge_lower_eyelid_cp_y.value);
+};
 
 
 

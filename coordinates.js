@@ -19,6 +19,12 @@ let coordinates = {
 				y: 0,
 			},
 		},
+		lower_eyelid : {
+			cp: {
+				x: 0,
+				y: 0,
+			},
+		},
 	},
 	nose : {
 		position: {

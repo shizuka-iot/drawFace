@@ -186,6 +186,26 @@ class DrawFace
 				y: this.renge_upper_eyelid_cp2[1].y -14 ,
 			},
 		];
+		this.renge_lower_eyelid_cp1 = [
+			{
+				x: this.renge_eye_head[0].x,
+				y: this.renge_eye_head[0].y + 80 + this.coordinates.renge.lower_eyelid.cp.y,
+			},
+			{
+				x: this.renge_eye_head[1].x,
+				y: this.renge_eye_head[1].y + 80 + this.coordinates.renge.lower_eyelid.cp.y,
+			},
+		];
+		this.renge_lower_eyelid_cp2 = [
+			{
+				x: this.renge_eye_end[0].x,
+				y: this.renge_eye_end[0].y + 80 + this.coordinates.renge.lower_eyelid.cp.y,
+			},
+			{
+				x: this.renge_eye_end[1].x,
+				y: this.renge_eye_end[1].y + 80 + this.coordinates.renge.lower_eyelid.cp.y,
+			},
+		];
 		
 
 		this.eye_head = [ // 目頭
@@ -885,12 +905,15 @@ class DrawFace
 		this.drawEar();
 		this.drawOutline();
 		//this.drawWhiteEyes();
+		this.drawRengeWhiteEyes();
 		this.drawEyes();
-		this.drawEyelid();
+		//this.drawEyelid();
+		this.drawRengeEyelid();
 		this.drawRengeEyes();
 		//this.drawEyeline2();
 		//this.drawEyelashes();
 		//this.drawLowerEyelid();
+		this.drawRengeLowerEyelid();
 		this.drawMouth();
 		this.drawEyeblow();
 		this.drawNose();
@@ -1573,37 +1596,51 @@ class DrawFace
 		this._config(this.hair_color, this.hair_color, 1, 1);
 		this.con.beginPath();
 		this.drawCurve2(this.temple_right, this.temple_left, this.head_cp1, this.head_cp2, true );
-		//this.con.lineTo(this.forehead_left.x, this.forehead_left.y);
 		this.lineTo(this.forehead_left);
 		this.drawCurve(this.forehead_left, this.forehead_right, this.top_of_head );
-		//this.con.lineTo(this.temple_right.x, this.temple_right.y);
 		this.lineTo(this.temple_right);
 		this.con.fill();
 	}
 
 
+	drawRengeLowerEyelid()
+	{
+		this._config("#fee", "#f00");
+		this.con.beginPath();
+		this.drawCurve2(
+			this.renge_eye_end[1], 
+			this.renge_eye_head[1], 
+			this.renge_lower_eyelid_cp2[1], 
+			this.renge_lower_eyelid_cp1[1], true);
+		this.lineTo(this.renge_eye_head[0]);
+		this.drawCurve2(
+			this.renge_eye_head[0], 
+			this.renge_eye_end[0], 
+			this.renge_lower_eyelid_cp1[0], 
+			this.renge_lower_eyelid_cp2[0]);
+		this.lineTo(this.cheek_end[0]);
+		this.drawCurve2(this.temple_right, this.chin_end, this.cheek_cp2[0], this.cheek_cp1[0] );
+		this.drawCurve2(this.chin_end, this.chin_start, this.chin_cp2, this.chin_cp1 );
+		this.drawCurve2(this.chin_start, this.temple_left, this.cheek_cp1[1], this.cheek_cp2[1] );
+		this.lineTo(this.renge_eye_end[1]);
+		this.con.fill();
+	}
 	drawLowerEyelid()
 	{
 		this._config("#fee", "#ff0");
 		this.con.beginPath();
-		//this.con.moveTo(this.upper_eyeline_end[1].x, this.upper_eyeline_end[1].y);
 		this.moveTo(this.upper_eyeline_end[1]);
-		//this.con.lineTo(this.eye_end[1].x, this.eye_end[1].y);
 		this.lineTo(this.eye_end[1]);
 		this.drawCurve(this.eye_end[1], this.eyelid_bottom[1], this.eyelid_bottom_cp3[1] );
 		this.drawCurve(this.eyelid_bottom[1], this.eye_head[1], this.eyelid_bottom_cp1[1] );
-		//this.con.lineTo(this.eye_head[0].x, this.eye_head[0].y);
 		this.lineTo(this.eye_head[0]);
 		this.drawCurve(this.eye_head[0], this.eyelid_bottom[0], this.eyelid_bottom_cp1[0] );
 		this.drawCurve(this.eyelid_bottom[0], this.eye_end[0], this.eyelid_bottom_cp3[0] );
-		//this.con.lineTo(this.upper_eyeline_end[0].x, this.upper_eyeline_end[0].y);
 		this.lineTo(this.upper_eyeline_end[0]);
-		//this.con.lineTo(this.temple_right.x, this.temple_right.y);
 		this.lineTo(this.temple_right);
 		this.drawCurve2(this.temple_right, this.chin_end, this.cheek_cp2[0], this.cheek_cp1[0] );
 		this.drawCurve2(this.chin_end, this.chin_start, this.chin_cp2, this.chin_cp1);
 		this.drawCurve2(this.chin_start, this.temple_left, this.cheek_cp1[1], this.cheek_cp2[1] );
-		//this.con.lineTo(this.upper_eyeline_end[1].x, this.upper_eyeline_end[1].y);
 		this.lineTo(this.upper_eyeline_end[1]);
 		this.con.fill();
 	}
@@ -1656,6 +1693,26 @@ class DrawFace
 		}
 	}
 
+	drawRengeEyelid()
+	{
+		this._config("#fee", "#f00");
+		this.con.beginPath();
+		this.drawCurve2(
+			this.renge_upper_eyelash_end[1], 
+			this.renge_upper_eyelash_start[1], 
+			this.renge_upper_eyelash_cp2[1], 
+			this.renge_upper_eyelash_cp1[1], true);
+		this.lineTo(this.renge_upper_eyelash_start[0]);
+		this.drawCurve2(
+			this.renge_upper_eyelash_start[0], 
+			this.renge_upper_eyelash_end[0], 
+			this.renge_upper_eyelash_cp1[0], 
+			this.renge_upper_eyelash_cp2[0]);
+		this.lineTo(this.cheek_end[0]);
+		this.drawCurve2(this.cheek_end[0], this.cheek_end[1], this.head_cp1, this.head_cp2 );
+		this.lineTo(this.renge_upper_eyelash_end[1]);
+		this.con.fill();
+	}
 	drawEyelid()
 	{
 		this._config("#fee", "#000");
@@ -1670,11 +1727,26 @@ class DrawFace
 	}
 
 
+	drawRengeWhiteEyes()
+	{
+		for (let i=0; i<2; i++)
+		{
+			this._config("#fff", "#000");
+			this.con.beginPath();
+			this.drawCurve2(
+				this.renge_eye_head[i], this.renge_eye_end[i], 
+				this.renge_upper_eyelid_cp1[i], this.renge_upper_eyelid_cp2[i], true);
+			this.drawCurve2(
+				this.renge_eye_end[i], this.renge_eye_head[i], 
+				this.renge_lower_eyelid_cp2[i], this.renge_lower_eyelid_cp1[i], true);
+			this.con.fill();
+		}
+	}
 	drawRengeEyes()
 	{
 		for (let i=0; i<2; i++)
 		{
-			this._config(this.hair_color, "#000");
+			this._config("#000", "#000");
 			this.con.beginPath();
 			this.drawCurve2(
 				this.renge_eye_head[i], this.renge_eye_end[i], 
@@ -1685,6 +1757,7 @@ class DrawFace
 				this.renge_upper_eyelash_cp2[i], this.renge_upper_eyelash_cp1[i]);
 			this.con.fill();
 		}
+		/*
 		for (let i=0; i<2; i++)
 		{
 			this.fillR(this.renge_eye_head[i], "red");
@@ -1695,7 +1768,10 @@ class DrawFace
 			this.fillR(this.renge_upper_eyelash_end[i], "red");
 			this.fillR(this.renge_upper_eyelash_cp1[i], "blue");
 			this.fillR(this.renge_upper_eyelash_cp2[i], "blue");
+			this.fillR(this.renge_lower_eyelid_cp1[i], "red");
+			this.fillR(this.renge_lower_eyelid_cp2[i], "red");
 		}
+		*/
 	}
 
 
