@@ -1,24 +1,4 @@
 
-/*
-function watchOninputFromElement(html_id)
-{
-	let id = document.getElementById(html_id);
-	id.oninput = (e)=> {
-	};
-}
-function test(html_id)
-{
-	let id = document.getElementById(html_id);
-	let str = html_id;
-	let str2 = str.replace(/_/g, ".");
-	id.oninput = (e)=> {
-		face.coordinates.str2 = Number(id.value);
-		console.log(face.coordinates.str2);
-	};
-}
-test("front_hair_tips");
-*/
-
 // れんげ　上瞼cp
 let renge_upper_eyelid_cp_y = document.getElementById("renge_upper_eyelid_cp_y");
 renge_upper_eyelid_cp_y.oninput = (e) => {
@@ -160,10 +140,7 @@ lower_eyeline_cp2_x.oninput = (e) => {
 	face.coordinates.eye.lower_eyeline_cp2.x = Number(lower_eyeline_cp2_x.value);
 };
 
-// エレメント取得
 let span_to_eye_x = document.getElementById("span_to_eye_x");
-// 取得したエレメントの入力状態を監視
-// 入力があれば関数内の処理
 span_to_eye_x.oninput = (e)=>{
 	face.coordinates.eye.span_to_eye_x = Number(span_to_eye_x.value);
 };
@@ -346,20 +323,11 @@ back_bunch.oninput = (e)=>{
 	face.coordinates.hair.back.bunch = Number(back_bunch.value);
 };
 outside_back_length.oninput = (e)=>{
-	//face.outside_back_hair_length = Number(outside_back_length.value);
 	face.coordinates.hair.outside_back.length = Number(outside_back_length.value);
 };
 outside_back_bunch.oninput = (e)=>{
-	//face.outside_back_hair_bunch = Number(outside_back_bunch.value);
 	face.coordinates.hair.outside_back.bunch = Number(outside_back_bunch.value);
 };
-
-/*
-front_length.oninput = frontLengthInput;
-function frontLengthInput(e) {
-	face.front_hair_length = Number(front_length.value);
-}
-*/
 
 let front_hair_types = document.getElementsByName("front_hair_type");
 for (let i=0; i<front_hair_types.length; i++)
@@ -399,6 +367,7 @@ function mainLoop()
 // 実際に関数を実行
 // ループを定期的に呼び出す
 window.onload = ()=>{
-	//mainLoop(); // ループを止めたい時にアンコメントしてsetIntervalのほうをコメントアウト
+	//ループを止めたい時にアンコメントしてsetIntervalのほうをコメントアウト
+	//mainLoop(); 
 	setInterval(mainLoop, 1000/5);
 }
