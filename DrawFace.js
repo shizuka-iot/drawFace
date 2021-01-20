@@ -904,16 +904,16 @@ class DrawFace
 		this.drawNeckShadow();
 		this.drawEar();
 		this.drawOutline();
-		//this.drawWhiteEyes();
-		this.drawRengeWhiteEyes();
+		this.drawWhiteEyes();
+		//this.drawRengeWhiteEyes();
 		this.drawEyes();
-		//this.drawEyelid();
-		this.drawRengeEyelid();
-		this.drawRengeEyes();
-		//this.drawEyeline2();
+		this.drawEyelid();
+		//this.drawRengeEyelid();
+		//this.drawRengeEyes();
+		this.drawEyeline2();
 		//this.drawEyelashes();
-		//this.drawLowerEyelid();
-		this.drawRengeLowerEyelid();
+		this.drawLowerEyelid();
+		//this.drawRengeLowerEyelid();
 		this.drawMouth();
 		this.drawEyeblow();
 		this.drawNose();
@@ -1779,7 +1779,7 @@ class DrawFace
 	drawEyes()
 	{
 		this._drawIris();
-		//this._drawEyeline();
+		this._drawEyeline();
 	}
 	_drawIris()
 	{
@@ -1800,7 +1800,7 @@ class DrawFace
 				pn = -1;
 			}
 
-			/* 瞳 */
+			/* 虹彩 */
 			this._config(this.iris_color, "#000", 0.9, 4);
 
 			/* 瞳の円1 */
@@ -1816,9 +1816,37 @@ class DrawFace
 			this.con.fill();
 			this.con.stroke();
 
+			/* 瞳孔の縁 */
+			this.con.save();
+			this.con.translate(0, -(this.center.y*eye_scale - this.center.y));
+			this.con.scale(1, eye_scale);
+			this.con.beginPath();
+			this.con.arc(
+				this.eye_head[i].x + this.coordinates.eye.position.x * pn,
+				this.center.y + this.coordinates.eye.position.y, 
+				10,  
+				Math.PI * 2, false);
+			this.con.restore();
+			this._config("#fff", "#fff", 0.2);
+			this.con.fill();
+
+			/* 虹彩の中の光 */
+			this.con.save();
+			this.con.translate(0, -(this.center.y*eye_scale - this.center.y));
+			this.con.scale(1, eye_scale);
+			this.con.beginPath();
+			this.con.arc(
+				this.eye_head[i].x + this.coordinates.eye.position.x * pn,
+				this.center.y + this.coordinates.eye.position.y +14, 
+				20,  
+				Math.PI * 2, false);
+			this.con.restore();
+			this._config("#fff", "#fff", 0.4);
+			this.con.fill();
+
 			this._config("#000", "#000", 1);
 
-			/* 瞳の円2 */
+			/* 瞳孔 */
 			this.con.save();
 			this.con.translate(0, -(this.center.y*eye_scale - this.center.y));
 			this.con.scale(1, eye_scale);
