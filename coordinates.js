@@ -176,6 +176,14 @@ let coordinates = {
 				volume: 10,
 			},
 		},
+		twin_tail : {
+			length: 0,
+			bunch: 10,
+			terminal: {
+				x: 0,
+				y: 0,
+			},
+		},
 	},
 
 	cheek: {

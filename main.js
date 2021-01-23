@@ -1,27 +1,29 @@
 
-// れんげ　上瞼cp
+let twin_tail_terminal_y = document.getElementById("twin_tail_terminal_y");
+twin_tail_terminal_y.oninput = (e) => {
+	face.coordinates.hair.twin_tail.terminal.y = Number(twin_tail_terminal_y.value);
+};
+let twin_tail_terminal_x = document.getElementById("twin_tail_terminal_x");
+twin_tail_terminal_x.oninput = (e) => {
+	face.coordinates.hair.twin_tail.terminal.x = Number(twin_tail_terminal_x.value);
+};
+
+
+
 let renge_upper_eyelid_cp_y = document.getElementById("renge_upper_eyelid_cp_y");
 renge_upper_eyelid_cp_y.oninput = (e) => {
 	face.coordinates.renge.upper_eyelid.cp.y = Number(renge_upper_eyelid_cp_y.value);
 };
-// れんげ　下瞼cp
 let renge_lower_eyelid_cp_y = document.getElementById("renge_lower_eyelid_cp_y");
 renge_lower_eyelid_cp_y.oninput = (e) => {
 	face.coordinates.renge.lower_eyelid.cp.y = Number(renge_lower_eyelid_cp_y.value);
 };
-
-
 
 let nose_position_y = document.getElementById("nose_position_y");
 nose_position_y.oninput = (e) => {
 	face.coordinates.nose.position.y = Number(nose_position_y.value);
 };
 
-
-
-
-
-// もみあげ
 let sideburns_left_length = document.getElementById("sideburns_left_length");
 sideburns_left_length.oninput = (e) => {
 	face.coordinates.hair.sideburns.left.length = Number(sideburns_left_length.value);
@@ -38,7 +40,6 @@ let sideburns_right_bunch = document.getElementById("sideburns_right_bunch");
 sideburns_right_bunch.oninput = (e) => {
 	face.coordinates.hair.sideburns.right.bunch = Number(sideburns_right_bunch.value);
 };
-
 
 
 let back_hair_cp1_y = document.getElementById("back_hair_cp1_y");
@@ -241,56 +242,39 @@ hair_color_b.oninput = (e)=>{
 	face.coordinates.hair.color.b = Number(hair_color_b.value);
 };
 
-// エレメント取得
-// 目の大きさ
 let eye_size_param = document.getElementById("eye_size");
-// 目の水平
 let eye_position_x = document.getElementById("eye_position_x");
-// 目の高さ
 let eye_position_y = document.getElementById("eye_position_y");
 
-// 前髪の長さ
 let front_length = document.getElementById("front_hair_length");
-// 前髪の束数
 let front_bunch = document.getElementById("front_hair_bunch");
 
-// 横髪の長さ: 左
 let hair_side_left_length = document.getElementById("hair_side_left_length");
 hair_side_left_length.oninput = (e)=>{
 	face.coordinates.hair.side.left.length = Number(hair_side_left_length.value);
 };
-// 横髪の束数: 左
 let hair_side_left_bunch = document.getElementById("hair_side_left_bunch");
 hair_side_left_bunch.oninput = (e)=>{
 	face.coordinates.hair.side.left.bunch = Number(hair_side_left_bunch.value);
 };
-// 横髪の長さ: 右
 let hair_side_right_length = document.getElementById("hair_side_right_length");
 hair_side_right_length.oninput = (e)=>{
 	face.coordinates.hair.side.right.length = Number(hair_side_right_length.value);
 };
-// 横髪の束数: 右
 let hair_side_right_bunch = document.getElementById("hair_side_right_bunch");
 hair_side_right_bunch.oninput = (e)=>{
 	face.coordinates.hair.side.right.bunch = Number(hair_side_right_bunch.value);
 };
 
-// 横髪外側の長さ
 let outside_length = document.getElementById("outside_hair_length");
-// 横髪外側の束数
 let outside_bunch = document.getElementById("outside_hair_bunch");
 
-// 後ろ髪の長さ
 let back_length = document.getElementById("back_hair_length");
-// 後ろ髪の束数
 let back_bunch = document.getElementById("back_hair_bunch");
 
-// 後ろ髪外側の長さ
 let outside_back_length = document.getElementById("outside_back_hair_length");
-// 後ろ髪外側の束数
 let outside_back_bunch = document.getElementById("outside_back_hair_bunch");
 
-// イベントが起きたときの処理
 let eye_scale = document.getElementById("eye_scale");
 eye_scale.oninput = (e)=>{
 	face.coordinates.eye.scale = Number(eye_scale.value);
@@ -352,6 +336,8 @@ for (let i=0; i<back_hair_types.length; i++)
 		face.coordinates.hair.back.type = Number(back_hair_types[i].value);
 	}
 }
+
+
 
 // クラスインスタンス作成
 let face = new DrawFace("can2", coordinates);

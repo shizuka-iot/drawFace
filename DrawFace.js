@@ -638,6 +638,14 @@ class DrawFace
 		this.chin_cp2 = {
 			x:this.chin_start.x + this.sp(this.chin_start.x, this.chin_end.x, 2/3), 
 			y: this.chin_start.y + 10};
+		this.nape = {
+			x: this.center.x,
+			y: this.chin_start.y,
+		};
+		this.twin_terminal_right = {
+			x: this.top_of_head.x + 100 + this.coordinates.hair.twin_tail.terminal.x,
+			y: this.top_of_head.y + this.sp(this.top_of_head.y, this.nape.y, 1/2) + this.coordinates.hair.twin_tail.terminal.y,
+		};
 		this.cheek_start = [
 			{
 				x: this.chin_end.x 
@@ -1078,6 +1086,15 @@ class DrawFace
 			cp1: [],
 			cp2: [],
 		};
+		this.twin_tail_arrays = {
+			roots: [],
+			terminals: [],
+			tips: [],
+			cp1: [],
+			cp2: [],
+			cp3: [],
+			cp4: [],
+		};
 
 		this.side_hair_roots = [];
 		this.side_hair_tips = [];
@@ -1268,12 +1285,12 @@ class DrawFace
 	draw()
 	{
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
-		//this.drawDebug();
+		this.drawDebug();
 		this.drawOutsideBackHair(
 			this.coordinates.hair.outside_back.bunch, 
 			this.coordinates.hair.outside_back.length
 		);
-		this._selectBackHair();
+		//this._selectBackHair();
 		this.drawNeck();
 		this.drawNeckShadow();
 		this.drawEar();
@@ -1295,6 +1312,7 @@ class DrawFace
 		this.drawSideburns(this.coordinates.hair.sideburns);
 		this._selectFrontHair();
 		this._selectSideHair();
+		this.drawTwinTails();
 	}
 
 	_selectBackHair()
@@ -1425,6 +1443,202 @@ class DrawFace
 			}
 	}
 
+
+	// ツインテールを描画
+	// ツインテールはtop_of_headから縦一文字のラインから均等にルートを設定し
+	// そこからまず中継地点で一つにまとめ、
+	// さらにそこから毛先を任意に散らす。
+	drawTwinTails()
+	{
+		this._generateTwinTailCoordinates();
+		this.getAngleFrom3coordinates(this.top_of_head, this.twin_terminal_right, this.nape);
+		this.drawTwinTailFromRootsToTerminals();
+
+	}
+	_generateTwinTailCoordinates()// ツインテールの座標生成
+	{
+		this._generateTwinTailRoots();// ツインテールのルートの座標生成
+		this._generateTwinTailTerminals();// ツインテールのルートの座標生成
+	}
+	drawTwinTailFromRootsToTerminals()
+	{
+		this._config(this.hair_color, "#000");
+		this.moveTo(this.twin_tail_arrays.roots[0]);
+		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
+		{
+			/*
+			this.drawCurve2(
+				this.twin_tail_arrays.roots[i], 
+				this.twin_tail_arrays.terminals[i],
+				this.twin_tail_arrays.cp1[i],
+				this.twin_tail_arrays.cp2[i])
+			this.lineTo(this.twin_tail_arrays.terminals[i]);
+			this.drawCurve2(
+				this.twin_tail_arrays.terminals[i+1],
+				this.twin_tail_arrays.roots[i+1], 
+				this.twin_tail_arrays.cp1[i+1],
+				this.twin_tail_arrays.cp2[i+1])
+				*/
+			if( i+1<this.coordinates.hair.twin_tail.bunch)
+			{
+				this.drawCurve2(
+					this.twin_tail_arrays.roots[i], 
+					this.twin_tail_arrays.terminals[i],
+					this.twin_tail_arrays.cp1[i],
+					this.twin_tail_arrays.cp2[i]);
+				this.lineTo(this.twin_tail_arrays.terminals[i]);
+				this.drawCurve2(
+					this.twin_tail_arrays.terminals[i+1],
+					this.twin_tail_arrays.roots[i+1], 
+					this.twin_tail_arrays.cp2[i+1],
+					this.twin_tail_arrays.cp1[i+1]);
+					this.con.stroke();
+			}
+		}
+	}
+	_generateTwinTailTerminals()
+	{
+		let base = 40;
+		let span = base / this.coordinates.hair.twin_tail.bunch;
+		let terminal_start = {
+			x: this.twin_terminal_right.x 
+				+this._getTwinTerminalX(this._getTwinTerminalLean(), -10),
+			y: this.twin_terminal_right.y - 10,
+		};
+		let terminal_end = {
+			x: this.twin_terminal_right.x 
+				+this._getTwinTerminalX(this._getTwinTerminalLean(), 10),
+			y: this.twin_terminal_right.y + 10,
+		};
+		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
+		{
+			this.twin_tail_arrays.terminals[i] = {
+				x: terminal_start.x 
+					+this._getTwinTerminalX(this._getTwinTerminalLean(), span*i),
+				y: terminal_start.y + span*i,
+			};
+			this.twin_tail_arrays.cp1[i] = {
+				x: this.twin_tail_arrays.roots[i].x 
+					+this.sp(
+						this.twin_tail_arrays.roots[i].x, 
+						this.twin_tail_arrays.terminals[i].x, 2/3),
+				y: this.twin_tail_arrays.roots[i].y, 
+			};
+			if ( i<(this.coordinates.hair.twin_tail.bunch/2))
+			{
+				this.twin_tail_arrays.cp2[i] = {
+					x: this.twin_tail_arrays.terminals[i].x,
+					y: this.twin_tail_arrays.roots[i].y
+						+this.sp(
+							this.twin_tail_arrays.roots[i].y, 
+							this.twin_tail_arrays.terminals[i].y, 1/2),
+				};
+			}
+			else
+			{
+				this.twin_tail_arrays.cp2[i] = {
+					x: this.twin_tail_arrays.terminals[i].x,
+					y: this.twin_tail_arrays.roots[i].y
+						-this.sp(
+							this.twin_tail_arrays.roots[i].y, 
+							this.twin_tail_arrays.terminals[i].y, 1/2),
+				};
+			}
+			this.fillR(this.twin_tail_arrays.terminals[i], "#0a0");
+			this.fillR(this.twin_tail_arrays.cp1[i], "#0a0");
+			this.fillR(this.twin_tail_arrays.cp2[i], "orange");
+		}
+		this.fillR(terminal_start, "blue");
+		this.fillR(terminal_end, "red");
+	}
+	_getTwinTerminalLean()
+	{
+		let a = this.top_of_head;
+		let b = this.twin_terminal_right;
+		let p = {
+			y: this.top_of_head.y,
+		}
+		let ac = Math.sqrt((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y));
+		
+		let angleC = this.getAngleFrom3coordinates(
+			this.top_of_head, 
+			this.twin_terminal_right, 
+			this.nape
+		);
+		let angleA = this.getAngleFrom3coordinates(
+			this.twin_terminal_right, 
+			this.top_of_head, 
+			this.nape
+		);
+		let angle_acp = (180 - angleC)/2;
+		let angle_pac = 90 - angleA;
+		let angle_apc = 180 - angle_acp - angle_pac;
+		let ap = Math.sin(this.getRad(angle_acp)) * ac / Math.sin(this.getRad(angle_apc));
+		p.x = a.x + ap;
+		//this.fillR(p, "orange");
+		let lean = (p.y - b.y) / (p.x - b.x);
+		return lean;
+	}
+
+	_getTwinTerminalY(lean, x)
+	{
+		// y = ax;
+		// x = y/a;
+		return x * lean;
+	}
+	_getTwinTerminalX(lean, y)
+	{
+		// y = ax;
+		// x = y/a;
+		return y / lean;
+	}
+
+	getAngleFrom3coordinates(v1, v2, v3)
+	{ 
+		// ベクトルa(a1, a2), ベクトルb(b1, b2)とする
+		// ベクトルaとbの内積は
+		// a1 * b1 + a2 * b2 = ||ベクトルa|| ||ベクトルb||cosθ
+		// ||ベクトルa|| は絶対値に似てるがベクトルの大きさを表す
+
+		let ba = {
+			x: v1.x - v2.x,// 座標から成分を求める
+			y: v1.y - v2.y,
+		};
+		let bc = {
+			x: v3.x - v2.x,
+			y: v3.y - v2.y,
+		};
+
+		let babc = ba.x * bc.x + ba.y * bc.y;// 内積
+		let ban = (ba.x * ba.x) + (ba.y * ba.y);// 公式の通り2乗する
+		let bcn = (bc.x * bc.x) + (bc.y * bc.y);// 公式の通り2乗する
+		let radian = Math.acos(babc / (Math.sqrt/*平方根*/(ban * bcn)));
+		let angle = radian * 180 / Math.PI;  // 結果（ラジアンから角度に変換）
+
+		return angle;
+	}
+
+	getRad(angle)
+	{
+		return angle * (Math.PI / 180);
+	}
+	
+	_generateTwinTailRoots()
+	{
+		// twin_tail_arrays.roots[]
+		// 1. top_of_head からうなじnape部分まで
+		// 2. spanを決める
+		// 3. ループで均等に配置
+		let span = (this.nape.y - this.top_of_head.y) / this.coordinates.hair.twin_tail.bunch;
+		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
+		{
+			this.twin_tail_arrays.roots[i] = {
+				x: this.center.x,
+				y: this.top_of_head.y + i*span,
+			};
+			this.fillR(this.twin_tail_arrays.roots[i], "red");
+		}
+	}
 
 	_drawSideburnsLeft(hair_bunch)
 	{
