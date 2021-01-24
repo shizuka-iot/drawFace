@@ -1142,20 +1142,20 @@ class DrawFace
 		this.outside_back_hair_cp2 = [];
 
 		this.outside_back_hair_left = {
-			x: this.center.x - 190,
+			x: this.center.x - 170,
 			y: this.center.y,
 		};
 		this.outside_back_hair_right = {
-			x: this.center.x + 190,
+			x: this.center.x + 170,
 			y: this.center.y,
 		};
 		this.outside_back_head_cp1 = {
 			x: this.head_cp1.x -10,
-			y: this.head_cp1.y -30,
+			y: this.head_cp1.y -5,
 		};
 		this.outside_back_head_cp2 = {
 			x: this.head_cp2.x +10,
-			y: this.head_cp2.y -30,
+			y: this.head_cp2.y -5,
 		};
 		this.eye_shadow_start = [
 			{
@@ -1439,7 +1439,7 @@ class DrawFace
 					y: this.temple_left.y + this.generateSideburnsCoordinateLeft(i*span)
 				};
 				this.side_hair_tips[i] = {
-					x: this.temple_left.x + i*span + rand(-60, 0), 
+					x: this.temple_left.x + i*span + rand(-30, 10), 
 					y: this.temple_left.y + rand(0, 20) + hair_length
 				};
 				this.side_hair_cp1[i] = {
@@ -1862,7 +1862,7 @@ class DrawFace
 				y: this.forehead_right.y 
 					+this.generateSideburnsCoordinateRight(i*span)};
 			this.side_hair_tips[i] = {
-				x: this.forehead_right.x + i*span + rand(-60, 0), 
+				x: this.forehead_right.x + i*span + rand(-30, 10), 
 				y: this.cheek_end[0].y + rand(10, 20) + hair_length
 			};
 			this.side_hair_cp1[i] = {
@@ -1919,7 +1919,7 @@ class DrawFace
 					+this.generateSideburnsCoordinateRight(i*span)
 			};
 			this.side_hair_tips[i] = {
-				x: this.forehead_right.x + i*span +span/2 + rand(-60, 10), 
+				x: this.forehead_right.x + i*span +span/2 + rand(-30, 10), 
 				y: this.cheek_end[0].y + rand(10, 20) + hair_length
 			};
 			this.side_hair_cp1[i] = {
