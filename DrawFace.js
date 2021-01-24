@@ -1551,14 +1551,20 @@ class DrawFace
 		{
 			this.twin_tail_arrays.cp3[i] = {
 				x: this.twin_tail_arrays.terminals[i].x 
+					+direction * this.coordinates.hair.twin_tail.cp3.x 
+					+rand(-10, 10)
 					+direction * this.sp(
 						this.twin_tail_arrays.terminals[i].x, 
 						this.twin_tail_arrays.tips[i].x, 3/3),
-				y: this.twin_tail_arrays.terminals[i].y, 
+				y: this.twin_tail_arrays.terminals[i].y 
+					+this.coordinates.hair.twin_tail.cp3.y,
 			};
 			this.twin_tail_arrays.cp4[i] = {
-				x: this.twin_tail_arrays.tips[i].x,
+				x: this.twin_tail_arrays.tips[i].x
+					+rand(-10, 10)
+					+direction * this.coordinates.hair.twin_tail.cp4.x,
 				y: this.twin_tail_arrays.terminals[i].y
+					+this.coordinates.hair.twin_tail.cp4.y
 					+this.sp(
 						this.twin_tail_arrays.terminals[i].y, 
 						this.twin_tail_arrays.tips[i].y, 1/2),

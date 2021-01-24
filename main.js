@@ -11,6 +11,22 @@ let twin_tail_length = document.getElementById("twin_tail_length");
 twin_tail_length.oninput = (e) => {
 	face.coordinates.hair.twin_tail.length = Number(twin_tail_length.value);
 };
+let twin_tail_cp3_x = document.getElementById("twin_tail_cp3_x");
+twin_tail_cp3_x.oninput = (e) => {
+	face.coordinates.hair.twin_tail.cp3.x = Number(twin_tail_cp3_x.value);
+};
+let twin_tail_cp4_x = document.getElementById("twin_tail_cp4_x");
+twin_tail_cp4_x.oninput = (e) => {
+	face.coordinates.hair.twin_tail.cp4.x = Number(twin_tail_cp4_x.value);
+};
+let twin_tail_cp3_y = document.getElementById("twin_tail_cp3_y");
+twin_tail_cp3_y.oninput = (e) => {
+	face.coordinates.hair.twin_tail.cp3.y = Number(twin_tail_cp3_y.value);
+};
+let twin_tail_cp4_y = document.getElementById("twin_tail_cp4_y");
+twin_tail_cp4_y.oninput = (e) => {
+	face.coordinates.hair.twin_tail.cp4.y = Number(twin_tail_cp4_y.value);
+};
 
 
 
