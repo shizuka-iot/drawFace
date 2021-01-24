@@ -180,6 +180,8 @@ let coordinates = {
 			type: 1,
 			length: 100,
 			bunch: 5,
+			width: 10,
+			tip_span: 10,
 			terminal: {
 				x: 0,
 				y: 0,

@@ -1097,7 +1097,9 @@ class DrawFace
 			cp1: [],
 			cp2: [],
 			cp3: [],
+			cp3sub: [],
 			cp4: [],
+			cp4sub: [],
 		};
 
 		this.side_hair_roots = [];
@@ -1487,13 +1489,20 @@ class DrawFace
 				this.drawCurve2(
 					this.twin_tail_arrays.terminals[i], 
 					this.twin_tail_arrays.tips[i],
-					this.twin_tail_arrays.cp3[i],
-					this.twin_tail_arrays.cp4[i]);
+					this.twin_tail_arrays.cp3sub[i],
+					this.twin_tail_arrays.cp4sub[i]);
+				/*
 				this.drawCurve2(
 					this.twin_tail_arrays.tips[i],
 					this.twin_tail_arrays.terminals[i+1], 
 					this.twin_tail_arrays.cp4[i+1],
 					this.twin_tail_arrays.cp3[i+1]);
+					*/
+				this.drawCurve2(
+					this.twin_tail_arrays.tips[i],
+					this.twin_tail_arrays.terminals[i+1], 
+					this.twin_tail_arrays.cp4[i],
+					this.twin_tail_arrays.cp3[i]);
 				this.con.stroke();
 				this.con.fill();
 			}
@@ -1526,7 +1535,7 @@ class DrawFace
 	}
 	_generateTwinTailTips(direction = RIGHT)
 	{
-		let span = 10;
+		let span = this.coordinates.hair.twin_tail.tip_span;
 		let terminal;
 		if (direction === RIGHT)
 		{
@@ -1561,6 +1570,13 @@ class DrawFace
 				y: this.twin_tail_arrays.terminals[i].y 
 					+this.coordinates.hair.twin_tail.cp3.y,
 			};
+			this.twin_tail_arrays.cp3sub[i] = {
+				x: this.twin_tail_arrays.cp3[i].x 
+					+direction * this.coordinates.hair.twin_tail.cp3.x 
+					+direction * this.coordinates.hair.twin_tail.width,
+				y: this.twin_tail_arrays.cp3[i].y 
+					+this.coordinates.hair.twin_tail.cp3.y,
+			};
 			this.twin_tail_arrays.cp4[i] = {
 				x: this.twin_tail_arrays.tips[i].x
 					+rand(-30, 30)
@@ -1570,6 +1586,13 @@ class DrawFace
 					+this.sp(
 						this.twin_tail_arrays.terminals[i].y, 
 						this.twin_tail_arrays.tips[i].y, 1/2),
+			};
+			this.twin_tail_arrays.cp4sub[i] = {
+				x: this.twin_tail_arrays.cp4[i].x
+					+direction * this.coordinates.hair.twin_tail.width
+					+direction * this.coordinates.hair.twin_tail.cp4.x,
+				y: this.twin_tail_arrays.cp4[i].y
+					+this.coordinates.hair.twin_tail.cp4.y
 			};
 		}
 	}
