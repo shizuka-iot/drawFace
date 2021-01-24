@@ -1290,7 +1290,7 @@ class DrawFace
 	{
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
 		this.drawDebug();
-		/*
+		this.drawTwinTails();
 		this.drawOutsideBackHair(
 			this.coordinates.hair.outside_back.bunch, 
 			this.coordinates.hair.outside_back.length
@@ -1317,8 +1317,6 @@ class DrawFace
 		this.drawSideburns(this.coordinates.hair.sideburns);
 		this._selectFrontHair();
 		this._selectSideHair();
-		*/
-		this.drawTwinTails();
 	}
 
 	_selectBackHair()
@@ -1466,17 +1464,16 @@ class DrawFace
 		this.drawTwinTailFromRootsToTerminals();
 		this.drawTwinTailFromTerminalsToTips();
 
-		//this._generateTwinTailRoots();// ツインテールのルートの座標生成
-		this._generateTwinTailTerminals(LEFT);// ツインテールのルートの座標生成
-		this._generateTwinTailTips(LEFT);
+		this._generateTwinTailCoordinates(LEFT);
+		this.drawTwinTailFromRootsToTerminals();
+		this.drawTwinTailFromTerminalsToTips();
 	}
 	_generateTwinTailCoordinates(direction = RIGHT)// ツインテールの座標生成
 	{
 		this._generateTwinTailRoots();// ツインテールのルートの座標生成
 		this._generateTwinTailTerminals(direction);// ツインテールのルートの座標生成
-		this._generateTwinTailTips();
-		this._generateTwinTailTipCp()
-
+		this._generateTwinTailTips(direction);
+		this._generateTwinTailTipCp(direction);
 	}
 	drawTwinTailFromTerminalsToTips()
 	{
@@ -1545,17 +1542,16 @@ class DrawFace
 				x: terminal.x - i*span*direction + 40*direction + rand(-10, 10),
 				y: terminal.y + this.coordinates.hair.twin_tail.length + 100, 
 			};
-			this.fillR(this.twin_tail_arrays.tips[i], "red");
 		}
 	}
 
-	_generateTwinTailTipCp()
+	_generateTwinTailTipCp(direction = RIGHT)
 	{
 		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
 		{
 			this.twin_tail_arrays.cp3[i] = {
 				x: this.twin_tail_arrays.terminals[i].x 
-					+this.sp(
+					+direction * this.sp(
 						this.twin_tail_arrays.terminals[i].x, 
 						this.twin_tail_arrays.tips[i].x, 3/3),
 				y: this.twin_tail_arrays.terminals[i].y, 
@@ -1604,20 +1600,18 @@ class DrawFace
 		}
 		let base = 40;
 		let span = base / this.coordinates.hair.twin_tail.bunch;
-		this.fillR(terminal_start, "blue");
-		this.fillR(terminal_end, "green");
 		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
 		{
 			this.twin_tail_arrays.terminals[i] = {
 				x: terminal_start.x 
-					+this._getTwinTerminalX(this._getTwinTerminalLean(direction), span*i),
+					+direction * this._getTwinTerminalX(this._getTwinTerminalLean(direction), span*i),
 				y: terminal_start.y + span*i,
 			};
 			this.twin_tail_arrays.cp1[i] = {
 				x: this.twin_tail_arrays.roots[i].x 
-					+this.sp(
+					+direction * this.sp(
 						this.twin_tail_arrays.roots[i].x, 
-						this.twin_tail_arrays.terminals[i].x, 2/3),
+						this.twin_tail_arrays.terminals[i].x, 1/2),
 				y: this.twin_tail_arrays.roots[i].y, 
 			};
 			if ( i<(this.coordinates.hair.twin_tail.bunch/2))
@@ -1686,7 +1680,7 @@ class DrawFace
 			p.x = a.x - ap;
 		}
 		let lean = (p.y - b.y) / (p.x - b.x);
-		return lean;
+		return lean * direction;
 	}
 
 	_getTwinTerminalY(lean, x)
