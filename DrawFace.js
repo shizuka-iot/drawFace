@@ -97,6 +97,10 @@ class DrawFace
 			+this.coordinates.hair.color.r+", "
 			+this.coordinates.hair.color.g+", "
 			+this.coordinates.hair.color.b+")";
+		this.hair_stroke_color = "rgb("
+			+(255 -this.coordinates.hair.color.r)+", "
+			+(255 -this.coordinates.hair.color.g)+", "
+			+(255 -this.coordinates.hair.color.b)+")";
 
 		// れんげ　目頭
 		this.renge_eye_head = [
@@ -643,11 +647,11 @@ class DrawFace
 			y: this.chin_start.y,
 		};
 		this.twin_terminal_right = {
-			x: this.top_of_head.x + 100 + this.coordinates.hair.twin_tail.terminal.x,
+			x: this.top_of_head.x + 140 + this.coordinates.hair.twin_tail.terminal.x,
 			y: this.top_of_head.y + this.sp(this.top_of_head.y, this.nape.y, 1/2) + this.coordinates.hair.twin_tail.terminal.y,
 		};
 		this.twin_terminal_left = {
-			x: this.top_of_head.x - 100 - this.coordinates.hair.twin_tail.terminal.x,
+			x: this.top_of_head.x - 140 - this.coordinates.hair.twin_tail.terminal.x,
 			y: this.top_of_head.y + this.sp(this.top_of_head.y, this.nape.y, 1/2) + this.coordinates.hair.twin_tail.terminal.y,
 		};
 		this.cheek_start = [
@@ -1480,7 +1484,7 @@ class DrawFace
 	drawTwinTailFromTerminalsToTips()
 	{
 		this.con.beginPath();
-		this._config(this.hair_color, "#000", 1, 1);
+		this._config(this.hair_color, this.hair_stroke_color, 1, 1);
 		this.moveTo(this.twin_tail_arrays.terminals[0]);
 		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
 		{
@@ -1511,7 +1515,7 @@ class DrawFace
 	drawTwinTailFromRootsToTerminals()
 	{
 		this.con.beginPath();
-		this._config(this.hair_color, "#000", 1, 1);
+		this._config(this.hair_color, this.hair_stroke_color, 1, 1);
 		this.moveTo(this.twin_tail_arrays.roots[0]);
 		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
 		{
@@ -1548,7 +1552,7 @@ class DrawFace
 		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
 		{
 			this.twin_tail_arrays.tips[i] = {
-				x: terminal.x - i*span*direction + 40*direction + rand(-10, 10),
+				x: terminal.x + i*span*direction + 40*direction + rand(-10, 10),
 				y: terminal.y 
 					+this.coordinates.hair.twin_tail.length + 100
 					+rand(0, 5), 
@@ -1776,7 +1780,7 @@ class DrawFace
 		/* 左サイド髪の描画 */
 		this.con.beginPath();
 		this.con.moveTo(this.side_hair_roots[0].x, this.side_hair_roots[0].y);
-		this._config(this.hair_color, "#000");
+		this._config(this.hair_color, this.hair_stroke_color);
 
 		for (let i=0; i<hair_bunch; i++)
 		{
@@ -1932,7 +1936,7 @@ class DrawFace
 		/* 左サイド髪の描画 */
 		this.con.beginPath();
 		this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
-		this._config(this.hair_color, "#000");
+		this._config(this.hair_color, this.hair_stroke_color);
 
 		for (let i=0; i<hair_bunch; i++)
 		{
@@ -1970,7 +1974,7 @@ class DrawFace
 		/* 右サイド髪の描画 */
 		this.con.beginPath();
 		this.con.moveTo(this.top_of_head.x, this.top_of_head.y);
-		this._config(this.hair_color, "#000");
+		this._config(this.hair_color, this.hair_stroke_color);
 
 		for (let i=0; i<hair_bunch; i++)
 		{
@@ -2191,7 +2195,7 @@ class DrawFace
 		}
 	}
 
-	_drawStandardHair(hair_arrays, hair_bunch, hair_color, shadow = false, strokeStyle = "#000", globalAlpha = 1)
+	_drawStandardHair(hair_arrays, hair_bunch, hair_color, shadow = false, strokeStyle = this.hair_stroke_color, globalAlpha = 1)
 	{
 		if (shadow)
 		{
@@ -3171,7 +3175,7 @@ class DrawFace
 			}
 
 
-			this._config(this.hair_color, "#000", 0.4);
+			this._config(this.hair_color, this.hair_stroke_color, 0.4);
 
 			this.con.beginPath();
 			this.moveTo(this.back_hair_roots[0]);
