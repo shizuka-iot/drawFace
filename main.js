@@ -40,6 +40,10 @@ twin_tail_bunch.oninput = (e) => {
 	face.coordinates.hair.twin_tail.bunch = Number(twin_tail_bunch.value);
 };
 
+let lower_eyelid_bottom_y = document.getElementById("lower_eyelid_bottom_y");
+lower_eyelid_bottom_y.oninput = (e) => {
+	face.coordinates.eyelid.lower.y = Number(lower_eyelid_bottom_y.value);
+};
 
 
 let renge_upper_eyelid_cp_y = document.getElementById("renge_upper_eyelid_cp_y");

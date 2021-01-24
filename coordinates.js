@@ -99,6 +99,10 @@ let coordinates = {
 	},
 
 	eyelid: {
+		lower: {
+			x: 0,
+			y: 0,
+		},
 	},
 
 	// 髪

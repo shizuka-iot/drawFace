@@ -573,11 +573,11 @@ class DrawFace
 		this.eyelid_bottom = [
 			{
 				x: this.eye_head[0].x + 40, 
-				y: this.center.y +28 +5
+				y: this.center.y +28 +5 + this.coordinates.eyelid.lower.y
 			}, 
 			{
 				x: this.eye_head[1].x - 40, 
-				y: this.center.y +28 +5
+				y: this.center.y +28 +5 + this.coordinates.eyelid.lower.y
 			}, 
 		];
 		this.eyelid_bottom_cp1 = [
@@ -2516,6 +2516,34 @@ class DrawFace
 		this.lineTo(this.renge_eye_end[1]);
 		this.con.fill();
 	}
+
+
+	drawWhiteEyes()
+	{
+		for (let i=0; i<2; i++)
+		{
+			this._config("#fff", "#000");
+			this.con.beginPath();
+			this.drawCurve2(
+				this.eye_end[i], 
+				this.eye_head[i], 
+				this.lower_eyeline_cp2[i], 
+				this.upper_eyeline_cp1[i]
+			,true);
+			this.drawCurve(
+				this.eye_head[i], 
+				this.eyelid_bottom[i], 
+				this.eyelid_bottom_cp1[i] 
+			);
+			this.drawCurve(
+				this.eyelid_bottom[i], 
+				this.eye_end[i], 
+				this.eyelid_bottom_cp3[i] 
+			);
+			this.con.fill();
+		}
+	}
+
 	drawLowerEyelid()
 	{
 		this._config("#fee", "#ff0");
@@ -3484,35 +3512,6 @@ class DrawFace
 		);
 		this.con.stroke();
 		this.con.fill();
-	}
-
-
-
-	drawWhiteEyes()
-	{
-		for (let i=0; i<2; i++)
-		{
-			this._config("#fff", "#000");
-			this.con.beginPath();
-			this.drawCurve(
-				this.lower_eyelid_start[i], 
-				this.eye_end[i], 
-				this.lower_eyelid_cp1[i], true
-			);
-			this.drawCurve2(
-				this.eye_end[i], 
-				this.eye_head[i], 
-				this.lower_eyeline_cp2[i], 
-				this.upper_eyeline_cp1[i]
-			);
-			this.con.fill();
-			this.drawCurve(
-				this.eye_head[i], 
-				this.eyelid_bottom[i], 
-				this.eyelid_bottom_cp1[i] 
-			);
-			this.con.fill();
-		}
 	}
 
 
