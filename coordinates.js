@@ -177,11 +177,27 @@ let coordinates = {
 			},
 		},
 		twin_tail : {
-			length: 0,
-			bunch: 10,
+			length: 100,
+			bunch: 5,
 			terminal: {
 				x: 0,
 				y: 0,
+			},
+			left: {
+				length: 100,
+				bunch: 5,
+				terminal: {
+					x: 0,
+					y: 0,
+				},
+			},
+			right: {
+				length: 100,
+				bunch: 5,
+				terminal: {
+					x: 0,
+					y: 0,
+				},
 			},
 		},
 	},

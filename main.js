@@ -7,6 +7,10 @@ let twin_tail_terminal_x = document.getElementById("twin_tail_terminal_x");
 twin_tail_terminal_x.oninput = (e) => {
 	face.coordinates.hair.twin_tail.terminal.x = Number(twin_tail_terminal_x.value);
 };
+let twin_tail_length = document.getElementById("twin_tail_length");
+twin_tail_length.oninput = (e) => {
+	face.coordinates.hair.twin_tail.length = Number(twin_tail_length.value);
+};
 
 
 
