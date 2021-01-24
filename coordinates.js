@@ -177,6 +177,7 @@ let coordinates = {
 			},
 		},
 		twin_tail : {
+			type: 1,
 			length: 100,
 			bunch: 5,
 			terminal: {

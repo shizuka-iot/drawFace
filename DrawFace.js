@@ -1290,12 +1290,11 @@ class DrawFace
 	{
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
 		this.drawDebug();
-		this.drawTwinTails();
 		this.drawOutsideBackHair(
 			this.coordinates.hair.outside_back.bunch, 
 			this.coordinates.hair.outside_back.length
 		);
-		//this._selectBackHair();
+		this._selectBackHair();
 		this.drawNeck();
 		this.drawNeckShadow();
 		this.drawEar();
@@ -1340,6 +1339,9 @@ class DrawFace
 					this.coordinates.hair.back.bunch, 
 					this.coordinates.hair.back.length
 				);
+				break;
+			case 5:
+				this.drawTwinTails();
 				break;
 			default:
 				break;
@@ -1456,14 +1458,12 @@ class DrawFace
 	**********************************************************************/
 	drawTwinTails()
 	{
+		// 右
 		this._generateTwinTailCoordinates();
-		this.getAngleFrom3coordinates(
-			this.top_of_head, 
-			this.twin_terminal_right, 
-			this.nape);
 		this.drawTwinTailFromRootsToTerminals();
 		this.drawTwinTailFromTerminalsToTips();
 
+		// 左
 		this._generateTwinTailCoordinates(LEFT);
 		this.drawTwinTailFromRootsToTerminals();
 		this.drawTwinTailFromTerminalsToTips();
@@ -1554,7 +1554,7 @@ class DrawFace
 			this.twin_tail_arrays.cp3[i] = {
 				x: this.twin_tail_arrays.terminals[i].x 
 					+direction * this.coordinates.hair.twin_tail.cp3.x 
-					+rand(-10, 10)
+					+rand(-30, 30)
 					+direction * this.sp(
 						this.twin_tail_arrays.terminals[i].x, 
 						this.twin_tail_arrays.tips[i].x, 3/3),
@@ -1563,7 +1563,7 @@ class DrawFace
 			};
 			this.twin_tail_arrays.cp4[i] = {
 				x: this.twin_tail_arrays.tips[i].x
-					+rand(-10, 10)
+					+rand(-30, 30)
 					+direction * this.coordinates.hair.twin_tail.cp4.x,
 				y: this.twin_tail_arrays.terminals[i].y
 					+this.coordinates.hair.twin_tail.cp4.y
