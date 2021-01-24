@@ -1540,7 +1540,9 @@ class DrawFace
 		{
 			this.twin_tail_arrays.tips[i] = {
 				x: terminal.x - i*span*direction + 40*direction + rand(-10, 10),
-				y: terminal.y + this.coordinates.hair.twin_tail.length + 100, 
+				y: terminal.y 
+					+this.coordinates.hair.twin_tail.length + 100
+					+rand(0, 5), 
 			};
 		}
 	}

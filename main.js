@@ -27,6 +27,10 @@ let twin_tail_cp4_y = document.getElementById("twin_tail_cp4_y");
 twin_tail_cp4_y.oninput = (e) => {
 	face.coordinates.hair.twin_tail.cp4.y = Number(twin_tail_cp4_y.value);
 };
+let twin_tail_bunch = document.getElementById("twin_tail_bunch");
+twin_tail_bunch.oninput = (e) => {
+	face.coordinates.hair.twin_tail.bunch = Number(twin_tail_bunch.value);
+};
 
 
 
