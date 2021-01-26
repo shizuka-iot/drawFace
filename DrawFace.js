@@ -552,21 +552,22 @@ class DrawFace
 		 * 鼻
 		*************************************************************/
 		this.nose_top = {
-			x:this.center.x, 
-			y:this.center.y +90 + this.coordinates.nose.position.y
+			x: this.center.x, 
+			y: this.center.y +90 + this.coordinates.nose.position.y
 		};
 		this.nose_bottom = {
-			x:this.center.x, 
-			y:this.nose_top.y + 12
+			x: this.center.x + this.coordinates.nose.bottom.x, 
+			y: this.nose_top.y + 12 + this.coordinates.nose.bottom.y
 		};
 		this.nose_cp1 = {
-			x:this.nose_top.x + 5 , 
-			y:this.nose_top.y 
+			x: this.nose_top.x + 5  + this.coordinates.nose.cp1.x, 
+			y: this.nose_top.y  + this.coordinates.nose.cp1.y
 				+this.sp(this.nose_top.y , this.nose_bottom.y, 1/2)
 		};
 		this.nose_cp2 = {
-			x:this.nose_top.x , 
-			y:this.nose_top.y -this.sp(this.nose_top.y , this.nose_bottom.y, 2/3)
+			x: this.nose_top.x + this.coordinates.nose.cp2.x, 
+			y: this.nose_top.y +this.sp(this.nose_top.y , this.nose_bottom.y, 2/3)
+ 				+this.coordinates.nose.cp2.y
 		};
 
 
@@ -629,11 +630,11 @@ class DrawFace
 
 		this.chin_start = {
 			x: this.center.x - 30 - this.coordinates.chin.width, 
-			y: this.mouth_start.y + 50 + this.coordinates.chin.height
+			y: this.mouth_start.y + 50 + this.coordinates.chin.height + this.coordinates.mouth.cp_height/2
 		};
 		this.chin_end = {
 			x: this.center.x + 30 + this.coordinates.chin.width, 
-			y: this.mouth_start.y + 50 + this.coordinates.chin.height
+			y: this.mouth_start.y + 50 + this.coordinates.chin.height + this.coordinates.mouth.cp_height/2
 		};
 		this.chin_cp1 = {
 			x:this.chin_start.x + this.sp(this.chin_start.x, this.chin_end.x, 1/3), 
@@ -943,33 +944,37 @@ class DrawFace
 			y: this.neck_start2[1].y +50
 		};
 
-		this.lower_lip_start = {
-			x: this.center.x - 20, 
-			y:this.mouth_start.y +10
+		this.upper_lip_cp1 = {
+			x: this.mouth_start.x 
+				-this.coordinates.lip.upper.cp.width
+				+this.sp(this.mouth_start.x, this.mouth_end.x, 1/3),
+			y: this.mouth_start.y - 15
+				-this.coordinates.lip.upper.cp.height
+			,
 		};
-		this.lower_lip_end = {
-			x: this.center.x + 20, 
-			y:this.mouth_start.y +10
+		this.upper_lip_cp2 = {
+			x: this.mouth_start.x 
+				+this.coordinates.lip.upper.cp.width
+				+ this.sp(this.mouth_start.x, this.mouth_end.x, 2/3),
+			y: this.mouth_start.y - 15
+				-this.coordinates.lip.upper.cp.height
+			,
 		};
 		this.lower_lip_cp1 = {
-			x: this.lower_lip_start.x 
-				+this.sp(this.lower_lip_start.x, this.lower_lip_end.x, 1/3), 
-			y: this.lower_lip_start.y + 5
+			x: this.mouth_start.x 
+				-this.coordinates.lip.lower.cp.width
+			+ this.sp(this.mouth_start.x, this.mouth_end.x, 1/3),
+			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp_height
+				+this.coordinates.lip.lower.cp.height
+			,
 		};
 		this.lower_lip_cp2 = {
-			x: this.lower_lip_start.x 
-				+this.sp(this.lower_lip_start.x, this.lower_lip_end.x, 2/3), 
-			y: this.lower_lip_start.y + 5
-		};
-		this.lower_lip_cp3 = {
-			x: this.lower_lip_start.x 
-				+this.sp(this.lower_lip_start.x, this.lower_lip_end.x, 1/3), 
-			y: this.lower_lip_start.y + 10
-		};
-		this.lower_lip_cp4 = {
-			x: this.lower_lip_start.x 
-				+this.sp(this.lower_lip_start.x, this.lower_lip_end.x, 2/3), 
-			y: this.lower_lip_start.y + 10
+			x: this.mouth_start.x 
+				+this.coordinates.lip.lower.cp.width
+			+ this.sp(this.mouth_start.x, this.mouth_end.x, 2/3),
+			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp_height
+				+this.coordinates.lip.lower.cp.height
+			,
 		};
 
 		this.forehead_right = {
@@ -1301,6 +1306,10 @@ class DrawFace
 			this.coordinates.hair.outside_back.length
 		);
 		this._selectBackHair();
+		if ( this.coordinates.hair.twin_tail.flag )
+		{
+			this.drawTwinTails();
+		}
 		this.drawNeck();
 		this.drawNeckShadow();
 		this.drawEar();
@@ -2911,7 +2920,7 @@ class DrawFace
 		this.drawEyeShadow();
 		for (let i=0; i<2; i++)
 		{
-			this._config(this.hair_color, "#000");
+			this._config("#000", "#000");
 			this.con.beginPath();
 			this.drawCurve2(
 				this.eye_head[i], 
@@ -3518,57 +3527,53 @@ class DrawFace
 
 	drawNose()
 	{
-		this._config("#744", "#744");
+		this._config("#000", "#222", 0.8);
 		this.con.beginPath();
 		this.moveTo(this.nose_top);
 		this.lineTo(this.nose_bottom);
-		this.con.stroke();
-		this.con.beginPath();
 		this.drawCurve2(
-			this.nose_top, 
 			this.nose_bottom, 
+			this.nose_top, 
 			this.nose_cp1, 
 			this.nose_cp2
 		);
+		this.con.stroke();
+		this._config("#000", "#000", 0.3);
 		this.con.fill();
+		this.con.globalAlpha = 1;
 	}
 
 
 
 	drawMouth()
 	{
-		this._config("#744", "#aaa", 1, 2);
+		this._config("#ef857d", "#000", 1, 1);
 		this.con.beginPath();
+		this.drawUpperLip();
+		this.drawLowerLip();
+		this.con.fill();
+		this.con.stroke();
+		this._config("#000", "#000", 0.2, 1);
+		this.con.fill();
+	}
+
+	drawUpperLip()
+	{
 		this.drawCurve2(
 			this.mouth_start, 
 			this.mouth_end, 
-			this.mouth_cp1, 
-			this.mouth_cp2, true
+			this.upper_lip_cp1, 
+			this.upper_lip_cp2, true
 		);
-		this.con.stroke();
-		//this._drawLowerLipShadow();
 	}
-
-
-
-	_drawLowerLipShadow()
+	drawLowerLip()
 	{
-		this._config("#000", "#000", 0.2);
-		this.con.beginPath();
 		this.drawCurve2(
-			this.lower_lip_start, 
-			this.lower_lip_end, 
-			this.lower_lip_cp1, 
-			this.lower_lip_cp2, true
+			this.mouth_end, 
+			this.mouth_start, 
+			this.lower_lip_cp2, 
+			this.lower_lip_cp1
 		);
-		this.drawCurve2(
-			this.lower_lip_end, 
-			this.lower_lip_start, 
-			this.lower_lip_cp4, 
-			this.lower_lip_cp3
-		);
-		this.con.fill();
-		this.con.globalAlpha = 1;
 	}
 
 

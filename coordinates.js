@@ -31,6 +31,18 @@ let coordinates = {
 			x: 0,
 			y: 0,
 		},
+		bottom: {
+			x: 0,
+			y: 0,
+		},
+		cp1: {
+			x: 0,
+			y: 0,
+		},
+		cp2: {
+			x: 0,
+			y: 0,
+		},
 	},
 	// 目
 	eye: {
@@ -181,6 +193,7 @@ let coordinates = {
 			},
 		},
 		twin_tail : {
+			flag: 0,
 			type: 1,
 			length: 100,
 			bunch: 5,
@@ -232,5 +245,35 @@ let coordinates = {
 		width: 30,
 		height: 0,
 		cp_height: 10,
+	},
+	lip: {
+		upper: {
+			cp: {
+			width: 0,
+			height: 0,
+			},
+			cp1: {
+				x: 0,
+				y: 0,
+			},
+			cp2: {
+				x: 0,
+				y: 0,
+			},
+		},
+		lower: {
+			cp: {
+			width: 0,
+			height: 0,
+			},
+			cp1: {
+				x: 0,
+				y: 0,
+			},
+			cp2: {
+				x: 0,
+				y: 0,
+			},
+		},
 	},
 };

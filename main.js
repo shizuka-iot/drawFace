@@ -1,8 +1,40 @@
+function onInput(element_id)
+{
+	let arr = element_id.split('.');
+	let elem = document.getElementById(element_id);
+	elem.oninput = (e) => {
+		switch (arr.length)
+		{
+			case 1:
+				face.coordinates[arr[0]] = Number(elem.value);
+				break;
+			case 2:
+				face.coordinates[arr[0]][arr[1]] = Number(elem.value);
+				break;
+			case 3:
+				face.coordinates[arr[0]][arr[1]][arr[2]] = Number(elem.value);
+				break;
+			case 4:
+				face.coordinates[arr[0]][arr[1]][arr[2]][arr[3]] = Number(elem.value);
+				break;
+			default:
+				break;
+		}
+	};
+}
 
+let hoge = "twin_tail";
+let twin_tail_flag = document.getElementById("twin_tail_flag");
+twin_tail_flag.oninput = (e) => {
+	//face.coordinates.hair.twin_tail.flag = twin_tail_flag.checked;
+	face.coordinates.hair[hoge].flag = twin_tail_flag.checked;
+};
+/*
 let twin_tail_terminal_y = document.getElementById("twin_tail_terminal_y");
 twin_tail_terminal_y.oninput = (e) => {
 	face.coordinates.hair.twin_tail.terminal.y = Number(twin_tail_terminal_y.value);
 };
+*/
 let twin_tail_terminal_x = document.getElementById("twin_tail_terminal_x");
 twin_tail_terminal_x.oninput = (e) => {
 	face.coordinates.hair.twin_tail.terminal.x = Number(twin_tail_terminal_x.value);
@@ -45,6 +77,56 @@ lower_eyelid_bottom_y.oninput = (e) => {
 	face.coordinates.eyelid.lower.y = Number(lower_eyelid_bottom_y.value);
 };
 
+let upper_lip_cp_width = document.getElementById("upper_lip_cp_width");
+upper_lip_cp_width.oninput = (e) => {
+	face.coordinates.lip.upper.cp.width = Number(upper_lip_cp_width.value);
+};
+let upper_lip_cp_height = document.getElementById("upper_lip_cp_height");
+upper_lip_cp_height.oninput = (e) => {
+	face.coordinates.lip.upper.cp.height = Number(upper_lip_cp_height.value);
+};
+let lower_lip_cp_width = document.getElementById("lower_lip_cp_width");
+lower_lip_cp_width.oninput = (e) => {
+	face.coordinates.lip.lower.cp.width = Number(lower_lip_cp_width.value);
+};
+let lower_lip_cp_height = document.getElementById("lower_lip_cp_height");
+lower_lip_cp_height.oninput = (e) => {
+	face.coordinates.lip.lower.cp.height = Number(lower_lip_cp_height.value);
+};
+
+let upper_lip_cp1_x = document.getElementById("upper_lip_cp1_x");
+upper_lip_cp1_x.oninput = (e) => {
+	face.coordinates.lip.upper.cp1.x = Number(upper_lip_cp1_x.value);
+};
+let upper_lip_cp2_x = document.getElementById("upper_lip_cp2_x");
+upper_lip_cp1_x.oninput = (e) => {
+	face.coordinates.lip.upper.cp2.x = Number(upper_lip_cp2_x.value);
+};
+let lower_lip_cp1_x = document.getElementById("lower_lip_cp1_x");
+lower_lip_cp1_x.oninput = (e) => {
+	face.coordinates.lip.lower.cp1.x = Number(lower_lip_cp1_x.value);
+};
+let lower_lip_cp2_x = document.getElementById("lower_lip_cp2_x");
+lower_lip_cp1_x.oninput = (e) => {
+	face.coordinates.lip.lower.cp2.x = Number(lower_lip_cp2_x.value);
+};
+let upper_lip_cp1_y = document.getElementById("upper_lip_cp1_y");
+upper_lip_cp1_y.oninput = (e) => {
+	face.coordinates.lip.upper.cp1.x = Number(upper_lip_cp1_y.value);
+};
+let upper_lip_cp2_y = document.getElementById("upper_lip_cp2_y");
+upper_lip_cp1_y.oninput = (e) => {
+	face.coordinates.lip.upper.cp2.x = Number(upper_lip_cp2_y.value);
+};
+let lower_lip_cp1_y = document.getElementById("lower_lip_cp1_y");
+lower_lip_cp1_y.oninput = (e) => {
+	face.coordinates.lip.lower.cp1.x = Number(lower_lip_cp1_y.value);
+};
+let lower_lip_cp2_y = document.getElementById("lower_lip_cp2_y");
+lower_lip_cp1_y.oninput = (e) => {
+	face.coordinates.lip.lower.cp2.x = Number(lower_lip_cp2_y.value);
+};
+
 
 let renge_upper_eyelid_cp_y = document.getElementById("renge_upper_eyelid_cp_y");
 renge_upper_eyelid_cp_y.oninput = (e) => {
@@ -58,6 +140,30 @@ renge_lower_eyelid_cp_y.oninput = (e) => {
 let nose_position_y = document.getElementById("nose_position_y");
 nose_position_y.oninput = (e) => {
 	face.coordinates.nose.position.y = Number(nose_position_y.value);
+};
+let nose_bottom_x = document.getElementById("nose_bottom_x");
+nose_bottom_x.oninput = (e) => {
+	face.coordinates.nose.bottom.x = Number(nose_bottom_x.value);
+};
+let nose_bottom_y = document.getElementById("nose_bottom_y");
+nose_bottom_y.oninput = (e) => {
+	face.coordinates.nose.bottom.y = Number(nose_bottom_y.value);
+};
+let nose_cp1_x = document.getElementById("nose_cp1_x");
+nose_cp1_x.oninput = (e) => {
+	face.coordinates.nose.cp1.x = Number(nose_cp1_x.value);
+};
+let nose_cp2_x = document.getElementById("nose_cp2_x");
+nose_cp2_x.oninput = (e) => {
+	face.coordinates.nose.cp2.x = Number(nose_cp2_x.value);
+};
+let nose_cp1_y = document.getElementById("nose_cp1_y");
+nose_cp1_y.oninput = (e) => {
+	face.coordinates.nose.cp1.y = Number(nose_cp1_y.value);
+};
+let nose_cp2_y = document.getElementById("nose_cp2_y");
+nose_cp2_y.oninput = (e) => {
+	face.coordinates.nose.cp2.y = Number(nose_cp2_y.value);
 };
 
 let sideburns_left_length = document.getElementById("sideburns_left_length");
@@ -377,6 +483,7 @@ for (let i=0; i<back_hair_types.length; i++)
 
 // クラスインスタンス作成
 let face = new DrawFace("can2", coordinates);
+onInput("hair.twin_tail.terminal.y");
 
 // メインループ関数
 // インスタンスの更新メソッド・描画メソッドを実行
