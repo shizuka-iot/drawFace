@@ -244,7 +244,10 @@ let coordinates = {
 	mouth: {
 		width: 30,
 		height: 0,
-		cp_height: 10,
+		cp: {
+			x: 0,
+			y: 10,
+		}
 	},
 	lip: {
 		upper: {

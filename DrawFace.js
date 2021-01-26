@@ -27,9 +27,6 @@ class DrawFace
 
 		// 全ての座標を計算
 		this.initAllCoordinates();
-
-		//this.mainLoop();
-
 	}// コンストラクタ閉じ括弧
 
 	initCanvas(canvas_id, canvas_width, canvas_height)
@@ -623,18 +620,18 @@ class DrawFace
 		};
 		this.mouth_cp1 = {
 			x: this.mouth_start.x + this.sp(this.mouth_start.x , this.mouth_end.x, 1/3), 
-			y: this.mouth_start.y + this.coordinates.mouth.cp_height};
+			y: this.mouth_start.y + this.coordinates.mouth.cp.y};
 		this.mouth_cp2 = {
 			x: this.mouth_start.x + this.sp(this.mouth_start.x , this.mouth_end.x, 2/3), 
-			y: this.mouth_start.y + this.coordinates.mouth.cp_height};
+			y: this.mouth_start.y + this.coordinates.mouth.cp.y};
 
 		this.chin_start = {
 			x: this.center.x - 30 - this.coordinates.chin.width, 
-			y: this.mouth_start.y + 50 + this.coordinates.chin.height + this.coordinates.mouth.cp_height/2
+			y: this.mouth_start.y + 50 + this.coordinates.chin.height + this.coordinates.mouth.cp.y/2
 		};
 		this.chin_end = {
 			x: this.center.x + 30 + this.coordinates.chin.width, 
-			y: this.mouth_start.y + 50 + this.coordinates.chin.height + this.coordinates.mouth.cp_height/2
+			y: this.mouth_start.y + 50 + this.coordinates.chin.height + this.coordinates.mouth.cp.y/2
 		};
 		this.chin_cp1 = {
 			x:this.chin_start.x + this.sp(this.chin_start.x, this.chin_end.x, 1/3), 
@@ -1315,15 +1312,11 @@ class DrawFace
 		this.drawEar();
 		this.drawOutline();
 		this.drawWhiteEyes();
-		//this.drawRengeWhiteEyes();
 		this.drawEyes();
 		this.drawEyelid();
-		//this.drawRengeEyelid();
-		//this.drawRengeEyes();
 		this.drawEyeline2();
 		//this.drawEyelashes();
 		this.drawLowerEyelid();
-		//this.drawRengeLowerEyelid();
 		this.drawMouth();
 		this.drawEyeblow();
 		this.drawNose();
