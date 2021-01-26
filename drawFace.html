@@ -96,19 +96,19 @@
 				<div class="parts">
 					<div class="eye">
 						<label for="eye.scale">目の縦幅</label>
-						<input id="eye.scale" type="range" value="1" min="1" max="5" step="0.01">
+						<input class="slider" id="eye.scale" type="range" value="1" min="1" max="5" step="0.01">
 					</div>
 					<div class="eye">
 						<label for="eye.size">目の大きさ</label>
-						<input id="eye.size" type="range" value="1" min="1" max="100" step="1">
+						<input class="slider" id="eye.size" type="range" value="1" min="1" max="100" step="1">
 					</div>
 					<div class="eye">
 						<label for="eye.position.y">目の高さ</label>
-						<input id="eye.position.y" type="range" value="1" min="-100" max="100" step="1">
+						<input class="slider" id="eye.position.y" type="range" value="1" min="-100" max="100" step="1">
 					</div>
 					<div class="eye">
 						<label for="eye.position.x">目の水平</label>
-						<input id="eye.position.x" type="range" value="1" min="1" max="100" step="1">
+						<input class="slider" id="eye.position.x" type="range" value="1" min="1" max="100" step="1">
 					</div>
 				</div>
 				<div class="parts">
@@ -331,7 +331,7 @@
 				<legend>前髪</legend>
 				<div class="front_hair">
 					<label for="front_hair_flag">表示</label>
-					<input id="front_hair_flag" name="show" value="front_hair" type="checkbox">
+					<input class="" id="front_hair_flag" name="show" value="front_hair" type="checkbox">
 				</div>
 				<div class="parts">
 					<div class="front_hair_type">
@@ -345,35 +345,35 @@
 				<div class="parts">
 					<div class="">
 						<label for="hair.front.length">前髪長さ</label>
-						<input id="hair.front.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.front.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.cp1.y">前髪cp1y</label>
-						<input id="hair.front.cp1.y" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.front.cp1.y" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.cp2.y">前髪cp2y</label>
-						<input id="hair.front.cp2.y" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.front.cp2.y" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.cp1.x">前髪cp1x</label>
-						<input id="hair.front.cp1.x" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.front.cp1.x" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.cp2.x">前髪cp2x</label>
-						<input id="hair.front.cp2.x" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.front.cp2.x" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.bunch">前髪束数</label>
-						<input id="hair.front.bunch" type="range" value="1" min="1" max="40" step="1">
+						<input class="slider" id="hair.front.bunch" type="range" value="1" min="1" max="40" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.tips">毛先のX座標</label>
-						<input id="hair.front.tips" type="range" value="0" min="-100" max="500" step="1">
+						<input class="slider" id="hair.front.tips" type="range" value="0" min="-100" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.front.tip_span">毛先同士の間隔</label>
-						<input id="hair.front.tip_span" type="range" value="0" min="0" max="100" step="1">
+						<input class="slider" id="hair.front.tip_span" type="range" value="0" min="0" max="100" step="1">
 					</div>
 				</div>
 			</fieldset>
@@ -385,7 +385,7 @@
 				<legend>後ろ髪</legend>
 				<div class="back_hair">
 					<label for="back_hair_flag">表示</label>
-					<input id="back_hair_flag" name="show" value="back_hair" type="checkbox">
+					<input class="" id="back_hair_flag" name="show" value="back_hair" type="checkbox">
 				</div>
 				<div class="parts">
 					<div class="back_hair_type">
@@ -404,94 +404,94 @@
 				<div class="parts">
 					<div class="back_hair">
 						<label for="hair.back.length">後ろ髪長さ</label>
-						<input id="hair.back.length" type="range" value="1" min="1" max="1000" step="1">
+						<input class="slider" id="hair.back.length" type="range" value="1" min="1" max="1000" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.cp1.y">後ろ髪cp1y</label>
-						<input id="hair.back.cp1.y" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.back.cp1.y" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.cp2.y">後ろ髪cp2y</label>
-						<input id="hair.back.cp2.y" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.back.cp2.y" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.cp1.x">後ろ髪cp1x</label>
-						<input id="hair.back.cp1.x" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.back.cp1.x" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.cp2.x">後ろ髪cp2x</label>
-						<input id="hair.back.cp2.x" type="range" value="1" min="-255" max="500" step="1">
+						<input class="slider" id="hair.back.cp2.x" type="range" value="1" min="-255" max="500" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.bunch">後ろ髪束数</label>
-						<input id="hair.back.bunch" type="range" value="1" min="1" max="40" step="1">
+						<input class="slider" id="hair.back.bunch" type="range" value="1" min="1" max="40" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.tips">毛先のX座標</label>
-						<input id="hair.back.tips" type="range" value="0" min="-100" max="500" step="1">
+						<input class="slider" id="hair.back.tips" type="range" value="0" min="-100" max="500" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.back.tip_span">毛先同士の間隔</label>
-						<input id="hair.back.tip_span" type="range" value="0" min="0" max="100" step="1">
+						<input class="slider" id="hair.back.tip_span" type="range" value="0" min="0" max="100" step="1">
 					</div>
 				</div>
 
 				<div class="parts">
 					<div class="back_hair">
 						<label for="hair.twin_tail.flag">ツインテール表示</label>
-						<input id="hair.twin_tail.flag" name="show" value="twin_tail" type="checkbox">
+						<input class="slider" id="hair.twin_tail.flag" name="show" value="twin_tail" type="checkbox">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.terminal.y">ツインテール高さ</label>
-						<input id="hair.twin_tail.terminal.y" type="range" value="0" min="-500" max="500" step="1">
+						<input class="slider" id="hair.twin_tail.terminal.y" type="range" value="0" min="-500" max="500" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.terminal.x">ツインテールのX座標</label>
-						<input id="hair.twin_tail.terminal.x" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.terminal.x" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.bunch">ツインテールの束数</label>
-						<input id="hair.twin_tail.bunch" type="range" value="0" min="1" max="40" step="1">
+						<input class="slider" id="hair.twin_tail.bunch" type="range" value="0" min="1" max="40" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.length">ツインテールの長さ</label>
-						<input id="hair.twin_tail.length" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.length" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.width">ツインテールの幅</label>
-						<input id="hair.twin_tail.width" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.width" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.tip_span">ツインテールの毛先の間隔</label>
-						<input id="hair.twin_tail.tip_span" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.tip_span" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 
 					<div class="back_hair">
 						<label for="hair.twin_tail.cp3.x">ツインテールのCP3のX座標</label>
-						<input id="hair.twin_tail.cp3.x" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.cp3.x" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.cp4.x">ツインテールのCP4のX座標</label>
-						<input id="hair.twin_tail.cp4.x" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.cp4.x" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.cp3.y">ツインテールのCP3のY座標</label>
-						<input id="hair.twin_tail.cp3.y" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.cp3.y" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 					<div class="back_hair">
 						<label for="hair.twin_tail.cp4.y">ツインテールのCP4のY座標</label>
-						<input id="hair.twin_tail.cp4.y" type="range" value="0" min="-100" max="400" step="1">
+						<input class="slider" id="hair.twin_tail.cp4.y" type="range" value="0" min="-100" max="400" step="1">
 					</div>
 				</div>
 
 				<div class="parts">
 					<div class="">
 						<label for="hair.outside_back.length">外側後ろ髪長さ</label>
-						<input id="hair.outside_back.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.outside_back.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.outside_back.bunch">外側後ろ髪束数</label>
-						<input id="hair.outside_back.bunch" type="range" value="1" min="1" max="30" step="1">
+						<input class="slider" id="hair.outside_back.bunch" type="range" value="1" min="1" max="30" step="1">
 					</div>
 				</div>
 			</fieldset>
@@ -504,26 +504,26 @@
 				<div class="parts">
 					<div class="sideburns">
 						<label for="sideburns_flag">ツインテール表示</label>
-						<input id="sideburns_flag" name="show" value="sideburns" type="checkbox">
+						<input class="slider" id="sideburns_flag" name="show" value="sideburns" type="checkbox">
 					</div>
 					<div class="">
 						<label for="hair.sideburns.left.length">もみあげ長さ: 左</label>
-						<input id="hair.sideburns.left.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.sideburns.left.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.sideburns.left.bunch">もみあげ束数: 左</label>
-						<input id="hair.sideburns.left.bunch" type="range" value="1" min="1" max="20" step="1">
+						<input class="slider" id="hair.sideburns.left.bunch" type="range" value="1" min="1" max="20" step="1">
 					</div>
 				</div>
 
 				<div class="parts">
 					<div class="">
 						<label for="hair.sideburns.right.length">もみあげ長さ: 右</label>
-						<input id="hair.sideburns.right.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.sideburns.right.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.sideburns.right.bunch">もみあげ束数: 右</label>
-						<input id="hair.sideburns.right.bunch" type="range" value="1" min="1" max="20" step="1">
+						<input class="slider" id="hair.sideburns.right.bunch" type="range" value="1" min="1" max="20" step="1">
 					</div>
 				</div>
 			</fieldset>
@@ -535,7 +535,7 @@
 				<legend>横髪</legend>
 				<div class="side_hair">
 					<label for="side_hair_flag">表示</label>
-					<input id="side_hair_flag" name="show" value="side_hair" type="checkbox">
+					<input class="" id="side_hair_flag" name="show" value="side_hair" type="checkbox">
 				</div>
 				<div class="parts">
 					<div class="side_hair_type">
@@ -545,37 +545,37 @@
 				<div class="parts">
 					<div class="">
 						<label for="hair.side.left.length">横髪長さ: 左</label>
-						<input id="hair.side.left.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.side.left.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.side.left.bunch">横髪束数: 左</label>
-						<input id="hair.side.left.bunch" type="range" value="1" min="1" max="30" step="1">
+						<input class="slider" id="hair.side.left.bunch" type="range" value="1" min="1" max="30" step="1">
 					</div>
 				</div>
 
 				<div class="parts">
 					<div class="">
 						<label for="hair.side.right.length">横髪長さ: 右</label>
-						<input id="hair.side.right.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.side.right.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.side.right.bunch">横髪束数: 右</label>
-						<input id="hair.side.right.bunch" type="range" value="1" min="1" max="30" step="1">
+						<input class="slider" id="hair.side.right.bunch" type="range" value="1" min="1" max="30" step="1">
 					</div>
 				</div>
 
 				<div class="parts">
 				<div class="outside_hair">
 					<label for="outside_hair_flag">表示</label>
-					<input id="outside_hair_flag" name="show" value="outside_hair" type="checkbox">
+					<input class="slider" id="outside_hair_flag" name="show" value="outside_hair" type="checkbox">
 				</div>
 					<div class="">
 						<label for="hair.outside.length">外側横髪長さ</label>
-						<input id="hair.outside.length" type="range" value="1" min="1" max="500" step="1">
+						<input class="slider" id="hair.outside.length" type="range" value="1" min="1" max="500" step="1">
 					</div>
 					<div class="">
 						<label for="hair.outside.bunch">外側横髪束数</label>
-						<input id="hair.outside.bunch" type="range" value="1" min="1" max="30" step="1">
+						<input class="slider" id="hair.outside.bunch" type="range" value="1" min="1" max="30" step="1">
 					</div>
 				</div>
 			</fieldset>
