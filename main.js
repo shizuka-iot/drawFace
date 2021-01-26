@@ -5,7 +5,6 @@ function onInput(element_id)
 	let arr = element_id.split('.');
 	let elem = document.getElementById(element_id);
 	elem.oninput = (e) => {
-		console.log(element_id);
 		switch (arr.length)
 		{
 			case 1:
