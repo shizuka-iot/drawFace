@@ -24,11 +24,8 @@ function onInput(element_id)
 }
 
 let twin_tail_flag = document.getElementById("hair.twin_tail.flag");
-console.log(twin_tail_flag);
 twin_tail_flag.onchange = (e) => {
 	face.coordinates.hair.twin_tail.flag = twin_tail_flag.checked;
-	console.log(twin_tail_flag);
-	console.log("test");
 };
 
 let front_hair_types = document.getElementsByName("front_hair_type");
