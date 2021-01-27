@@ -961,7 +961,7 @@ class DrawFace
 			x: this.mouth_start.x 
 				-this.coordinates.lip.lower.cp.width
 			+ this.sp(this.mouth_start.x, this.mouth_end.x, 1/3),
-			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp_height
+			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp.y
 				+this.coordinates.lip.lower.cp.height
 			,
 		};
@@ -969,7 +969,7 @@ class DrawFace
 			x: this.mouth_start.x 
 				+this.coordinates.lip.lower.cp.width
 			+ this.sp(this.mouth_start.x, this.mouth_end.x, 2/3),
-			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp_height
+			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp.y
 				+this.coordinates.lip.lower.cp.height
 			,
 		};
