@@ -125,6 +125,7 @@ let coordinates = {
 			b: 100,
 		},
 		front: {
+			flag: 1,
 			type: 2,
 			tips: 0,
 			bunch: 6,
@@ -138,10 +139,12 @@ let coordinates = {
 			},
 		},
 		outside_back: {
+			flag: 1,
 			bunch: 1,
 			length: 10,
 		},
 		back: {
+			flag: 1,
 			type: 2,
 			tips: 18,
 			bunch: 18,
@@ -155,6 +158,7 @@ let coordinates = {
 			},
 		},
 		side: {
+			flag: 1,
 			type: 0,
 			bunch: 1,
 			length: 10,
@@ -168,6 +172,7 @@ let coordinates = {
 			},
 		},
 		sideburns: {
+			flag: 1,
 			bunch: 1,
 			length: 10,
 			left: {
@@ -180,6 +185,7 @@ let coordinates = {
 			},
 		},
 		outside: {
+			flag: 1,
 			bunch: 1,
 			length: 10,
 			volume: 100,
@@ -193,7 +199,7 @@ let coordinates = {
 			},
 		},
 		twin_tail : {
-			flag: 0,
+			flag: 1,
 			type: 1,
 			length: 100,
 			bunch: 5,

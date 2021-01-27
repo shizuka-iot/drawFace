@@ -25,11 +25,30 @@ function onInput(element_id)
 	};
 }
 
-// ツインテールの表示/非表示
-let twin_tail_flag = document.getElementById("hair.twin_tail.flag");
-twin_tail_flag.onchange = (e) => {
-	face.coordinates.hair.twin_tail.flag = twin_tail_flag.checked;
-};
+function toggleShow(element_id)
+{
+	let arr = element_id.split('.');
+	let elem = document.getElementById(element_id);
+	elem.onchange = (e) => {
+		switch (arr.length)
+		{
+			case 1:
+				face.coordinates[arr[0]] = elem.checked;
+				break;
+			case 2:
+				face.coordinates[arr[0]][arr[1]] = elem.checked;
+				break;
+			case 3:
+				face.coordinates[arr[0]][arr[1]][arr[2]] = elem.checked;
+				break;
+			case 4:
+				face.coordinates[arr[0]][arr[1]][arr[2]][arr[3]] = elem.checked;
+				break;
+			default:
+				break;
+		}
+	};
+}
 
 // 前髪を変更
 let front_hair_types = document.getElementsByName("front_hair_type");
@@ -71,6 +90,13 @@ let sliders = document.getElementsByClassName("slider");
 for (let i=0; i<sliders.length; i++)
 {
 	onInput(sliders[i].id);
+}
+
+// 表示/非表示を切り替え
+let shows = document.getElementsByName("show");
+for (let i=0; i<shows.length; i++)
+{
+	toggleShow(shows[i].id);
 }
 
 // メインループ関数

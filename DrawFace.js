@@ -1298,11 +1298,17 @@ class DrawFace
 	{
 		this.con.clearRect(0, 0, this.can.width, this.can.height);
 		this.drawDebug();
-		this.drawOutsideBackHair(
-			this.coordinates.hair.outside_back.bunch, 
-			this.coordinates.hair.outside_back.length
-		);
-		this._selectBackHair();
+		if ( this.coordinates.hair.outside_back.flag )
+		{
+			this.drawOutsideBackHair(
+				this.coordinates.hair.outside_back.bunch, 
+				this.coordinates.hair.outside_back.length
+			);
+		}
+		if ( this.coordinates.hair.back.flag )
+		{
+			this._selectBackHair();
+		}
 		if ( this.coordinates.hair.twin_tail.flag )
 		{
 			this.drawTwinTails();
@@ -1321,9 +1327,18 @@ class DrawFace
 		this.drawEyeblow();
 		this.drawNose();
 		this.drawSkinHead();
-		this.drawSideburns(this.coordinates.hair.sideburns);
-		this._selectFrontHair();
-		this._selectSideHair();
+		if ( this.coordinates.hair.sideburns.flag )
+		{
+			this.drawSideburns(this.coordinates.hair.sideburns);
+		}
+		if ( this.coordinates.hair.front.flag )
+		{
+			this._selectFrontHair();
+		}
+		if ( this.coordinates.hair.side.flag )
+		{
+			this._selectSideHair();
+		}
 	}
 
 	_selectBackHair()
