@@ -203,7 +203,7 @@ let coordinates = {
 			type: 1,
 			length: 100,
 			bunch: 5,
-			width: 10,
+			width: 30,
 			tip_span: 10,
 			terminal: {
 				x: 0,

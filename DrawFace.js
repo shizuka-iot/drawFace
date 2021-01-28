@@ -1507,32 +1507,26 @@ class DrawFace
 	}
 	drawTwinTailFromTerminalsToTips()
 	{
-		this.con.beginPath();
 		this._config(this.hair_color, this.hair_stroke_color, 1, 1);
-		this.moveTo(this.twin_tail_arrays.terminals[0]);
+		//this.moveTo(this.twin_tail_arrays.terminals[0]);
 		for (let i=0; i<=this.coordinates.hair.twin_tail.bunch; i++)
 		{
 			if( i+1<=this.coordinates.hair.twin_tail.bunch)
 			{
+				this.con.beginPath();
 				this.drawCurve2(
 					this.twin_tail_arrays.terminals[i], 
 					this.twin_tail_arrays.tips[i],
 					this.twin_tail_arrays.cp3sub[i],
-					this.twin_tail_arrays.cp4sub[i]);
-				/*
-				this.drawCurve2(
-					this.twin_tail_arrays.tips[i],
-					this.twin_tail_arrays.terminals[i+1], 
-					this.twin_tail_arrays.cp4[i+1],
-					this.twin_tail_arrays.cp3[i+1]);
-					*/
+					this.twin_tail_arrays.cp4sub[i], true);
 				this.drawCurve2(
 					this.twin_tail_arrays.tips[i],
 					this.twin_tail_arrays.terminals[i+1], 
 					this.twin_tail_arrays.cp4[i],
 					this.twin_tail_arrays.cp3[i]);
-				this.con.stroke();
 				this.con.fill();
+				this.con.stroke();
+				this.con.closePath();
 			}
 		}
 	}
@@ -1582,6 +1576,7 @@ class DrawFace
 					+rand(0, 5), 
 			};
 		}
+		this.twin_tail_arrays.tips.reverse();
 	}
 
 	_generateTwinTailTipCp(direction = RIGHT)
@@ -1591,7 +1586,7 @@ class DrawFace
 			this.twin_tail_arrays.cp3[i] = {
 				x: this.twin_tail_arrays.terminals[i].x 
 					+direction * this.coordinates.hair.twin_tail.cp3.x 
-					+rand(-30, 30)
+					//+rand(-30, 30)
 					+direction * this.sp(
 						this.twin_tail_arrays.terminals[i].x, 
 						this.twin_tail_arrays.tips[i].x, 3/3),
@@ -1607,7 +1602,7 @@ class DrawFace
 			};
 			this.twin_tail_arrays.cp4[i] = {
 				x: this.twin_tail_arrays.tips[i].x
-					+rand(-30, 30)
+					//+rand(-30, 30)
 					+direction * this.coordinates.hair.twin_tail.cp4.x,
 				y: this.twin_tail_arrays.terminals[i].y
 					+this.coordinates.hair.twin_tail.cp4.y
@@ -1944,7 +1939,8 @@ class DrawFace
 			};
 			this.side_hair_tips[i] = {
 				x: this.forehead_right.x + i*span +span/2 + rand(-30, 10), 
-				y: this.cheek_end[0].y + rand(10, 20) + hair_length
+				//y: this.cheek_end[0].y + rand(10, 20) + hair_length
+				y: this.temple_right.y + rand(0, 20) + hair_length
 			};
 			this.side_hair_cp1[i] = {
 				x: this.side_hair_roots[i].x + rand(-10, 10), 
