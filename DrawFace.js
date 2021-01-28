@@ -94,10 +94,17 @@ class DrawFace
 			+this.coordinates.hair.color.r+", "
 			+this.coordinates.hair.color.g+", "
 			+this.coordinates.hair.color.b+")";
-		this.hair_stroke_color = "rgb("
-			+(255 -this.coordinates.hair.color.r)+", "
-			+(255 -this.coordinates.hair.color.g)+", "
-			+(255 -this.coordinates.hair.color.b)+")";
+		if ( 
+			this.coordinates.hair.color.r < 50 &&
+			this.coordinates.hair.color.g < 50 &&
+			this.coordinates.hair.color.b < 50 )
+		{
+			this.hair_stroke_color = "#ddd";
+		}
+		else
+		{
+			this.hair_stroke_color = "#000";
+		}
 
 		// れんげ　目頭
 		this.renge_eye_head = [
@@ -945,7 +952,7 @@ class DrawFace
 			x: this.mouth_start.x 
 				-this.coordinates.lip.upper.cp.width
 				+this.sp(this.mouth_start.x, this.mouth_end.x, 1/3),
-			y: this.mouth_start.y - 15
+			y: this.mouth_start.y +10
 				-this.coordinates.lip.upper.cp.height
 			,
 		};
@@ -953,7 +960,7 @@ class DrawFace
 			x: this.mouth_start.x 
 				+this.coordinates.lip.upper.cp.width
 				+ this.sp(this.mouth_start.x, this.mouth_end.x, 2/3),
-			y: this.mouth_start.y - 15
+			y: this.mouth_start.y +10
 				-this.coordinates.lip.upper.cp.height
 			,
 		};
@@ -961,7 +968,7 @@ class DrawFace
 			x: this.mouth_start.x 
 				-this.coordinates.lip.lower.cp.width
 			+ this.sp(this.mouth_start.x, this.mouth_end.x, 1/3),
-			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp.y
+			y: this.mouth_start.y +10 + this.coordinates.mouth.cp.y
 				+this.coordinates.lip.lower.cp.height
 			,
 		};
@@ -969,7 +976,7 @@ class DrawFace
 			x: this.mouth_start.x 
 				+this.coordinates.lip.lower.cp.width
 			+ this.sp(this.mouth_start.x, this.mouth_end.x, 2/3),
-			y: this.mouth_start.y - 15 + this.coordinates.mouth.cp.y
+			y: this.mouth_start.y +10 + this.coordinates.mouth.cp.y
 				+this.coordinates.lip.lower.cp.height
 			,
 		};
@@ -3004,7 +3011,7 @@ class DrawFace
 					y: this.outside_back_hair_left.y 
 				};
 				this.outside_back_hair_tips[i] = {
-					x: this.outside_back_hair_left.x + i*span + rand(-60, 0),
+					x: this.outside_back_hair_left.x + i*span + rand(-20, 0),
 					y: this.outside_back_hair_left.y + rand(0, 20) + hair_length
 				};
 				this.outside_back_hair_cp1[i] = {
@@ -3069,7 +3076,7 @@ class DrawFace
 					y: this.temple_right.y 
 				};
 				this.outside_back_hair_tips[i] = {
-					x: this.temple_right.x + i*span + rand(-60, 0), 
+					x: this.temple_right.x + i*span + rand(-20, 0), 
 					y: this.temple_right.y + rand(10, 20) + hair_length
 				};
 				this.outside_back_hair_cp1[i] = {
@@ -3557,15 +3564,16 @@ class DrawFace
 	{
 		this._config("#ef857d", "#000", 1, 1);
 		this.con.beginPath();
-		this.drawUpperLip();
-		this.drawLowerLip();
+		this.drawUpperLipLine();
+		this.drawLowerLipLine();
 		this.con.fill();
 		this.con.stroke();
 		this._config("#000", "#000", 0.2, 1);
 		this.con.fill();
+		//this.drawLowerLip();
 	}
 
-	drawUpperLip()
+	drawUpperLipLine()
 	{
 		this.drawCurve2(
 			this.mouth_start, 
@@ -3574,7 +3582,7 @@ class DrawFace
 			this.upper_lip_cp2, true
 		);
 	}
-	drawLowerLip()
+	drawLowerLipLine()
 	{
 		this.drawCurve2(
 			this.mouth_end, 
@@ -3582,6 +3590,30 @@ class DrawFace
 			this.lower_lip_cp2, 
 			this.lower_lip_cp1
 		);
+	}
+	drawLowerLip()
+	{
+		this._config("#fee", "#000", 1, 1);
+		this.con.beginPath();
+		this.moveTo(this.mouth_end);
+		this.drawLowerLipLine();
+
+		this.lineTo(this.chin_start);
+
+		// あごの左からあごの右
+		this.drawCurve2(
+			this.chin_start, 
+			this.chin_end, 
+			this.chin_cp1, 
+			this.chin_cp2
+		);
+
+		this.lineTo(this.mouth_end);
+		this.con.fill();
+		this.fillR(this.chin_end, "green");
+		this.fillR(this.chin_start, "orange");
+		this.fillR(this.mouth_end, "orange");
+		this.fillR(this.mouth_start, "#000");
 	}
 
 
